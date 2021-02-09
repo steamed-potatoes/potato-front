@@ -1,68 +1,76 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faKey,
-  faUnlockAlt,
-  faEnvelope,
-} from '@fortawesome/free-solid-svg-icons';
-import './Login.css';
-
-const inputStyle = {
-  border: 'none',
-};
-const headerIconStyle = {
-  color: 'white',
-};
+import styled from 'styled-components';
 
 const Login = () => {
   return (
-    <div className="Login__Container">
-      <div className="Login__Item__Header">
-        <div className="Item__Logo">
-          <FontAwesomeIcon
-            size="2x"
-            style={headerIconStyle}
-            icon={faUnlockAlt}
-          />
-        </div>
-        <span id="header__print">Sign In</span>
-      </div>
-      <form id="Login__Item__Form">
-        <div className="Login__form" id="Item__id">
-          <div className="area__email">
-            <FontAwesomeIcon size="1.8x" icon={faEnvelope} />
-            <input
-              type="text"
-              id="input__email"
-              name="user-Email"
-              placeholder="Email"
-              style={inputStyle}
-            />
-          </div>
-        </div>
-        <div className="Login__form" id="Item__pw">
-          <div className="area__pw">
-            <FontAwesomeIcon className="Icon__Logo" icon={faKey} />
-            <input
-              type="password"
-              id="input__pw"
-              name="user-Pw"
-              placeholder="password"
-              style={inputStyle}
-            />
-          </div>
-        </div>
-        <div className="Login__form">
-          <input type="submit" id="Item__submit" value="Sign In" />
-        </div>
-      </form>
-      <div className="Login__Item__Under">
-        forget password?
-        <br />
-        <a href="/Signup">Sign up now</a>
-      </div>
-    </div>
+    <Wrapper>
+      <div>아직 뭐하는건지 모름</div>
+      <InputBox type="text" placeholder="Login" />
+      <InputBox type="password" placeholder="Password" />
+      <ForgotContainer>
+        <ForgotPassword>비밀번호 찾기</ForgotPassword>
+        <ForgotId>아이디 찾기</ForgotId>
+      </ForgotContainer>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+`;
+
+const InputBox = styled.input`
+  border: 1px solid #000;
+  width: 320px;
+  height: 24px;
+  background-color: #fff;
+  padding: 16px;
+  margin-bottom: 4px;
+  outline: none;
+`;
+
+const ForgotContainer = styled.div`
+  display: flex;
+  width: 354px;
+`;
+
+const ForgotPassword = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background-color: #000;
+  font-size: 16px;
+  cursor: pointer;
+  width: 176px;
+  padding: 8px;
+  outline: none;
+  &:hover {
+    transform: scale(1.05);
+    transition-duration: 0.5s;
+  }
+`;
+const ForgotId = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+  border: 1px solid #000;
+  background-color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  width: 176px;
+  padding: 8px;
+  outline: none;
+  &:hover {
+    transform: scale(1.05);
+    transition-duration: 0.5s;
+  }
+`;
 
 export default Login;
