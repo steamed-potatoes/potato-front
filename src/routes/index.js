@@ -6,7 +6,7 @@ import Login from 'containers/login/Login';
 const Routes = () => (
   <Switch>
     <Route exact path="/" component={Home} />
-    <Route path="/login" component={Login} />
+    <Route path="/Login" component={Login} />
   </Switch>
 );
 
