@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import './Login.css';
 
-export default function Login() {
+const Login = () => {
   const inputStyle = {
     border: 'none',
   };
@@ -63,4 +63,6 @@ export default function Login() {
       </div>
     </div>
   );
-}
+};
+
+export default Login;
