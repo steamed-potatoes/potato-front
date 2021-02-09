@@ -54,6 +54,10 @@ const ForgotPassword = styled.div`
     transform: scale(1.05);
     transition-duration: 0.5s;
   }
+  &: not(: hover) {
+    transform: scale(1);
+    transition-duration: 0.5s;
+  }
 `;
 const ForgotId = styled.div`
   display: flex;
@@ -69,6 +73,10 @@ const ForgotId = styled.div`
   outline: none;
   &:hover {
     transform: scale(1.05);
+    transition-duration: 0.5s;
+  }
+  &: not(: hover) {
+    transform: scale(1);
     transition-duration: 0.5s;
   }
 `;
