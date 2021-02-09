@@ -7,14 +7,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import './Login.css';
 
-const Login = () => {
-  const inputStyle = {
-    border: 'none',
-  };
-  const headerIconStyle = {
-    color: 'white',
-  };
+const inputStyle = {
+  border: 'none',
+};
+const headerIconStyle = {
+  color: 'white',
+};
 
+const Login = () => {
   return (
     <div className="Login__Container">
       <div className="Login__Item__Header">
