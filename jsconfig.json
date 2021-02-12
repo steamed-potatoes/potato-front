@@ -2,5 +2,5 @@
   "compilerOptions": {
     "baseUrl": "src"
   },
-  "include": ["src", "src/containers/.js"]
+  "include": ["src", "src/page/.js"]
 }
