@@ -7,6 +7,7 @@ const Login = () => {
       <div>아직 뭐하는건지 모름</div>
       <InputBox type="text" placeholder="Login" />
       <InputBox type="password" placeholder="Password" />
+      <LoginBox>로그인</LoginBox>
       <ForgotContainer>
         <ForgotPassword>비밀번호 찾기</ForgotPassword>
         <ForgotId>아이디 찾기</ForgotId>
@@ -32,6 +33,28 @@ const InputBox = styled.input`
   padding: 16px;
   margin-bottom: 4px;
   outline: none;
+`;
+
+const LoginBox = styled.div`
+  border: 1px solid #000;
+  cursor: pointer;
+  width: 336px;
+  padding: 8px;
+  background-color: #343434;
+  color: #fff;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    transform: scale(1.05);
+    transition-duration: 0.5s;
+  }
+  &: not(: hover) {
+    transform: scale(1);
+    transition-duration: 0.5s;
+  }
 `;
 
 const ForgotContainer = styled.div`
