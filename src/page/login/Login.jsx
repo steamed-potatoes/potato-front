@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import sendApi from 'libs/api/sendApi';
 
 const Login = () => {
+  // 백엔드 통신 모듈 호출 테스트
   const onTest = async () => {
     const { data } = await sendApi.onTest({ test: 'test' });
 
