@@ -82,6 +82,7 @@ const ForgotPassword = styled.div`
     transition-duration: 0.5s;
   }
 `;
+
 const ForgotId = styled.div`
   display: flex;
   justify-content: center;
