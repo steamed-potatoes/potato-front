@@ -1,13 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import sendApi from 'libs/api/sendApi';
 
 const Login = () => {
+  const onTest = async () => {
+    const { data } = await sendApi.onTest({ test: 'test' });
+
+    console.log('DATA :: ', data);
+  };
+
   return (
     <Wrapper>
       <div>아직 뭐하는건지 모름</div>
       <InputBox type="text" placeholder="Login" />
       <InputBox type="password" placeholder="Password" />
-      <LoginBox>로그인</LoginBox>
+      <LoginBox onClick={onTest}>로그인</LoginBox>
       <ForgotContainer>
         <ForgotPassword>비밀번호 찾기</ForgotPassword>
         <ForgotId>아이디 찾기</ForgotId>
