@@ -1,11 +1,9 @@
-name: Build and Deploy
+name: Hook Netlify
 on:
   push:
     branches:
       - develop
       - feature/cicd
-env:
-  CI: ''
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -13,32 +11,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
-
-      - name: Use Node.js 12.x
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-
-      - name: Make .env
-        uses: SpicyPizza/create-envfile@v1
-        with:
-          envkey_REACT_APP_API_URI: ${{secrets.REACT_APP_API_URI}}
-          envkey_REACT_APP_CLIENT_ID: ${{secrets.REACT_APP_CLIENT_ID}}
-          envkey_REACT_APP_REDIRECT_URI: ${{secrets.REACT_APP_REDIRECT_URI}}
-          file_name: .env
-
-      - name: Cache node_modules 🚀
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{runner.OS}}-build-${{hashFiles('**/yarn.lock')}}
-          restore-keys: |
-            ${{ runner.OS }}-build-${{ runner.OS }}-
-
-      - name: Install and Build
-        run: |
-          yarn install
-          yarn run build
 
       - name: Deploy to netlify
         uses: netlify/actions/cli@master
