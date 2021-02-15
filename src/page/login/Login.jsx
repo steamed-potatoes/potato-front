@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import sendApi from 'libs/api/sendApi';
+import GoogleButton from 'components/google/GoogleButton';
 
 const Login = () => {
   // 백엔드 통신 모듈 호출 테스트
@@ -20,6 +21,7 @@ const Login = () => {
         <ForgotPassword>비밀번호 찾기</ForgotPassword>
         <ForgotId>아이디 찾기</ForgotId>
       </ForgotContainer>
+      <GoogleButton />
     </Wrapper>
   );
 };
