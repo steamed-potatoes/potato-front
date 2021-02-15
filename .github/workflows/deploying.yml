@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - develop
-      - feature/google-auth
+      - feature/cicd
 env:
   CI: ''
 jobs:
