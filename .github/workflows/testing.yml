@@ -1,6 +1,6 @@
-name: Hook Netlify
+name: Build and Deploy
 on:
-  push:
+  pull_request:
     branches:
       - develop
 env:
@@ -8,7 +8,7 @@ env:
 jobs:
   testing:
     runs-on: ubuntu-latest
-    name: 'Build test'
+    name: 'Deploy to Netlify'
     steps:
       - name: Checkout code
         uses: actions/checkout@v1
@@ -30,18 +30,3 @@ jobs:
         run: |
           yarn install
           yarn run build
-  deploy:
-    runs-on: ubuntu-latest
-    name: 'Deploy to Netlify'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v1
-
-      - name: Deploy to netlify
-        uses: netlify/actions/cli@master
-        env:
-          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN}}
-          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-        with:
-          args: deploy --dir=build --prod
-          secrets: '["NETLIFY_AUTH_TOKEN", "NETLIFY_SITE_ID"]'
