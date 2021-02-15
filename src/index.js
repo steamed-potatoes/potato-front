@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
-import App from './containers/App';
+import App from './page/App';
 
 ReactDOM.render(
   <Router>
@@ -10,5 +10,5 @@ ReactDOM.render(
       <App />
     </React.StrictMode>
   </Router>,
-  document.getElementById('root'),
+  document.getElementById('root')
 );
