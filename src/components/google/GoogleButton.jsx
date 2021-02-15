@@ -1,10 +1,10 @@
+import GOOGLE_AUTH_URL from 'config/google';
 import React from 'react';
-import GOOGLE_OAUTH_URL from 'consts/GoogleAuth';
-import googleIcon from 'assets/icons/google.png';
+import { FcGoogle } from 'react-icons/fc';
 
 const GoogleButton = () => (
-  <a href={GOOGLE_OAUTH_URL}>
-    <img src={googleIcon} alt="google" />
+  <a href={GOOGLE_AUTH_URL}>
+    <FcGoogle size="3em" />
   </a>
 );
 

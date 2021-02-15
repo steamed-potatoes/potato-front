@@ -1,14 +1,13 @@
 import React, { useEffect } from 'react';
 import querystring from 'querystring';
 import sendApi from 'libs/api/sendApi';
-
-const { REACT_APP_REDIRECT_URI } = process.env;
+import config from 'config';
 
 const GoogleCallback = () => {
   const sendToken = async (code) => {
-    const { data } = await sendApi.sendToken({
+    const { data } = await sendApi.sendGoogleAuth({
       code,
-      redirectUri: REACT_APP_REDIRECT_URI,
+      redirectUri: config.google.redirectUri,
     });
 
     console.log(data);
