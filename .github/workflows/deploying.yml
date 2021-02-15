@@ -3,7 +3,9 @@ on:
   push:
     branches:
       - develop
-      - feature/netlify
+      - feature/google-auth
+env:
+  CI: ''
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -17,9 +19,26 @@ jobs:
         with:
           node-version: 12.x
 
-      - run: yarn install
+      - name: Make .env
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_REACT_APP_API_URI: ${{secrets.REACT_APP_API_URI}}
+          envkey_REACT_APP_CLIENT_ID: ${{secrets.REACT_APP_CLIENT_ID}}
+          envkey_REACT_APP_REDIRECT_URI: ${{secrets.REACT_APP_REDIRECT_URI}}
+          file_name: .env
 
-      - run: yarn run build
+      - name: Cache node_modules 🚀
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: ${{runner.OS}}-build-${{hashFiles('**/yarn.lock')}}
+          restore-keys: |
+            ${{ runner.OS }}-build-${{ runner.OS }}-
+
+      - name: Install and Build
+        run: |
+          yarn install
+          yarn run build
 
       - name: Deploy to netlify
         uses: netlify/actions/cli@master
