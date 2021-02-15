@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import querystring from 'querystring';
 import sendApi from 'libs/api/sendApi';
-import config from 'config';
+import { authKey } from 'config';
 
 const GoogleCallback = () => {
   const sendToken = async (code) => {
     const { data } = await sendApi.sendGoogleAuth({
       code,
-      redirectUri: config.google.redirectUri,
+      redirectUri: authKey.google.redirectUri,
     });
 
     console.log(data);

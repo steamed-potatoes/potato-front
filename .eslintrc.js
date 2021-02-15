@@ -16,6 +16,8 @@ module.exports = {
     'jsx-a11y/label-has-associated-control': 'off',
     'react/jsx-wrap-multilines': 'off',
     'react/no-unused-prop-types': 'off',
+    'import/prefer-default-export': 'off',
+    'import/no-cycle': 'off',
 
     'no-param-reassign': 'off',
     'no-unused-expressions': 'off',
