@@ -36,7 +36,7 @@ jobs:
             ${{ runner.OS }}-build-${{ runner.OS }}-
 
       - name: Install and Build
-      - run: |
+        run: |
           yarn install
           yarn run build
 
