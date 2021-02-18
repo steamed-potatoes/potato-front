@@ -18,6 +18,7 @@ module.exports = {
     'react/no-unused-prop-types': 'off',
     'import/prefer-default-export': 'off',
     'import/no-cycle': 'off',
+    'import/no-unresolved': 'off',
 
     'no-param-reassign': 'off',
     'no-unused-expressions': 'off',
