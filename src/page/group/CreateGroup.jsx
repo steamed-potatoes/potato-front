@@ -68,6 +68,7 @@ const RegisterButton = styled.div`
   border: 1px solid rgba(0, 0, 0, 0.2);
   margin: 0 10% 3rem 10%;
   padding: 16px;
+  cusor: pointer
 
   &:hover {
     transform: scale(1.02);
