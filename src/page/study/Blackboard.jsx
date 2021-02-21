@@ -3,7 +3,10 @@ import React, { useState } from "react";
 const useInput = (initialValue) => {
   const [value, setValue] = useState(initialValue);
   const onChange = (event) => {
-      setValue(event.target.value);
+    const {
+      target: { value }
+    } = event;
+      setValue(value);
   };
   return { value, onChange };
 };
@@ -16,7 +19,7 @@ const Balckboard = () => {
       <div>
         <textarea value={name.value} />
       </div>
-      <input placeholder="입력해주세요" {...name} />
+      <input placeholder="입력해주세요" {...name}  />
     </div>
   );
 };
