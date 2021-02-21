@@ -4,7 +4,12 @@ const Home = () => {
   return (
     <div>
       Home
-      <a href="/Login">Sign In now</a>
+      <div>
+        <a href="/Login">Sign In now</a>
+      </div>
+      <div>
+        <a href="/group">Group</a>
+      </div>
     </div>
   );
 };
