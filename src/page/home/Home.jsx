@@ -5,6 +5,7 @@ const Home = () => {
     <div>
       Home
       <a href="/Login">Sign In now</a>
+      <a href="/Blackboard">Blackboard</a>
     </div>
   );
 };
