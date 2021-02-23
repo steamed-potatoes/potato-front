@@ -35,8 +35,8 @@ const DigitalBoard = styled.div`
   display: flex;
   justify-content: center;
   background-color: rgb(30, 130, 76);
-  width: 70vw;
-  height: 55vh;
+  width: 70%;
+  height: 300px;
   border: 1px solid rgba(0, 0, 0, 1);
 `;
 
@@ -52,8 +52,8 @@ const DigitalBoardContent = styled.div`
 
 const InputBox = styled.input`
   border: 1px solid rgba(0, 0, 0, 1);
-  width: 70vw;
-  height: 5vh;
+  width: 70%;
+  height: 40px;
   text-align: center;
   outline: none;
   padding: 0;
