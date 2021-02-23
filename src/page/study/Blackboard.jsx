@@ -10,8 +10,8 @@ const useInput = (initialValue) => {
   return { value, onChange };
 };
 
-const Balckboard = () => {
-  const name = useInput("");
+const Blackboard = () => {
+  const name = useInput('');
   return (
     <div>
       <h1 className="h1tag">디지털 칠판</h1>
@@ -23,4 +23,4 @@ const Balckboard = () => {
   );
 };
 
-export default Balckboard;
+export default Blackboard;

@@ -4,7 +4,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 const Home = lazy(() => import('./page/home/Home'));
 const Login = lazy(() => import('./page/login/Login'));
 const GoogleCallback = lazy(() => import('./page/google/GoogleCallback'));
-const Blackboard = lazy(() => import('./page/Blackboard'));
+const Blackboard = lazy(() => import('./page/study/Blackboard'));
 
 const Root = () => {
   return (
