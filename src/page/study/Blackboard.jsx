@@ -6,7 +6,6 @@ const Blackboard = () => {
 
   const onChangeContents = (e) => {
     setContents(e.target.value);
-    console.log(contents);
   };
 
   return (
@@ -31,13 +30,14 @@ const Board = styled.div`
   flex-direction: column;
 `;
 
-const Title = styled.h1`
+const Title = styled.p`
   font-size: 72px;
+  font-weight: 600;
   margin: auto;
 `;
 
 const Show = styled.div`
-  margin-top: 30px;
+  margin-top: 32px;
   margin-left: auto;
   margin-right: auto;
   border: 1px solid rgb(0, 0, 0);
@@ -60,7 +60,7 @@ const InputBox = styled.input`
   margin-left: auto;
   margin-right: auto;
   width: 1024px;
-  height: 30px;
+  height: 32px;
   text-align: center;
 `;
 
