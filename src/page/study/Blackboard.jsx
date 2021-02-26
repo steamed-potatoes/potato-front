@@ -4,9 +4,9 @@ import styled from 'styled-components';
 const Blackboard = () => {
   const [contents, setContents] = useState('');
 
-  const onChangeContents = (e) => {
-    setContents(e.target.value);
-  };
+const onChangeContents = (e) =>{
+  setContents(e.target.value)
+};
 
   return (
     <Board>
@@ -16,51 +16,51 @@ const Blackboard = () => {
       </Show>
       <InputBox
         type="text"
-        placeholder="입력해주세요"
+        placeholder="입력해주세요."
         onChange={onChangeContents}
       />
     </Board>
   );
 };
 
+
 const Board = styled.div`
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  width : 100vw;
+  display : flex;
+  justify-content : center;
+  flex-direction : column;
 `;
 
-const Title = styled.h1`
-  font-size: 72px;
-  margin: auto;
+const Title = styled.p`
+  font-size : 85px;
+  text-align:center;
 `;
 
 const Show = styled.div`
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid rgb(0, 0, 0);
-  background-color: rgb(30, 130, 76);
+  background: green;
+  width: 1024px;
+  height: 600px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 1024px;
-  height: 400px;
+  border: 2px solid black;
+  margin-top: 10px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const Content = styled.div`
   font-size: 24px;
-  color: rgb(255, 255, 255);
-  margin: 0px;
-  white-space: pre-wrap;
+  color: white;
+
 `;
 
 const InputBox = styled.input`
-  margin-left: auto;
-  margin-right: auto;
   width: 1024px;
   height: 30px;
-  text-align: center;
+  margin: auto;
+  margin-bottom : 50px;
+  text-align:center;
 `;
 
 export default Blackboard;
