@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 const Wrapper = styled.div`
   display: flex;
@@ -30,27 +29,17 @@ const AddButton = styled.div`
   color: #fff;
 `;
 
-let id = 0;
-
-export const AddTodo = ({ setTodos, todos }) => {
+export const AddTodo = ({ onClickAddButton }) => {
+  const [id, setId] = useState(0);
   const [content, setContent] = useState('');
 
   const handleOnChangeContent = (e) => {
     setContent(e.target.value);
   };
 
-  const onClickAddButton = () => {
-    setTodos(
-      todos.concat({
-        id,
-        content,
-      })
-    );
-    id += 1;
-    resetInput();
-  };
-
-  const resetInput = () => {
+  const handleAddButton = () => {
+    onClickAddButton({ id, content });
+    setId(id + 1);
     setContent('');
   };
 
@@ -62,17 +51,7 @@ export const AddTodo = ({ setTodos, todos }) => {
         type="text"
         placeholder="You can write this input box"
       />
-      <AddButton onClick={onClickAddButton}>ADD</AddButton>
+      <AddButton onClick={handleAddButton}>ADD</AddButton>
     </Wrapper>
   );
-};
-
-AddTodo.propTypes = {
-  setTodos: PropTypes.func.isRequired,
-  todos: PropTypes.arrayOf(
-    PropTypes.shape({
-      content: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-    })
-  ).isRequired,
 };

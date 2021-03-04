@@ -18,11 +18,16 @@ const Title = styled.p`
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
 
+  const onClickDeleteButton = (id) =>
+    setTodos(todos.filter((todo) => todo.id !== id));
+
+  const onClickAddButton = (todo) => setTodos(todos.concat(todo));
+
   return (
     <Wrapper>
       <Title>투두리스트</Title>
-      <AddTodo todos={todos} setTodos={setTodos} />
-      <TodoItems todos={todos} setTodos={setTodos} />
+      <AddTodo onClickAddButton={onClickAddButton} />
+      <TodoItems todos={todos} onClickDeleteButton={onClickDeleteButton} />
     </Wrapper>
   );
 };
