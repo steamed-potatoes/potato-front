@@ -20,14 +20,11 @@ function TodoList() {
   const [ toDoList, setToDoList ] = useState([]);
 
   const handleDelete = (id) => {
-    const temp = toDoList.filter((todo) => todo.id !== id);
-    setToDoList(temp);
+    setToDoList(toDoList.filter((todo)=> todo.id !== id));
   };
 
-  const addTask = (userInput ) => {
-    let copy = [...toDoList];
-    copy = [...copy, {key: toDoList.length + 1 ,id: toDoList.length + 1, task: userInput}];
-    setToDoList(copy);
+  const addTask = (userInput, index) => {
+    setToDoList(toDoList.concat({key: {index} ,id: toDoList.length + 1, task: userInput}))
   }
 
   return (
