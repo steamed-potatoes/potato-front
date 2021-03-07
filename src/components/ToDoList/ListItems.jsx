@@ -1,11 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const List = styled.div`
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-`;
+export const ListItems = ({ id, text, onDelete }) => {
+  const onClickDelTodo = (e) => onDelete(Number(e.target.id));
+
+  return (
+    <Item>
+      <DelbtnArea>
+        <Delbtn id={id} onClick={onClickDelTodo}>
+          X
+        </Delbtn>
+      </DelbtnArea>
+      <Text>{text}</Text>
+    </Item>
+  );
+};
+
 const Item = styled.div`
   width: 1016px;
   height: 80px;
@@ -31,24 +41,3 @@ const Text = styled.div`
   padding: 16px 8px;
   font-size: 16px;
 `;
-
-export const ListItems = ({ todolist, onDelete }) => {
-  const onClickDelTodo = (e) => {
-    onDelete(Number(e.target.id));
-  };
-
-  return (
-    <List>
-      {todolist.map((todo) => (
-        <Item>
-          <DelbtnArea>
-            <Delbtn id={todo.id} onClick={onClickDelTodo}>
-              X
-            </Delbtn>
-          </DelbtnArea>
-          <Text>{todo.text}</Text>
-        </Item>
-      ))}
-    </List>
-  );
-};
