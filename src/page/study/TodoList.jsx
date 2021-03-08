@@ -2,8 +2,14 @@ import React ,{useState} from 'react';
 import styled from 'styled-components';
 import {ToDoList, AddToDo} from 'components/ToDoList';
 
-const Wrapper = styled.div``;
-const Title = styled.p``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const Title = styled.p`
+  font-size: 85px;
+`;
 
 
 const TodoList = () => {
