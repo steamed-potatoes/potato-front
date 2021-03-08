@@ -36,6 +36,7 @@ module.exports = {
     'comma-dangle': 'off',
     'implicit-arrow-linebreak': 'off',
     'no-alert': 'off',
+    'react/prop-types': 'off'
   },
   settings: {
     'import/resolver': {
