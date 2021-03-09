@@ -11,12 +11,14 @@ const Title = styled.p`
   font-size: 85px;
 `;
 
+let count = 0;
 
 const TodoList = () => {
     const [todoList, setTodoList] = useState([]);
 
     const onAddTodo = (task) => {
-        setTodoList(todoList.concat({key:todoList.length + 1, id:todoList.length + 1, task}));
+      setTodoList(todoList.concat({ id: count++, task }));
+      console.log(count);
     };
 
     const onDeleteTodo = (id) => {

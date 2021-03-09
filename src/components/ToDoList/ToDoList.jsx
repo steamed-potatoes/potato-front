@@ -8,7 +8,7 @@ export const ToDoList = ({todoList, onDeleteTodo}) => {
     return (
       <List>
         {todoList.map((todo) => (
-          <ToDo key={todo.key} todo={todo} onDeleteTodo={onDeleteTodo} />
+          <ToDo key={todo.id} todo={todo} onDeleteTodo={onDeleteTodo} />
         ))}
       </List>
     );
