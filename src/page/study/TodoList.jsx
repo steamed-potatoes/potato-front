@@ -18,7 +18,6 @@ const TodoList = () => {
 
     const onAddTodo = (task) => {
       setTodoList(todoList.concat({ id: count++, task }));
-      console.log(count);
     };
 
     const onDeleteTodo = (id) => {
