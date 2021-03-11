@@ -20,6 +20,8 @@ module.exports = {
     'import/no-cycle': 'off',
     'import/no-named-as-default-member': 'off',
     'import/no-named-as-default': 'off',
+    'react/prop-types': 'off',
+    'no-console': 'off',
 
     'no-param-reassign': 'off',
     'no-unused-expressions': 'off',
