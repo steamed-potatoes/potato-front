@@ -4,6 +4,8 @@ module.exports = {
   },
   extends: ['airbnb', 'prettier'],
   rules: {
+    'react/jsx-indent' : "off",
+    'react/prop-types': 'off',
     'react/prefer-stateless-function': 0,
     'react/jsx-filename-extension': 0,
     'react/jsx-one-expression-per-line': 0,
