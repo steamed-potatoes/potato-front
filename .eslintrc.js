@@ -4,6 +4,7 @@ module.exports = {
   },
   extends: ['airbnb', 'prettier'],
   rules: {
+    'import/no-unresolved': 'off',
     'react/prefer-stateless-function': 0,
     'react/jsx-filename-extension': 0,
     'react/jsx-one-expression-per-line': 0,
@@ -42,6 +43,8 @@ module.exports = {
     'import/resolver': {
       node: {
         moduleDirectory: ['node_modules', 'src'],
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
+        
       },
     },
   },
