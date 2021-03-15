@@ -20,6 +20,7 @@ module.exports = {
     'import/no-cycle': 'off',
     'import/no-named-as-default-member': 'off',
     'import/no-named-as-default': 'off',
+    'import/order': 'off',
 
     'no-param-reassign': 'off',
     'no-unused-expressions': 'off',

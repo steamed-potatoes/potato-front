@@ -3,6 +3,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
 import rootReducer from './libs/store/modules';
+import Example from 'page/Example';
 
 const Home = lazy(() => import('./page/home/Home'));
 const Login = lazy(() => import('./page/login/Login'));
@@ -19,6 +20,7 @@ const Root = () => {
             <Route exact path="/" component={Home} />
             <Route path="/Login" component={Login} />
             <Route path="/auth/google/callback" component={GoogleCallback} />
+            <Route path="/Example" component={Example} />
           </Switch>
         </Suspense>
       </BrowserRouter>
