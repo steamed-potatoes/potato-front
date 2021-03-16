@@ -37,6 +37,7 @@ module.exports = {
     'comma-dangle': 'off',
     'implicit-arrow-linebreak': 'off',
     'no-alert': 'off',
+    'import/no-unresolved': 'off'
   },
   settings: {
     'import/resolver': {
