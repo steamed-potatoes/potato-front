@@ -2,7 +2,7 @@ export const INPUT = 'INPUT';
 
 export const textTest = (text) => ({type: INPUT, content: text});
 
-const initialState = { content: "" };
+const initialState = { content: '' };
 
 export default function text(state = initialState, action) {
   switch (action.type) {
