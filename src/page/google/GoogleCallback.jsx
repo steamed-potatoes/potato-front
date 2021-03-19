@@ -1,17 +1,39 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import querystring from 'querystring';
+import { useDispatch } from 'react-redux';
+import * as actions from 'libs/store/modules/signup';
 import sendApi from 'libs/api/sendApi';
 import { authKey } from 'config';
+import localStorageService from 'libs/service/localStorageService';
 
 const GoogleCallback = () => {
-  const sendToken = async (code) => {
-    const { data } = await sendApi.sendGoogleAuth({
-      code,
-      redirectUri: authKey.google.redirectUri,
-    });
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-    console.log(data);
-    // TODO data로 넘어오는 응답 객체를 통해 회원가입 or 로그인을 진행해야 한다.
+  const sendToken = async (code) => {
+    try {
+      const { data } = await sendApi.sendGoogleAuth({
+        code,
+        redirectUri: authKey.google.redirectUri,
+      });
+
+      const { email, name, profileUrl, token, type } = data.data;
+
+      if (type === 'LOGIN') {
+        // TODO 상수로 빼기
+        localStorageService.set('authToken', token);
+        history.push('/');
+        return;
+      }
+
+      dispatch(actions.changeSignupInfo(email, name, profileUrl));
+      localStorageService.delete('authToken');
+      history.push('/Signup');
+    } catch (error) {
+      alert(error.response.data.message);
+      history.push('/Login');
+    }
   };
 
   useEffect(async () => {
