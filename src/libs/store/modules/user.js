@@ -1,16 +1,22 @@
-export const USER_TEST = 'user/TEST';
+const CHANGE_USER_INFO = 'user/CHANGE_USER_INFO';
 
-export const userTest = () => ({type: USER_TEST, id: 1});
+export const changeUserInfo = (email, name, profileUrl) => ({
+  type: CHANGE_USER_INFO,
+  email,
+  name,
+  profileUrl,
+});
 
-const initialState = {};
+const initialState = { email: '', name: '', profileUrl: '' };
 
 export default function user(state = initialState, action) {
   switch (action.type) {
-    case USER_TEST:
+    case CHANGE_USER_INFO:
       return {
-        ...state,
-        test: action.id
-      }
+        email: action.email,
+        name: action.name,
+        profileUrl: action.profileUrl,
+      };
     default:
       return state;
   }
