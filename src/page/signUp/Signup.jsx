@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import * as actions from 'libs/store/modules/signup';
+import * as actions from 'libs/store/modules/user';
 import sendApi from 'libs/api/sendApi';
 import localStorageService from 'libs/service/localStorageService';
 
@@ -72,7 +72,7 @@ const Profile = styled.img`
 const SignUp = () => {
   const history = useHistory();
   const dispatch = useDispatch();
-  const { email, name, profileUrl } = useSelector((state) => state.signup);
+  const { email, name, profileUrl } = useSelector((state) => state.user);
 
   const requestSignUp = async () => {
     try {
@@ -87,7 +87,7 @@ const SignUp = () => {
     }
   };
   const onChangeName = (e) => {
-    dispatch(actions.changeSignupInfo(email, e.target.value, profileUrl));
+    dispatch(actions.changeUserInfo(email, e.target.value, profileUrl));
   };
 
   return (

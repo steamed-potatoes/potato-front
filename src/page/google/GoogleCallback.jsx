@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import querystring from 'querystring';
 import { useDispatch } from 'react-redux';
-import * as actions from 'libs/store/modules/signup';
+import * as actions from 'libs/store/modules/user';
 import sendApi from 'libs/api/sendApi';
 import { authKey } from 'config';
 import localStorageService from 'libs/service/localStorageService';
@@ -27,7 +27,7 @@ const GoogleCallback = () => {
         return;
       }
 
-      dispatch(actions.changeSignupInfo(email, name, profileUrl));
+      dispatch(actions.changeUserInfo(email, name, profileUrl));
       localStorageService.delete('authToken');
       history.push('/Signup');
     } catch (error) {
