@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../libs/store/modules/board';
@@ -7,12 +7,9 @@ const BlackBoard = () => {
   const dispatch = useDispatch();
   const { content } = useSelector((state) => state.board);
 
-  const onChangeBoard = useCallback(
-    (e) => {
-      dispatch(actions.changeContent(e.target.value));
-    },
-    [dispatch]
-  );
+  const onChangeBoard = (e) => {
+    dispatch(actions.changeContent(e.target.value));
+  };
 
   return (
     <Wrapper>
