@@ -33,11 +33,11 @@ export const ToDo = ({todo, onDeleteTodo}) => {
   return (
     <Wrapper>
       <Btn>
-        <Button id={todo.id} onClick={(e) => onDeleteTodo(Number(e.target.id))}>
+        <Button id={todo.data.id} onClick={(e) => onDeleteTodo(e.target.id)}>
           X
         </Button>
       </Btn>
-      <Task>{todo.task}</Task>
+      <Task>{todo.data.title}</Task>
     </Wrapper>
   );
 };
