@@ -12,8 +12,6 @@ const Title = styled.p`
   font-size: 85px;
 `;
 
-let count = 0;
-
 const TodoList = () => {
   const [todoList, setTodoList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -29,6 +27,7 @@ const TodoList = () => {
           'http://52.78.179.189:8080/api/v1/todo/list'
         );
         setTodoList(response.data);
+        console.log(response.data)
       } catch (e) {
         setError(e);
       }
@@ -38,23 +37,36 @@ const TodoList = () => {
     fetchTodoList();
   }, []);
 
-  const onAddTodo = (title) => {
-    setTodoList(todoList.concat({data:{ id: count++, title }}));
+  const onAddTodo = async (title) => {
+    try {
+      const text = JSON.stringify({title})
+      const todo = await axios.post(
+        'http://52.78.179.189:8080/api/v1/todo',
+        text,
+          {
+            headers: {
+              "Content-Type": `application/json`,
+            }
+          });
+      setTodoList(todoList.concat(todo.data));
+    } catch (e) {
+      setError(e);
+    }
   };
 
-  const onDeleteTodo = (id) => {
-    if (id <= 100){ // 어떻게 구분해야 할까?
-      id = Number(id)
+  const onDeleteTodo = async (id) => {
+    try {
+      await axios.delete(`http://52.78.179.189:8080/api/v1/todo?todoId=${id}`);
+      setTodoList(todoList.filter((todo) => todo.data.id !== id));
+    } catch (e) {
+      setError(e);
     }
-    setTodoList(todoList.filter((todo) => todo.data.id !== id));
   };
+  
 
   if (loading) return <div>로딩중..</div>;
   if (error) return <div>에러가 발생했습니다</div>;
   if (!todoList) return null;
-
-  // const test = todoList[0].data.title
-  // console.log(test);
 
   return (
     <Wrapper>
