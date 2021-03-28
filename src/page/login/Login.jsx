@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import sendApi from 'libs/api/sendApi';
+import sendApi from 'apis/sendApi';
 import { GoogleButton } from 'components/google';
 
 const Login = () => {

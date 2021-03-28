@@ -2,9 +2,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import * as actions from 'libs/store/modules/user';
-import sendApi from 'libs/api/sendApi';
-import localStorageService from 'libs/service/localStorageService';
+import * as actions from 'store/modules/user';
+import sendApi from 'apis/sendApi';
+import localStorageService from 'libs/localStorageService';
 
 const Wrapper = styled.div`
   display: flex;

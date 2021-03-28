@@ -1,4 +1,4 @@
-import { GOOGLE_AUTH_URL } from 'config';
+import { GOOGLE_AUTH_URL } from 'constant';
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 

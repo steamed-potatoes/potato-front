@@ -4,7 +4,7 @@ const {
   REACT_APP_API_URI,
 } = process.env;
 
-export const authKey = {
+export const AUTH_KEY = {
   apiUrl: REACT_APP_API_URI,
   google: {
     clientId: REACT_APP_CLIENT_ID,

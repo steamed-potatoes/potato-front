@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import querystring from 'querystring';
 import { useDispatch } from 'react-redux';
-import * as actions from 'libs/store/modules/user';
-import sendApi from 'libs/api/sendApi';
-import { authKey } from 'config';
-import localStorageService from 'libs/service/localStorageService';
+import * as actions from 'store/modules/user';
+import sendApi from 'apis/sendApi';
+import { AUTH_KEY } from 'constant';
+import localStorageService from 'libs/localStorageService';
 
 const GoogleCallback = () => {
   const history = useHistory();
@@ -15,7 +15,7 @@ const GoogleCallback = () => {
     try {
       const { data } = await sendApi.sendGoogleAuth({
         code,
-        redirectUri: authKey.google.redirectUri,
+        redirectUri: AUTH_KEY.google.redirectUri,
       });
 
       const { email, name, profileUrl, token, type } = data.data;

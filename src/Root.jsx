@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from './libs/store/modules';
+import rootReducer from './store/modules';
 
 const Home = lazy(() => import('./page/home/Home'));
 const Login = lazy(() => import('./page/login/Login'));
