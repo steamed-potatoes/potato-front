@@ -27,7 +27,6 @@ const TodoList = () => {
           'http://52.78.179.189:8080/api/v1/todo/list'
         );
         setTodoList(response.data);
-        console.log(response.data)
       } catch (e) {
         setError(e);
       }
