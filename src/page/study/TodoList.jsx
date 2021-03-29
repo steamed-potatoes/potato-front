@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { ToDoList, AddToDo } from 'components/ToDoList';
-import axios from 'axios';
+import swal from 'sweetalert';
+import sendApi from 'libs/api/sendApi';
 
 const Wrapper = styled.div`
   display: flex;
@@ -14,23 +15,15 @@ const Title = styled.p`
 
 const TodoList = () => {
   const [todoList, setTodoList] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchTodoList = async () => {
       try {
-        setError(null);
-        setTodoList(null);
-
-        const response = await axios.get(
-          'http://52.78.179.189:8080/api/v1/todo/list'
-        );
-        setTodoList(response.data);
+        const {data} = await sendApi.getTodoList();  
+        setTodoList(data);
       } catch (e) {
-        setError(e);
+        swal(`${e}`);
       }
-      setLoading(false);
     };
 
     fetchTodoList();
@@ -39,33 +32,28 @@ const TodoList = () => {
   const onAddTodo = async (title) => {
     try {
       const text = JSON.stringify({title})
-      const todo = await axios.post(
-        'http://52.78.179.189:8080/api/v1/todo',
+      const {data} = await sendApi.addTodo(
         text,
           {
             headers: {
               "Content-Type": `application/json`,
             }
           });
-      setTodoList(todoList.concat(todo.data));
+      setTodoList(todoList.concat(data));
     } catch (e) {
-      setError(e);
+      swal(`${e}`);
     }
   };
 
   const onDeleteTodo = async (id) => {
     try {
-      await axios.delete(`http://52.78.179.189:8080/api/v1/todo?todoId=${id}`);
+      await sendApi.deleteTodo(id);
       setTodoList(todoList.filter((todo) => todo.data.id !== id));
     } catch (e) {
-      setError(e);
+      swal(`${e}`);
     }
   };
   
-
-  if (loading) return <div>로딩중..</div>;
-  if (error) return <div>에러가 발생했습니다</div>;
-  if (!todoList) return null;
 
   return (
     <Wrapper>
