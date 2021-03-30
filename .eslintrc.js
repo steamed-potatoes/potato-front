@@ -20,6 +20,7 @@ module.exports = {
     'import/no-cycle': 'off',
     'import/no-named-as-default-member': 'off',
     'import/no-named-as-default': 'off',
+    'import/no-unresolved': 'off',
     'react/prop-types': 'off',
 
     'no-param-reassign': 'off',
