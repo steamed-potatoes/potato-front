@@ -31,14 +31,12 @@ const TodoList = () => {
 
   const onAddTodo = async (title) => {
     try {
-      const text = JSON.stringify({title})
-      const {data} = await sendApi.addTodo(
-        text,
-          {
-            headers: {
-              "Content-Type": `application/json`,
-            }
-          });
+      const { data } = await sendApi.addTodo({
+        title,
+        headers: {
+          'Content-Type': `application/json`,
+        },
+      });
       setTodoList(todoList.concat(data));
     } catch (e) {
       swal(`${e}`);
