@@ -8,10 +8,13 @@ export default {
 
     return type === 'post' ? axios.post(url, req) : axios.get(url, req);
   },
-  send2: (url, type = 'get') => {
-    return type === 'get' ? axios.get(url) : axios.delete(url);
+  send2: (url) => {
+    return axios.get(url);
   },
   send3: (url, req, header) => {
     return axios.post(url, req, header);
   },
+  sendDelete: (url) => {
+    return axios.delete(url);
+    },
 };
