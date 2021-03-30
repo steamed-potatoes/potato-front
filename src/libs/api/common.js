@@ -9,7 +9,7 @@ export default {
     return type === 'post' ? axios.post(url, req) : axios.get(url, req);
   },
   send2: (url, req, type = 'post') => {
-    return type === 'post' ? axios.post(url, req) : axios.get(url, req);;
+    return type === 'post' ? axios.post(url, req) : axios.get(url, req);
   },
   sendDelete: (url) => {
     return axios.delete(url);
