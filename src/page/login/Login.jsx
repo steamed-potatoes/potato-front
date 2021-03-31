@@ -1,81 +1,94 @@
 import React from 'react';
 import styled from 'styled-components';
-import {GoogleButton, GoogleArrow} from 'components/google/index';
-
+import { GoogleButton, GoogleArrow } from 'components/google/index';
 
 const Wrapper = styled.div`
-  margin-top : 24px;
+  margin-top: 24px;
 `;
 
 const Header = styled.div`
-  font-size : 24px;
-  height : 72px;
-  padding: 16px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  height: 72px;
+  padding: 16px;
+
+  font-size: 24px;
 `;
 
 const Manager = styled.div``;
 
 const MenuList = styled.ul`
-  list-style-type: none;
   margin: 0;
   padding: 0;
+
+  list-style-type: none;
 `;
 
 const MenuItem = styled.li`
-  float : right;
-  display : block;
+  float: right;
+
+  display: block;
+
   padding: 16px 16px;
 `;
 
 const LoginWrapper = styled.div`
-  margin-top : 160px;
-  display : flex;
-  flex-direction : column;
-  justify-content : center;
-  align-items : center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 160px;
+  
 `;
 
 const Title = styled.p`
-  margin : 0px;
-  font-size : 56px;
+  margin: 0px;
+
+  font-size: 56px;
 `;
 
 const SubTitle = styled.p`
-  margin : 8px 0px 16px 0px;
-  font-size : 16px;
+  margin: 8px 0px 16px 0px;
+
+  font-size: 16px;
 `;
 
 const LoginButton = styled.button`
-  margin : 24px 0px 0px 0px;
-  padding : 16px 32px 16px 32px;
-  width: 720px;
-  display : flex;
-  flex-direction : row;
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
-  align-items : center;
-  background-color: #FFFFFF;
-  border: 0px solid #FFFFFF;
+  align-items: center;
+  
+  margin: 24px 0px 0px 0px;
+  padding: 16px 32px 16px 32px;
+  width: 720px;
+
+  border: 0px solid #ffffff;
   border-radius: 48px;
-  box-shadow: 0px 24px 3px -16px #CFCECE;
+  background-color: #ffffff;
+  box-shadow: 0px 24px 3px -16px #cfcece;
+
   &:hover {
     cursor: pointer;
-    border: 1px solid #CFCECE;
+    border: 1px solid #cfcece;
   }
-  &:focus { outline:none; }
+  &:focus {
+    outline: none;
+  }
 `;
 
 const LoginButtonText = styled.p`
- margin : 16px 24px 16px 24px;
- display : block;
- font-size : 24px;
+  display: block;
+
+  margin: 16px 24px 16px 24px;
+  
+  font-size: 24px;
 `;
 
-
 const Login = () => {
-
   return (
     <Wrapper>
       <Header>
