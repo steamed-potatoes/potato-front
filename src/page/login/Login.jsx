@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { FcGoogle } from 'react-icons/fc';
-import { AiOutlineArrowRight } from "react-icons/ai";
+import {GoogleButton, GoogleArrow} from 'components/google/index';
+
 
 const Wrapper = styled.div`
   margin-top : 24px;
@@ -56,13 +56,13 @@ const LoginButton = styled.button`
   flex-direction : row;
   justify-content: space-between;
   align-items : center;
-  background-color: white;
-  border: 0px solid white;
+  background-color: #FFFFFF;
+  border: 0px solid #FFFFFF;
   border-radius: 48px;
-  box-shadow: 0px 24px 3px -16px #cfcece;
+  box-shadow: 0px 24px 3px -16px #CFCECE;
   &:hover {
     cursor: pointer;
-    border: 1px solid #cfcece;
+    border: 1px solid #CFCECE;
   }
   &:focus { outline:none; }
 `;
@@ -91,9 +91,9 @@ const Login = () => {
           이용하시려면 하단의 아이디로 로그인 하기를 클릭 하세오
         </SubTitle>
         <LoginButton>
-          <FcGoogle size="88px" />
+          <GoogleButton />
           <LoginButtonText>구글 아이디로 시작하기</LoginButtonText>
-          <AiOutlineArrowRight size="40px" />
+          <GoogleArrow />
         </LoginButton>
       </LoginWrapper>
     </Wrapper>

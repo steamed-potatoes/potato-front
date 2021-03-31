@@ -1,9 +1,4 @@
-import { GOOGLE_AUTH_URL } from 'constant';
 import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 
-export const GoogleButton = () => (
-  <a href={GOOGLE_AUTH_URL}>
-    <FcGoogle size="3em" />
-  </a>
-);
+export const GoogleButton = () => <FcGoogle size="88px" />;
