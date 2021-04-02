@@ -15,7 +15,7 @@ const Header = styled.div`
 
 const Manager = styled.div``;
 
-const HeaderMenu = () => {
+export const HeaderMenu = () => {
   return (
     <Header>
       <Manager>관리자</Manager>
@@ -23,5 +23,3 @@ const HeaderMenu = () => {
     </Header>
   );
 }
-
-export default HeaderMenu;

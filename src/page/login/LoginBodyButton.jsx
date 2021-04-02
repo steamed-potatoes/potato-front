@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { GoogleButton, GoogleArrow } from 'components/google/index';
 import { GOOGLE_AUTH_URL } from 'constant';
+import GoogleButton from './GoogleButton';
+import GoogleArrow from './GoogleArrow';
+
 
 const LoginButton = styled.a`
   display: flex;
