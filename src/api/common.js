@@ -8,4 +8,15 @@ export default {
 
     return type === 'post' ? axios.post(url, req) : axios.get(url, req);
   },
+
+  sendTodoAdd: (url, req) => {
+    return axios.post(url, req);
+  },
+  sendTodoDel: (url) => {
+    return axios.delete(url);
+  },
+
+  getTodoList: (url) => {
+    return axios.get(url);
+  },
 };
