@@ -8,7 +8,7 @@ import Example from 'page/Example';
 const Home = lazy(() => import('./page/home/Home'));
 const Login = lazy(() => import('./page/login/Login'));
 const GoogleCallback = lazy(() => import('./page/google/GoogleCallback'));
-
+const TodoList = lazy(() => import('./page/study/TodoList'));
 const store = createStore(rootReducer);
 
 const Root = () => {
@@ -21,6 +21,7 @@ const Root = () => {
             <Route path="/Login" component={Login} />
             <Route path="/auth/google/callback" component={GoogleCallback} />
             <Route path="/Example" component={Example} />
+            <Route path="/TodoList" component={TodoList} />
           </Switch>
         </Suspense>
       </BrowserRouter>

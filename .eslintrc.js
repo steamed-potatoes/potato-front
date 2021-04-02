@@ -21,6 +21,7 @@ module.exports = {
     'import/no-named-as-default-member': 'off',
     'import/no-named-as-default': 'off',
     'import/order': 'off',
+    'react/prop-types': 'off',
 
     'no-param-reassign': 'off',
     'no-unused-expressions': 'off',
