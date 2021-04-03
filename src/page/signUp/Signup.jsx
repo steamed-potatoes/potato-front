@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {HeaderMenu} from 'components/header/index';
 import SignUpBody from './SignUpBody';
-import BackgroundImg from '../images/BackgroundImg.png';
+import BackgroundImg from '../../images/BackgroundImg.png';
 
 const Wrapper = styled.div`
   height: 100vh;
