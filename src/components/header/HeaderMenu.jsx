@@ -8,12 +8,15 @@ const Header = styled.div`
   align-items: center;
 
   height: 72px;
-  padding: 16px;
+  margin: 0;
+  padding: 48px 48px 0px 48px;
 
   font-size: 24px;
 `;
 
-const Manager = styled.div``;
+const Manager = styled.div`
+  padding: 16px;
+`;
 
 export const HeaderMenu = () => {
   return (
