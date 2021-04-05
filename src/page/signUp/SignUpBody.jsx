@@ -5,29 +5,29 @@ import SignUpBodyList from './SignUpBodyList';
 const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: top;
+  justify-content: center;
   align-items: center;
 
   width: 480px;
   height: 560px;
-  margin: 16px auto;
-  padding: 16px 32px 16px 32px;
+  margin: 40px auto;
+  padding: 40px 24px 40px 24px;
   
   border: 0px solid #FFFFFF;
   border-radius: 48px;
   background-color: #FFFFFF;
-  box-shadow: -16px 16px 3px 0px #CFCECE;
+  box-shadow: -8px 16px 4px rgb(128 , 128, 128, 0.6);
 `;
 
 const Title = styled.p`
-  margin: 16px;
+  margin: 40px;
   
   font-size: 56px;
 `;
 
 const Button = styled.button`
   width: 400px;
-  margin: 40px auto;
+  margin: 48px auto;
   padding: 16px 0px;
 
   

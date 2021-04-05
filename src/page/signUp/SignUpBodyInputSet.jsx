@@ -6,7 +6,7 @@ const InputSet = styled.div`
 `;
 
 const InputName = styled.p`
-  font-size: 8px;
+  font-size: 12px;
 `;
 
 const Input = styled.input`
