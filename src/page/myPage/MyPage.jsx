@@ -29,7 +29,7 @@ return (
   </Main>
   );
 };
-// 배경이미지 왜안되는지 모르겟슴...
+
 const Main = styled.div`
   width : 100vw;
   height : 100vh;
