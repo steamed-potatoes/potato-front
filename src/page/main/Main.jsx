@@ -8,7 +8,7 @@ const Main = () => {
 
   return (
     <Wrapper>
-      <BoardCategory category={category} setCategory={setCategory} />
+      <BoardCategory setCategory={setCategory} />
       <BoardView category={category} />
     </Wrapper>
   );
