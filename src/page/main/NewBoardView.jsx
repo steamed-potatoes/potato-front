@@ -1,22 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const BoardViewWrapper = styled.div`
+const NewBoardViewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
 `;
 
-const BoardViewTitle = styled.div`
-  width: 70%;
+const NewBoardViewTitle = styled.div`
+  width: 60%;
   margin: 8px 0 8px 16px;
   font-size: 24px;
   font-weight: bold;
 `;
 
-const BoardItem = styled.div`
-  width: 70%;
+const NewBoardItem = styled.div`
+  width: 60%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -32,26 +32,19 @@ const ItemDetail = styled.div`
   background-color: gray;
 `;
 
-const BoardView = ({ category }) => {
+const NewBoardView = () => {
   return (
-    <BoardViewWrapper>
-      <BoardViewTitle>{category}</BoardViewTitle>
-      <BoardItem>
+    <NewBoardViewWrapper>
+      <NewBoardViewTitle>최근 게시글</NewBoardViewTitle>
+      <NewBoardItem>
         <ItemDetail />
         <ItemDetail />
         <ItemDetail />
         <ItemDetail />
         <ItemDetail />
-        <ItemDetail />
-        <ItemDetail />
-        <ItemDetail />
-        <ItemDetail />
-        <ItemDetail />
-        <ItemDetail />
-        <ItemDetail />
-      </BoardItem>
-    </BoardViewWrapper>
+      </NewBoardItem>
+    </NewBoardViewWrapper>
   );
 };
 
-export default BoardView;
+export default NewBoardView;

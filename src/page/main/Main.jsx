@@ -1,15 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import BoardCategory from './BoardCategory';
-import BoardView from './BoardView';
+import NewBoardView from './NewBoardView';
 
 const Main = () => {
-  const [category, setCategory] = useState('전체보기');
-
   return (
     <Wrapper>
-      <BoardCategory setCategory={setCategory} />
-      <BoardView category={category} />
+      <BoardCategory />
+      <NewBoardView />
     </Wrapper>
   );
 };
