@@ -10,6 +10,7 @@ const GoogleCallback = lazy(() => import('./page/google/GoogleCallback'));
 const SignUp = lazy(() => import('page/signUp/Signup'));
 const Main = lazy(() => import('page/main/Main'));
 
+const MyPage = lazy(() => import('./page/myPage/MyPage'));
 const store = createStore(rootReducer);
 
 const Root = () => {
@@ -23,6 +24,7 @@ const Root = () => {
             <Route path="/SignUp" component={SignUp} />
             <Route path="/auth/google/callback" component={GoogleCallback} />
             <Route path="/Main" component={Main} />
+            <Route path="/MyPage" component={MyPage} />
           </Switch>
         </Suspense>
       </BrowserRouter>
