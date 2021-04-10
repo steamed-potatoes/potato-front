@@ -6,6 +6,8 @@ import Calender from './Calender';
 import BoardCategory from './BoardCategory';
 import NewBoardView from './NewBoardView';
 import CreateGroupBox from './CreateGroupBox';
+import PopularGroup from './PopularGroup';
+import Intermissionless from './Intermissionless';
 
 const Wrapper = styled.div``;
 
@@ -16,6 +18,8 @@ const Main = () => {
       <Logo />
       <Calender />
       <CreateGroupBox />
+      <PopularGroup />
+      <Intermissionless />
       <BoardCategory />
       <NewBoardView />
     </Wrapper>
