@@ -21,7 +21,6 @@ const HeaderMenuList = () => {
     <MenuList>
       <MenuItem>Home</MenuItem>
       <MenuItem>Login</MenuItem>
-      <MenuItem>Sign up</MenuItem>
     </MenuList>
   );
 };

@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { GoogleButton, GoogleArrow } from 'components/google/index';
 import { GOOGLE_AUTH_URL } from 'constant';
+import GoogleButton from './GoogleButton';
+import GoogleArrow from './GoogleArrow';
+
 
 const LoginButton = styled.a`
   display: flex;
@@ -14,11 +16,11 @@ const LoginButton = styled.a`
   width: 720px;
 
   border: 0px solid #ffffff;
-  border-radius: 48px;
+  border-radius: 96px;
   background-color: #ffffff;
-  box-shadow: 0px 24px 3px -16px #cfcece;
+  box-shadow: 0px 12px 1px rgb(128 , 128, 128, 0.3);
 
-  color: black;
+  color: #000000;
   text-decoration: none;
 
   &:hover {
