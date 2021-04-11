@@ -9,9 +9,9 @@ const MyPage = () => {
       <ProfileBox>
         <EditProfile>Edit Profile</EditProfile>
         <LineBox>
-          <Line width="48" color="gray" />
-          <Line width="100" color="yellow" />
-          <Line width="1492" color="gray" />
+          <Line width="48" color="gray" storke="1" />
+          <Line width="272" color="orange" storke="3" />
+          <Line width="1320" color="gray" storke="1" />
         </LineBox>
         <PhotoBox>
           <BsFillCircleFill size="389" color="gray" />
@@ -96,13 +96,15 @@ const ListItem = styled.li`
 const Line = styled.hr`
   width: ${(props) => props.width}px;
   height: 0px;
-  border: 1px solid ${(props) => props.color};
+  border: ${(props) => props.storke}px solid ${(props) => props.color};
   margin-top: -48px;
 `;
 
 const LineBox = styled.div`
   width: 1640px;
+  height : 0px;
   display: flex;
+  align-items: center;
 `;
 
 export default MyPage;
