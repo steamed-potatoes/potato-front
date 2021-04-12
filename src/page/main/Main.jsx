@@ -9,7 +9,9 @@ import CreateGroupBox from './CreateGroupBox';
 import PopularGroup from './PopularGroup';
 import Intermissionless from './Intermissionless';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  margin-bottom: 4%;
+`;
 
 const Main = () => {
   return (
