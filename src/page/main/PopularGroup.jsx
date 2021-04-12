@@ -1,17 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 const Title = styled.p`
   line-height: 8px;
   font-size: 24px;
   margin-left: 8px;
+  font-weight: bold;
 `;
 
 const SubTitle = styled.p`
   line-height: 8px;
-  font-size: 8px;
+  font-size: 16px;
   margin-left: 8px;
 `;
 
@@ -53,6 +58,8 @@ const PopularGroup = () => {
         <Content>
           <LeftButton>&#60;</LeftButton>
         </Content>
+        <Content />
+        <Content />
         <Content />
         <Content>
           <RightButton>&#62;</RightButton>
