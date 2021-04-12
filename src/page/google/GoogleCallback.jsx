@@ -23,7 +23,7 @@ const GoogleCallback = () => {
       if (type === 'LOGIN') {
         // TODO 상수로 빼기
         localStorageService.set('authToken', token);
-        history.push('/');
+        history.push('/Main');
         return;
       }
 
@@ -32,7 +32,7 @@ const GoogleCallback = () => {
       history.push('/Signup');
     } catch (error) {
       alert(error.response.data.message);
-      history.push('/Login');
+      history.push('/');
     }
   };
 
