@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import SignUpBodyInputSet from './SignUpBodyInputSet';
 
+
 const InputList = styled.div`
   align-items: left;
 

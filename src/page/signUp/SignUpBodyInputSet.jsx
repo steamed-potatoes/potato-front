@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import sendApi from 'apis/sendApi';
 
 const InputSet = styled.div`
   margin: 40px;
@@ -25,10 +26,26 @@ const Input = styled.input`
 `;
 
 const SignUpBodyInputSet = ({name}) => {
+  const [major, setMajor] = useState([]);
+
+  useEffect(() => {
+  const getMajor = async () => {
+    try {
+      const { data } = await sendApi.signUpMajor();
+      setMajor(data);
+      // console.log(data);
+    } catch (e) {
+      alert(e.response.data.message);
+    }
+  };
+  
+  getMajor();
+}, []);
+
   return (
     <InputSet>
       <InputName>{name}</InputName>
-      <Input />
+      <Input placeholder={major} />
     </InputSet>
   );
 }
