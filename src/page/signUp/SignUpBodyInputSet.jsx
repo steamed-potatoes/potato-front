@@ -10,7 +10,7 @@ const InputName = styled.p`
   font-size: 12px;
 `;
 
-const Input = styled.input`
+const Select = styled.select`
   width: 400px;
 
   border: none;
@@ -25,7 +25,10 @@ const Input = styled.input`
   }
 `;
 
-const SignUpBodyInputSet = ({name}) => {
+const Option = styled.option`
+`;
+
+const SignUpBodyInputSet = () => {
   const [major, setMajor] = useState([]);
 
   useEffect(() => {
@@ -44,8 +47,12 @@ const SignUpBodyInputSet = ({name}) => {
 
   return (
     <InputSet>
-      <InputName>{name}</InputName>
-      <Input placeholder={major} />
+      <InputName>학과</InputName>
+      <Select>
+        {major.map((data) => (
+          <Option key={data.major}>{data.major}</Option>
+        ))}
+      </Select>
     </InputSet>
   );
 }

@@ -12,9 +12,9 @@ const InputList = styled.div`
 const SignUpBodyList = () => {
   return (
     <InputList>
-      <SignUpBodyInputSet name="닉네임" />
-      <SignUpBodyInputSet name="학과" />
-      <SignUpBodyInputSet name="학번" />
+      {/* <SignUpBodyInputSet name="닉네임" /> */}
+      <SignUpBodyInputSet />
+      {/* <SignUpBodyInputSet name="학번" /> */}
     </InputList>
   );
 }
