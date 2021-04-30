@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import swal from 'sweetalert';
+import sendApi from '../../apis/sendApi';
 import GroupInput from './MakeGroupInput'
 import Picture from './MakeGroupPicture'
 
@@ -37,11 +39,39 @@ const SendButton = styled.button`
 `
 
 const MakeGroupBox = () => {
+  const [form, setForm] = useState({
+    subDomain:'',
+    name:'',
+    description:'',
+    profileUrl:''
+  });
+
+  const onChangeForm = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value
+    });
+  }
+
+  const makeGroup = async (form) => {
+    try {
+        await sendApi.makeGroup({
+        form,
+        headers: {
+          'Content-Type': `application/json`,
+        },
+      });
+    } catch (e) {
+      swal(`${e}`);
+    }
+  };
+
+
   return (
     <GroupBox>
       <Picture />
-      <GroupInput />
-      <SendButton>생성하기</SendButton> 
+      <GroupInput onChangeForm={onChangeForm} />
+      <SendButton onClick={()=>makeGroup(form)}>생성하기</SendButton> 
     </GroupBox>
   )
 }

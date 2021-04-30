@@ -27,15 +27,15 @@ const Textarea = styled.textarea`
   padding: 24px;
 `
 
-const MakeGroupInput = () => {
+const MakeGroupInput = ({onChangeForm}) => {
   return (
     <Wrapper>
       <TagName>도메인주소</TagName>
-      <InputName />
+      <InputName name="subDomain" onChange={onChangeForm} />
       <TagName>그룹 이름</TagName>
-      <InputName />
+      <InputName name="name" onchange={onChangeForm} />
       <TagName>그룹 소개</TagName>
-      <Textarea />
+      <Textarea name="description" onChange={onChangeForm} />
     </Wrapper>
   )
 }

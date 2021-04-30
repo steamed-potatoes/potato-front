@@ -22,6 +22,8 @@ module.exports = {
     'import/no-named-as-default': 'off',
     'import/no-unresolved': 'off',
     'react/prop-types': 'off',
+    'prefer-const': 'off',
+    'no-unused-vars': 'off',
 
     'no-param-reassign': 'off',
     'no-unused-expressions': 'off',
