@@ -8,4 +8,7 @@ export default {
 
     return type === 'post' ? axios.post(url, req) : axios.get(url, req);
   },
+  send2: (url, req, type = 'get') => {
+    return type === 'post' ? axios.post(url, req) : axios.get(url, req);
+  },
 };

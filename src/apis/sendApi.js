@@ -10,4 +10,7 @@ export default {
   signUpMember: async (req) => {
     return await api.send('/api/v1/member', req, 'post');
   },
+  checkMyProfile : async (req) => {
+    return await api.send('/api/v1/member', req, 'get');
+  }
 };

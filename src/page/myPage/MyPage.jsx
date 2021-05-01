@@ -1,11 +1,41 @@
-import React from 'react';
+import React,{ useEffect,useState } from 'react';
 import styled from 'styled-components';
 import { BsFillCircleFill } from 'react-icons/bs';
 import { FiCamera } from 'react-icons/fi';
+import {HeaderMenu} from 'components/header/index';
+import sendApi from 'apis/sendApi';
 
 const MyPage = () => {
+  const [loading,setLoading] = useState(false)
+  const [profile,setProfile] = useState(null)
+
+  useEffect(()=> {
+    const myProfile = async () => {
+      try{
+        setLoading(true)
+        const {data} = await sendApi.checkMyProfile();
+        setProfile(data)
+
+      }catch(e) {
+        console.log(e)
+      }
+    }
+    myProfile()
+    setLoading(false)
+  },[])
+
+  if (loading){
+    <Main>
+      대기중...
+    </Main>
+  }
+  if (!profile){
+    return null
+  }
+  
   return (
     <Main>
+      <HeaderMenu />
       <ProfileBox>
         <EditProfile>Edit Profile</EditProfile>
         <LineBox>
