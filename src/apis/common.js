@@ -8,4 +8,8 @@ export default {
 
     return type === 'post' ? axios.post(url, req) : axios.get(url, req);
   },
+
+  receivedNewBoard: (url) => {
+    return axios.get(url);
+  },
 };

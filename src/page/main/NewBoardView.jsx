@@ -1,5 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import swal from 'sweetalert';
+import sendApi from 'apis/sendApi';
+import { useEffect } from 'react/cjs/react.development';
+import { BoardThumbnail } from 'components/BoardThumbnail';
 
 const NewBoardViewWrapper = styled.div`
   display: flex;
@@ -33,15 +37,29 @@ const ItemDetail = styled.div`
 `;
 
 const NewBoardView = () => {
+  const [newBoardData, setNewBoardData] = useState([]);
+
+  useEffect(() => {
+    const receivedData = async () => {
+      try {
+        const { data } = await sendApi.newBoardData();
+        setNewBoardData(data.data);
+      } catch (e) {
+        swal(`${e}`);
+      }
+    };
+    receivedData();
+  }, []);
+
   return (
     <NewBoardViewWrapper>
       <NewBoardViewTitle>최근 게시글</NewBoardViewTitle>
       <NewBoardItem>
-        <ItemDetail />
-        <ItemDetail />
-        <ItemDetail />
-        <ItemDetail />
-        <ItemDetail />
+        {newBoardData.length ? (
+          newBoardData.map((data) => <BoardThumbnail itemData={data} />)
+        ) : (
+          <ItemDetail />
+        )}
       </NewBoardItem>
     </NewBoardViewWrapper>
   );

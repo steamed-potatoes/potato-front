@@ -10,4 +10,9 @@ export default {
   signUpMember: async (req) => {
     return await api.send('/api/v1/member', req, 'post');
   },
+  newBoardData: async () => {
+    return await api.receivedNewBoard(
+      'https://api.pmarket.space/api/v2/organization/board/list?size=5'
+    );
+  },
 };
