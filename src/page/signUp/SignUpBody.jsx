@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
 import { useHistory } from 'react-router-dom';
@@ -100,38 +101,58 @@ const SignUpBody = () => {
   const [major, setMajor] = useState([]);
   const [inputs,setInputs] = useState({
     selectedMajor: 'ICT융합과',
-    nickname: '',
-    studentNumber: ''
+    classNumber: 0
   });
+  const { email, name, profileUrl} = useSelector(state => ({
+    email: state.user.email,
+    name: state.user.name,
+    profileUrl: state.user.profileUrl
+  }));
+
   const history = useHistory();
 
   useEffect(() => {
-  const getMajor = async () => {
+  const getMajors = async () => {
     try {
-      const { data } = await sendApi.signUpMajor();
+      const { data } = await sendApi.getMajors();
       setMajor(data);
     } catch (e) {
       alert(e.response.data.message);
     }
-  };
+  }
   
-  getMajor();
+  getMajors();
 }, []);
+
+const signUpMember = async () => {
+  try {
+    const ans = {
+      "email": email,
+      "name": name,
+      "profileUrl": profileUrl,
+      "major": inputs.selectedMajor,
+      "classNumber": inputs.classNumber
+    };
+
+    const { data } = await sendApi.signUpMember(ans);
+    
+    localStorageService.set('authToken', data);
+    history.push('/Main');
+  } catch(error){
+    alert(error);
+  }
+}
 
 const handleSubmit = (e) => {
   e.preventDefault();
-  localStorageService.set('signUpData', JSON.stringify(inputs));
-  console.log(localStorageService.get('signUpData'));
-  console.log(localStorage);
-  localStorageService.delete('signUpData');
-  history.push('/Main');
+  signUpMember();
 };
 
 const handleChange = (e) => {
   const { value, name } = e.target; 
   setInputs({
     ...inputs, 
-    [name]: value 
+    [name]: Number(value)
   });
 };
 
@@ -139,10 +160,10 @@ const handleChange = (e) => {
     <InputWrapper onSubmit={handleSubmit}>
       <Title>Sign up</Title>
       <InputList>
-        <InputSet>
+        {/* <InputSet>
           <InputName>닉네임</InputName>
           <Input name="nickname" onChange={handleChange} />
-        </InputSet>
+        </InputSet> */}
         <SelectSet>
           <InputName>학과</InputName>
           <Select name="selectedMajor" onChange={handleChange}>
@@ -153,7 +174,7 @@ const handleChange = (e) => {
         </SelectSet>
         <InputSet>
           <InputName>학번</InputName>
-          <Input name="studentNumber" onChange={handleChange} />
+          <Input name="classNumber" onChange={handleChange} />
         </InputSet>
       </InputList>
       <Button type="submit">START</Button>

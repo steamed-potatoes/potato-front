@@ -13,14 +13,13 @@ const GoogleCallback = () => {
 
   const sendToken = async (code) => {
     try {
-      // console.log(code);
       const { data } = await sendApi.sendGoogleAuth({
         code,
         redirectUri: AUTH_KEY.google.redirectUri,
       });
 
       const { email, name, profileUrl, token, type } = data.data;
-      
+
       if (type === 'LOGIN') {
         // TODO 상수로 빼기
         localStorageService.set('authToken', token);
@@ -42,7 +41,7 @@ const GoogleCallback = () => {
       return;
     }
     const { code } = querystring.parse(window.location.search);
-    
+
     sendToken(code);
   }, []);
   return <div>Google Login</div>;

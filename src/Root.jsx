@@ -6,7 +6,7 @@ import rootReducer from './store/modules';
 
 const Login = lazy(() => import('./page/login/Login'));
 const GoogleCallback = lazy(() => import('./page/google/GoogleCallback'));
-const SignUp = lazy(() => import('page/signUp/Signup'));
+const SignUp = lazy(() => import('page/signUp/SignUp'));
 const MakeGroup = lazy(() => import('page/makeGroup/MakeGroupMain'));
 const Main = lazy(() => import('page/main/Main'));
 

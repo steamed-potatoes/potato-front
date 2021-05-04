@@ -10,7 +10,7 @@ export default {
   signUpMember: async (req) => {
     return await api.send('/api/v1/member', req, 'post');
   },
-  signUpMajor: async (req) => {
-    return await api.send2('https://api.pmarket.space/api/v1/major/list',req, 'get');
+  getMajors: async (req) => {
+    return await api.send('/api/v1/major/list', req, 'get');
   }
 };
