@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
 import { useHistory } from 'react-router-dom';
 import localStorageService from 'libs/localStorageService';
+import * as actions from 'store/modules/user';
 
 const InputWrapper = styled.form`
   display: flex;
@@ -100,7 +101,8 @@ const Input = styled.input`
 const SignUpBody = () => {
   const [major, setMajor] = useState([]);
   const [inputs,setInputs] = useState({
-    selectedMajor: 'ICT융합과',
+    nickname: '',
+    selectedMajor: 'IT_ICT',
     classNumber: 0
   });
   const { email, name, profileUrl} = useSelector(state => ({
@@ -110,6 +112,7 @@ const SignUpBody = () => {
   }));
 
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
   const getMajors = async () => {
@@ -139,7 +142,7 @@ const signUpMember = async () => {
     localStorageService.set('authToken', data);
     history.push('/Main');
   } catch(error){
-    alert(error);
+    alert(error.response.data.message);
   }
 }
 
@@ -150,31 +153,46 @@ const handleSubmit = (e) => {
 
 const handleChange = (e) => {
   const { value, name } = e.target; 
-  setInputs({
-    ...inputs, 
-    [name]: Number(value)
-  });
+  if(name === "classNumber") {
+    setInputs({
+      ...inputs, 
+      [name]: Number(value)
+    });
+  } else if(name === "nickname"){
+    setInputs({
+      ...inputs, 
+      [name]: value
+    });
+
+    dispatch(actions.changeUserInfo(email, value ,profileUrl));
+
+  } else if(name === "selectedMajor"){
+    setInputs({
+      ...inputs, 
+      [name]: value
+    });
+  }
 };
 
   return (
     <InputWrapper onSubmit={handleSubmit}>
       <Title>Sign up</Title>
       <InputList>
-        {/* <InputSet>
+        <InputSet>
           <InputName>닉네임</InputName>
-          <Input name="nickname" onChange={handleChange} />
-        </InputSet> */}
+          <Input name="nickname" value={inputs.nickname} onChange={handleChange} />
+        </InputSet>
         <SelectSet>
           <InputName>학과</InputName>
-          <Select name="selectedMajor" onChange={handleChange}>
+          <Select name="selectedMajor" value={inputs.selectedMajor} onChange={handleChange}>
             {major.map((data) => (
-              <Option key={data.major}>{data.major}</Option>
+              <Option key={data.majorCode}>{data.majorCode}</Option>
             ))}
           </Select>
         </SelectSet>
         <InputSet>
           <InputName>학번</InputName>
-          <Input name="classNumber" onChange={handleChange} />
+          <Input name="classNumber" value={inputs.classNumber} onChange={handleChange} />
         </InputSet>
       </InputList>
       <Button type="submit">START</Button>
