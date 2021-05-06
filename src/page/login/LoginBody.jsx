@@ -8,19 +8,22 @@ const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  margin-top: 232px;
+  margin-top: 224px;
   
 `;
 
 const Title = styled.p`
-  margin: 0px;
+  margin: 0px 0px 36px 0px;
+  padding: 0px;
 
-  font-size: 56px;
+  font-size: 40px;
+  font-weight: bold;
 `;
 
 const SubTitle = styled.p`
-  margin: 8px 0px 16px 0px;
-
+  margin: 0px;
+  padding: 0px 0px 40px 0px;
+  
   font-size: 16px;
 `;
 
@@ -29,7 +32,7 @@ const LoginBody = () => {
     <LoginWrapper>
       <Title>슬기로운 감자생활</Title>
       <SubTitle>
-        이용하시려면 하단의 아이디로 로그인 하기를 클릭 하세오
+        이용하시려면 하단의 구글 아이디로 로그인 하기를 클릭하세요
       </SubTitle>
       <LoginBodyButton />
     </LoginWrapper>
