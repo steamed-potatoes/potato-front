@@ -25,11 +25,13 @@ const MenuItem = styled.li`
   display: block;
   padding: 0px 32px;
 `;
-export const LoginHeader = () => {
+
+export const SignUpHeader = () => {
   return (
     <Header>
       <Manager>관리자</Manager>
       <MenuList>
+        <MenuItem>Sign up</MenuItem>
         <MenuItem>Home</MenuItem>
         <MenuItem>Login</MenuItem>
       </MenuList>

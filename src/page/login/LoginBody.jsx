@@ -8,7 +8,7 @@ const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  margin-top: 224px;
+  margin-top: 304px;
   
 `;
 
