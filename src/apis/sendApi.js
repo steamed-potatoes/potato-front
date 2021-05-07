@@ -13,4 +13,7 @@ export default {
   newBoardData: async (req) => {
     return await api.send('/api/v2/organization/board/list?size=5', req, 'get');
   },
+  getMajors: async (req) => {
+    return await api.send('/api/v1/major/list', req, 'get');
+  },
 };
