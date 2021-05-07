@@ -10,7 +10,6 @@ const GroupBox = styled.div`
   flex-direction: column;
   justify-content: top;
   align-items: center;
-
   width: 1000px;
   height: 700px;
   margin: 16px auto;
@@ -31,7 +30,6 @@ const SendButton = styled.button`
   border-radius: 48px;
   color: white;
   font-size: 16px;
-
   &:hover {
     cursor: pointer;
     border: 1px solid #CFCECE;
@@ -47,25 +45,22 @@ const MakeGroupBox = () => {
   });
 
   const onChangeForm = (e) => {
-    console.log(e.target.name);
     setForm({
       ...form,
       [e.target.name]: e.target.value
     });
-    
-  }
+  } 
 
   const makeGroup = async (form) => {
-    console.log(form);
     try {
         await sendApi.makeGroup({
-        form,
-        headers: {
-          'Content-Type': `application/json`,
-        },
-      });
+        "subDomain": form.subDomain,
+        "name": form.name,
+        "description": form.description,
+        "profileUrl": form.profileUrl,
+      })
     } catch (e) {
-      swal(`${e}`);
+      swal(e.response.data.message);
     }
   };
 

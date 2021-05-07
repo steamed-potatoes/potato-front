@@ -44,13 +44,13 @@ const MakeGroupPicture = ({onChangeForm}) => {
   const inputFiled = useRef(null);
 
   const onChangeFile = (event) => {
-    const imageFile = event.target.files[0];
+    const [imageFile] = event.target.files;
     const imageUrl = URL.createObjectURL(imageFile);
     setFile(imageUrl);
     onChangeForm(event); 
   }
 
-  const onClickInput = (e) => {
+  const onClickInput = () => {
     inputFiled.current.click();
   }
 
