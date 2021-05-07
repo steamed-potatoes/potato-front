@@ -47,13 +47,16 @@ const MakeGroupBox = () => {
   });
 
   const onChangeForm = (e) => {
+    console.log(e.target.name);
     setForm({
       ...form,
       [e.target.name]: e.target.value
     });
+    
   }
 
   const makeGroup = async (form) => {
+    console.log(form);
     try {
         await sendApi.makeGroup({
         form,
@@ -69,7 +72,7 @@ const MakeGroupBox = () => {
 
   return (
     <GroupBox>
-      <Picture />
+      <Picture onChangeForm={onChangeForm} />
       <GroupInput onChangeForm={onChangeForm} />
       <SendButton onClick={()=>makeGroup(form)}>생성하기</SendButton> 
     </GroupBox>

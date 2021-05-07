@@ -46,7 +46,8 @@ const MakeGroupPicture = ({onChangeForm}) => {
   const onChangeFile = (event) => {
     const imageFile = event.target.files[0];
     const imageUrl = URL.createObjectURL(imageFile);
-    setFile(imageUrl);     
+    setFile(imageUrl);
+    onChangeForm(event); 
   }
 
   const onClickInput = (e) => {
@@ -58,8 +59,8 @@ const MakeGroupPicture = ({onChangeForm}) => {
       <PictureWrapper>
         <Picture src={file} />
       </PictureWrapper>
-      <InputPicture type="file" ref={inputFiled} onChange={onChangeFile} />
-      <Change onClick={onClickInput}>사진 수정</Change>  
+      <InputPicture type="file" name="profileUrl" ref={inputFiled} onChange={onChangeFile} />
+      <Change onClick={onClickInput}>사진 수정</Change>
     </Wrapper>
 	);
 }

@@ -33,7 +33,7 @@ const MakeGroupInput = ({onChangeForm}) => {
       <TagName>도메인주소</TagName>
       <InputName name="subDomain" onChange={onChangeForm} />
       <TagName>그룹 이름</TagName>
-      <InputName name="name" onchange={onChangeForm} />
+      <InputName name="name" onChange={onChangeForm} />
       <TagName>그룹 소개</TagName>
       <Textarea name="description" onChange={onChangeForm} />
     </Wrapper>
