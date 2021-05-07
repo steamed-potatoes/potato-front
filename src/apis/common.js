@@ -7,5 +7,5 @@ export default {
     url = defaultUrl + url;
 
     return type === 'post' ? axios.post(url, req) : axios.get(url, req);
-  },
+  }
 };
