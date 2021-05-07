@@ -29,7 +29,7 @@ const GoogleCallback = () => {
 
       dispatch(actions.changeUserInfo(email, name, profileUrl));
       localStorageService.delete('authToken');
-      history.push('/Signup');
+      history.push('/SignUp');
     } catch (error) {
       alert(error.response.data.message);
       history.push('/');

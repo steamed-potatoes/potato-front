@@ -1,11 +1,14 @@
 const CHANGE_USER_INFO = 'user/CHANGE_USER_INFO';
 
-export const changeUserInfo = (email, name, profileUrl) => ({
+export const changeUserInfo = (email, name, profileUrl) => {
+  return ({
   type: CHANGE_USER_INFO,
   email,
   name,
   profileUrl,
-});
+})
+
+};
 
 const initialState = { email: '', name: '', profileUrl: '' };
 
