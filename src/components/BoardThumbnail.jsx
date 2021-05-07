@@ -42,11 +42,11 @@ export const BoardThumbnail = (itemData) => {
   return (
     <NewBoard>
       <BoardThumb
-        src={itemData.itemData.imageUrl}
-        alt={itemData.itemData.title}
+        src={itemData.itemData.boardImageUrl}
+        alt={itemData.itemData.boardTitle}
       />
-      <BoardTitle>{itemData.itemData.title}</BoardTitle>
-      <BoardWriter>{itemData.itemData.subDomain}</BoardWriter>
+      <BoardTitle>{itemData.itemData.boardTitle}</BoardTitle>
+      <BoardWriter>{itemData.itemData.orgName}</BoardWriter>
     </NewBoard>
   );
 };
