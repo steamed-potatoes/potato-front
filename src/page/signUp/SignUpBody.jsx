@@ -88,7 +88,7 @@ const InputList = styled.div`
 const Input = styled.input`
   width: 400px;
   border: none;
-  border-bottom: solid 2px #CFCECE;
+  border-bottom: solid 2px #cfcece;
   &:hover {
     cursor: pointer;
     border-bottom: 2px solid #808080;
@@ -100,79 +100,78 @@ const Input = styled.input`
 
 const SignUpBody = () => {
   const [major, setMajor] = useState([]);
-  const [inputs,setInputs] = useState({
+  const [inputs, setInputs] = useState({
     nickname: '',
     selectedMajor: 'IT_ICT',
-    classNumber: 0
+    classNumber: 0,
   });
-  const { email, name, profileUrl} = useSelector(state => ({
+  const { email, name, profileUrl } = useSelector((state) => ({
     email: state.user.email,
     name: state.user.name,
-    profileUrl: state.user.profileUrl
+    profileUrl: state.user.profileUrl,
   }));
 
   const history = useHistory();
   const dispatch = useDispatch();
 
   useEffect(() => {
-  const getMajors = async () => {
-    try {
-      const { data } = await sendApi.getMajors();
-      setMajor(data);
-    } catch (e) {
-      alert(e.response.data.message);
-    }
-  }
-  
-  getMajors();
-}, []);
-
-const signUpMember = async () => {
-  try {
-    const ans = {
-      "email": email,
-      "name": name,
-      "profileUrl": profileUrl,
-      "major": inputs.selectedMajor,
-      "classNumber": inputs.classNumber
+    const getMajors = async () => {
+      try {
+        const { data } = await sendApi.getMajors();
+        setMajor(data);
+      } catch (e) {
+        alert(e.response.data.message);
+      }
     };
 
-    const { data } = await sendApi.signUpMember(ans);
-    
-    localStorageService.set('authToken', data);
-    history.push('/Main');
-  } catch(error){
-    alert(error.response.data.message);
-  }
-}
+    getMajors();
+  }, []);
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  signUpMember();
-};
+  const signUpMember = async () => {
+    try {
+      const ans = {
+        email,
+        name,
+        profileUrl,
+        major: inputs.selectedMajor,
+        classNumber: inputs.classNumber,
+      };
 
-const handleChange = (e) => {
-  const { value, name } = e.target; 
-  if(name === "classNumber") {
-    setInputs({
-      ...inputs, 
-      [name]: Number(value)
-    });
-  } else if(name === "nickname"){
-    setInputs({
-      ...inputs, 
-      [name]: value
-    });
+      const { data } = await sendApi.signUpMember(ans);
 
-    dispatch(actions.changeUserInfo(email, value ,profileUrl));
+      localStorageService.set('authToken', data.data);
+      history.push('/Main');
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
 
-  } else if(name === "selectedMajor"){
-    setInputs({
-      ...inputs, 
-      [name]: value
-    });
-  }
-};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    signUpMember();
+  };
+
+  const handleChange = (e) => {
+    const { value, name } = e.target;
+    if (name === 'classNumber') {
+      setInputs({
+        ...inputs,
+        [name]: Number(value),
+      });
+    } else if (name === 'nickname') {
+      setInputs({
+        ...inputs,
+        [name]: value,
+      });
+
+      dispatch(actions.changeUserInfo(email, value, profileUrl));
+    } else if (name === 'selectedMajor') {
+      setInputs({
+        ...inputs,
+        [name]: value,
+      });
+    }
+  };
 
   return (
     <InputWrapper onSubmit={handleSubmit}>
@@ -180,19 +179,33 @@ const handleChange = (e) => {
       <InputList>
         <InputSet>
           <InputName>닉네임</InputName>
-          <Input name="nickname" value={inputs.nickname} onChange={handleChange} />
+          <Input
+            name="nickname"
+            value={inputs.nickname}
+            onChange={handleChange}
+          />
         </InputSet>
         <SelectSet>
           <InputName>학과</InputName>
-          <Select name="selectedMajor" value={inputs.selectedMajor} onChange={handleChange}>
+          <Select
+            name="selectedMajor"
+            value={inputs.selectedMajor}
+            onChange={handleChange}
+          >
             {major.map((data) => (
-              <Option key={data.majorCode}>{data.majorCode}</Option>
+              <Option key={data.majorCode}>
+                {data.department} - {data.major}
+              </Option>
             ))}
           </Select>
         </SelectSet>
         <InputSet>
           <InputName>학번</InputName>
-          <Input name="classNumber" value={inputs.classNumber} onChange={handleChange} />
+          <Input
+            name="classNumber"
+            value={inputs.classNumber}
+            onChange={handleChange}
+          />
         </InputSet>
       </InputList>
       <Button type="submit">START</Button>
