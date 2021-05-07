@@ -1,6 +1,6 @@
 import React from 'react';
 import { AiOutlineArrowRight } from "react-icons/ai";
 
-const GoogleArrow = () => <AiOutlineArrowRight size="40px" />;
+const GoogleArrow = () => <AiOutlineArrowRight size="60px" />;
 
 export default GoogleArrow;

@@ -12,26 +12,28 @@ const InputWrapper = styled.form`
   justify-content: center;
   align-items: center;
 
-  width: 480px;
-  height: 560px;
-  margin: 40px auto;
-  padding: 40px 24px 40px 24px;
+  width: 1280px;
+  height: 696px;
+  margin: 88px auto 0px auto;
+  padding: 0px;
 
   border: 0px solid #ffffff;
   border-radius: 48px;
   background-color: #ffffff;
-  box-shadow: -8px 16px 4px rgb(128, 128, 128, 0.6);
+  box-shadow: 9px 9px 7px rgb(0, 0, 0, 0.3);
 `;
 
 const Title = styled.p`
-  margin: 40px;
+  margin: 0px 0px 80px 0px;
 
   font-size: 56px;
+  font-weight: bold;
 `;
 
 const Button = styled.button`
-  width: 400px;
-  margin: 48px auto;
+  width: 540px;
+  height: 80px;
+  margin: 40px auto 0px auto;
   padding: 16px 0px;
 
   color: #ffffff;
@@ -63,7 +65,7 @@ const InputName = styled.p`
 `;
 
 const Select = styled.select`
-  width: 400px;
+  width: 512px;
 
   border: none;
   border-bottom: solid 2px #cfcece;
@@ -82,11 +84,11 @@ const Option = styled.option``;
 const InputList = styled.div`
   align-items: left;
 
-  margin: 16px;
+  margin: 0px;
 `;
 
 const Input = styled.input`
-  width: 400px;
+  width: 512px;
   border: none;
   border-bottom: solid 2px #cfcece;
   &:hover {
@@ -208,7 +210,7 @@ const SignUpBody = () => {
           />
         </InputSet>
       </InputList>
-      <Button type="submit">START</Button>
+      <Button type="submit">로그인</Button>
     </InputWrapper>
   );
 };

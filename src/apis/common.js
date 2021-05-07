@@ -28,8 +28,8 @@ export default {
             Authorization: `Bearer ${token}`,
           }
         });
-    } else {
-      return type === 'post' ? axios.post(url, req) : axios.get(url, req);
     }
+
+    return type === 'post' ? axios.post(url, req) : axios.get(url, req);
   }
 };
