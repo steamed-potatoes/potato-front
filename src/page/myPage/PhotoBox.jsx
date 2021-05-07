@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import {IoPersonCircleOutline,IoCameraOutline} from 'react-icons/io5'
 
-const PhotoBox = () => {
+export const PhotoBox = () => {
   return (
     <Wrapper>
       <ProfileImgText>프로필 이미지</ProfileImgText>
@@ -56,4 +56,3 @@ const ProfileImgText = styled.div`
   margin-bottom : -10px;
 `;
 
-export default PhotoBox;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const LineBox = () => {
+export const LineBox = () => {
   return (
     <Wrapper>
       <Line width="48" color="#BCBCBC" storke="2" />
@@ -23,5 +23,3 @@ const Line = styled.hr`
   border: ${(props) => props.storke}px solid ${(props) => props.color};
   margin-top: -48px;
 `;
-
-export default LineBox;

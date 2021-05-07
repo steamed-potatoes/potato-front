@@ -1,10 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {HeaderMenu} from 'components/header/index';
-import TitleBox from './TitleBox'
-import LineBox from './LineBox'
-import PhotoBox from './PhotoBox'
-import TextBox from './TextBox';
+import { LineBox, TitleBox, PhotoBox,TextBox } from './index';
 import BackgroundImg from '../../images/BackgroundImg.png';
 
 const MyPage = () => {
