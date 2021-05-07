@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import swal from 'sweetalert';
 import sendApi from '../../apis/sendApi';
 import GroupInput from './MakeGroupInput'
 import Picture from './MakeGroupPicture'
@@ -44,29 +45,22 @@ const MakeGroupBox = () => {
   });
 
   const onChangeForm = (e) => {
-    console.log(e.target.name);
     setForm({
       ...form,
       [e.target.name]: e.target.value
     });
-    
   } 
 
   const makeGroup = async (form) => {
-    console.log(form);
     try {
-        const { data } = await sendApi.makeGroup({
+        await sendApi.makeGroup({
         "subDomain": form.subDomain,
         "name": form.name,
         "description": form.description,
         "profileUrl": form.profileUrl,
-        headers: {
-          'Content-Type': `application/json`,
-        },
       })
-      console.log(data);
     } catch (e) {
-      console.log(e.response.data.message);
+      swal(e.response.data.message);
     }
   };
 

@@ -15,10 +15,8 @@ export default {
     url = defaultUrl + url;
 
     const token = localStorageService.get('authToken');
-    console.log(token);
     
     if(token) {
-      console.log("token");
       return type === 'post'
         ? axios.post(url, req, {
           headers: {
@@ -31,9 +29,7 @@ export default {
           }
         });
     } else {
-      console.log("no token");
       return type === 'post' ? axios.post(url, req) : axios.get(url, req);
     }
-
   }
 };
