@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import swal from 'sweetalert';
 import sendApi from '../../apis/sendApi';
 import GroupInput from './MakeGroupInput'
 import Picture from './MakeGroupPicture'
@@ -52,7 +51,7 @@ const MakeGroupBox = () => {
     });
     
   } 
-  
+
   const makeGroup = async (form) => {
     console.log(form);
     try {
@@ -67,7 +66,7 @@ const MakeGroupBox = () => {
       })
       console.log(data);
     } catch (e) {
-      swal(`${e}`);
+      console.log(e.response.data.message);
     }
   };
 
