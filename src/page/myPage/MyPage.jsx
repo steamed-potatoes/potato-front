@@ -30,7 +30,7 @@ const ProfileBox = styled.div`
   margin-top: 56px;
   background-color : white;
   display: flex;
-  border-radius: 42px;
+  border-radius: 40px;
   width: 1648px;
   height: 760px;
   flex-flow: row wrap;
