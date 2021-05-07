@@ -6,11 +6,22 @@ const BoardCategoryWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 192px;
 `;
 const BoardCategoryTitle = styled.div`
-  margin: 32px 0 16px 16px;
-  font-size: 36px;
+  margin: 32px 0 8px 16px;
+
+  display: block;
+  font-size: 40px;
   font-weight: bold;
+  &::after {
+    content: '';
+    padding-bottom: 12px;
+    display: block;
+    margin-left: 32px;
+    width: 48px;
+    border-bottom: solid #686868 2px;
+  }
 `;
 
 const Line = styled.div`

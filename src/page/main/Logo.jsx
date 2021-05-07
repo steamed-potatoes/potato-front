@@ -5,16 +5,17 @@ const LogoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: left;
-
-  border: 1px solid black;
+  background-color: #bababa;
+  border-top: none;
 `;
 
 const Search = styled.div`
   width: 300px;
   margin: 24px 40px;
   padding: 0px 16px;
+  background-color: white;
 
-  border: 1px solid black;
+  border: none;
   border-radius: 12px;
 `;
 

@@ -7,23 +7,21 @@ const MainCalenderWrapper = styled.div`
   align-items: center;
 `;
 
-const TitleWrapper = styled.div`
-`;
+const TitleWrapper = styled.div``;
 
 const MainCalenderTitle = styled.p`
-  text-align: left;
-  
-  margin: 8px 0;
+  text-align: center;
 
-  font-size: 32px;
+  margin: 90px 0 0;
+
+  font-size: 40px;
   font-weight: bold;
-  
 `;
 
 const MainCalenderSubTitle = styled.p`
-  text-align: left;
-  
-  margin: 0px;
+  text-align: center;
+  font-size: 18px;
+  margin: 8px;
 `;
 
 const CalendersWrapper = styled.div`
@@ -32,8 +30,8 @@ const CalendersWrapper = styled.div`
 `;
 
 const MainCalender = styled.p`
-  width: 400px;
-  height: 400px;
+  width: 600px;
+  height: 560px;
   margin: 16px;
 
   background-color: gray;
@@ -45,16 +43,16 @@ const SubCalenderWrapper = styled.div`
 `;
 
 const SubCalender = styled.p`
-  width: 200px;
-  height: 200px;
+  width: 320px;
+  height: 280px;
   margin: 16px;
 
   background-color: gray;
 `;
 
 const SubCalenderDetail = styled.p`
-  width: 200px;
-  height: 120px;
+  width: 320px;
+  height: 200px;
   margin: 16px;
 
   background-color: gray;
@@ -81,6 +79,6 @@ const Calender = () => {
       </CalendersWrapper>
     </MainCalenderWrapper>
   );
-}
+};
 
 export default Calender;

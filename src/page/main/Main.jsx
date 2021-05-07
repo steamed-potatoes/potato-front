@@ -8,9 +8,15 @@ import NewBoardView from './NewBoardView';
 import CreateGroupBox from './CreateGroupBox';
 import PopularGroup from './PopularGroup';
 import Intermissionless from './Intermissionless';
+import BackgroundImg from '../../images/BackgroundImg.png';
 
 const Wrapper = styled.div`
-  margin-bottom: 4%;
+  height: 100%;
+  background-image: url(${BackgroundImg});
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: auto;
+  padding-bottom: 560px;
 `;
 
 const Main = () => {

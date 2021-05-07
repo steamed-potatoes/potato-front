@@ -1,17 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
+import LogoSymbol from '../../images/LogoSymbol.png';
 
 const NewBoardViewWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  margin-top: 192px;
+
+  background-image: url(${LogoSymbol});
+  background-position: center bottom;
+  background-repeat: no-repeat;
+  background-size: initial;
+  padding-bottom: 80px;
 `;
 
 const NewBoardViewTitle = styled.div`
-  width: 60%;
-  margin: 8px 0 8px 16px;
-  font-size: 24px;
+  text-align: center;
+  margin: 0 0 32px;
+  font-size: 40px;
   font-weight: bold;
 `;
 
