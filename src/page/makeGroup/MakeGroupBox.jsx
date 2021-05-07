@@ -54,10 +54,10 @@ const MakeGroupBox = () => {
   const makeGroup = async (form) => {
     try {
         await sendApi.makeGroup({
-        "subDomain": form.subDomain,
-        "name": form.name,
-        "description": form.description,
-        "profileUrl": form.profileUrl,
+        subDomain: form.subDomain,
+        name: form.name,
+        description: form.description,
+        profileUrl: form.profileUrl,
       })
     } catch (e) {
       swal(e.response.data.message);
