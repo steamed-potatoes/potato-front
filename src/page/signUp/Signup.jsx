@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {HeaderMenu} from 'components/header/index';
+import {SignUpHeader} from './SignUpHeader';
 import SignUpBody from './SignUpBody';
 import BackgroundImg from '../../images/BackgroundImg.png';
 
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 const SignUp = () => {
   return (
     <Wrapper>
-      <HeaderMenu />
+      <SignUpHeader />
       <SignUpBody />
     </Wrapper>
   );
