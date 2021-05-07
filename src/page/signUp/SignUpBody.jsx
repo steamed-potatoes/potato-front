@@ -154,7 +154,7 @@ const SignUpBody = () => {
   };
 
   const handleChange = (e) => {
-    const { value, name } = e.target;
+    const { value, name, key } = e.target;
     if (name === 'classNumber') {
       setInputs({
         ...inputs,
@@ -170,7 +170,7 @@ const SignUpBody = () => {
     } else if (name === 'selectedMajor') {
       setInputs({
         ...inputs,
-        [name]: value,
+        [name]: key,
       });
     }
   };
