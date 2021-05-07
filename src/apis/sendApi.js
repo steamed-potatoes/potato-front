@@ -12,5 +12,8 @@ export default {
   },
   getMajors: async (req) => {
     return await api.send('/api/v1/major/list', req, 'get');
-  }
+  },
+  makeGroup: async (req) => {
+    return await api.sendAuth('/api/v1/organization', req, 'post');
+  },
 };

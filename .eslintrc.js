@@ -38,6 +38,7 @@ module.exports = {
     'comma-dangle': 'off',
     'implicit-arrow-linebreak': 'off',
     'no-alert': 'off',
+    'no-else-return': 'off',
   },
   settings: {
     'import/resolver': {
