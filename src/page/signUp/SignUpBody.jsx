@@ -117,6 +117,10 @@ const SignUpBody = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (email === '') {
+      history.push('/');
+    }
+
     const getMajors = async () => {
       try {
         const { data } = await sendApi.getMajors();

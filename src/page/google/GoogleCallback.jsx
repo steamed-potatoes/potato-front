@@ -6,6 +6,7 @@ import * as actions from 'store/modules/user';
 import sendApi from 'apis/sendApi';
 import { AUTH_KEY } from 'constant';
 import localStorageService from 'libs/localStorageService';
+import { Loading } from 'components/Loading';
 
 const GoogleCallback = () => {
   const history = useHistory();
@@ -44,7 +45,7 @@ const GoogleCallback = () => {
 
     sendToken(code);
   }, []);
-  return <div>Google Login</div>;
+  return <Loading />;
 };
 
 export default GoogleCallback;
