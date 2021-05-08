@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HeaderMenu } from 'components/header/index';
+import { LoginHeader } from './LoginHeader';
 import LoginBody from './LoginBody';
 import BackgroundImg from '../../images/BackgroundImg.png';
 
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 const Login = () => {
   return (
     <Wrapper>
-      <HeaderMenu />
+      <LoginHeader />
       <LoginBody />
     </Wrapper>
   );
