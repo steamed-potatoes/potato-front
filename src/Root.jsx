@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import { Loading } from 'components/Loading/Loading';
+import { Loading } from 'components/Loading';
 
 import rootReducer from './store/modules';
 
