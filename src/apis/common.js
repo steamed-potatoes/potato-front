@@ -14,21 +14,53 @@ export default {
     url = defaultUrl + url;
 
     const token = localStorageService.get('authToken');
-    
-    if(token) {
+
+    if (token) {
       return type === 'post'
         ? axios.post(url, req, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
-        })
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          })
         : axios.get(url, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          }
-        });
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
     }
 
     return type === 'post' ? axios.post(url, req) : axios.get(url, req);
-  }
+  },
+
+  get: (url) => {
+    return axios.get(AUTH_KEY.apiUrl + url, {
+      headers: {
+        Authorization: `Bearer ${localStorageService.get('authToken')}`,
+      },
+    });
+  },
+
+  post: (url, req) => {
+    return axios.post(AUTH_KEY.apiUrl + url, req, {
+      headers: {
+        Authorization: `Bearer ${localStorageService.get('authToken')}`,
+      },
+    });
+  },
+
+  put: (url, req) => {
+    return axios.post(AUTH_KEY.apiUrl + url, req, {
+      headers: {
+        Authorization: `Bearer ${localStorageService.get('authToken')}`,
+      },
+    });
+  },
+
+  delete: (url) => {
+    return axios.delete(AUTH_KEY.apiUrl + url, {
+      headers: {
+        Authorization: `Bearer ${localStorageService.get('authToken')}`,
+      },
+    });
+  },
 };
