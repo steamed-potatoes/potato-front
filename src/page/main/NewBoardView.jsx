@@ -69,7 +69,14 @@ const NewBoardView = () => {
       <LinkButton />
       <NewBoardItem>
         {newBoardData.length ? (
-          newBoardData.map((data) => <BoardThumbnail itemData={data} />)
+          newBoardData.map((data) => (
+            <BoardThumbnail
+              boardImageUrl={data.boardImageUrl}
+              boardTitle={data.boardTitle}
+              orgName={data.orgName}
+              key={data.boardId}
+            />
+          ))
         ) : (
           <ItemDetail />
         )}

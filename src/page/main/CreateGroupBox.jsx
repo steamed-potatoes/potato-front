@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import LinkButtonImg from '../../images/LinkButtonImg.png';
+import sendApi from 'apis/sendApi';
+import ClubList from './ClubList';
 
 const Wrap = styled.div`
   display: flex;
@@ -33,7 +34,7 @@ const Title = styled.div`
   font-weight: bold;
   margin-bottom: 8px;
 `;
-const AddGroupButton = styled.button`
+const AddGroupButton = styled.a`
   border: none;
   background-color: white;
   margin-top: 90px;
@@ -45,74 +46,54 @@ const ButtonDiv = styled.div`
   height: 63px;
   color: white;
   font-size: 30px;
-  padding-top: 20px;
+  padding-top: 8px;
+  text-align: center;
   font-weight: bold;
 `;
-const ClubList = styled.ul`
+const NoneClubList = styled.ul`
   width: 524px;
   list-style: none;
 `;
-const LinkButton = styled.a`
-  padding: 16px;
-  margin: 16px 0 24px;
-  border-radius: 48px;
-
-  background-image: url(${LinkButtonImg});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto;
-`;
-const ListItem = styled.li`
-  display: flex;
-  align-items: center;
-  height: 136px;
-  position: relative;
-  border-top: solid #ededed 3px;
-
-  &:last-child {
-    border-bottom: solid #ededed 3px;
-  }
-`;
-const ClubPicture = styled.div`
-  background: #bababa;
-  border-radius: 24px;
-  width: 109px;
-  height: 109px;
-  position: absolute;
-  right: 8px;
-`;
-const ClubInfo = styled.div`
-  font-size: 24px;
-`;
 
 const CreateGroupBox = () => {
+  const [newGroupList, setNewGroupList] = useState([]);
+
+  useEffect(() => {
+    const getNewGroup = async () => {
+      try {
+        const { data } = await sendApi.getNewGroupList();
+        setNewGroupList(data.data);
+      } catch (e) {
+        alert(e.reponse.data.message);
+      }
+    };
+    getNewGroup();
+  }, []);
+
   return (
     <Wrap>
       <CreateGroupBoxWrraper>
         <CreateGroup>
           <Title>새로운 그룹 만들기</Title>
           신규 그룹을 만들어 다양한 사람들을 만나 보세요
-          <AddGroupButton>
+          <AddGroupButton href="/makeGroup">
             <ButtonDiv>그룹 신청하기→</ButtonDiv>
           </AddGroupButton>
         </CreateGroup>
         <FindGroup>
           <Title>신규 그룹 살펴보기</Title>
-          <LinkButton />
-          <ClubList>
-            <ListItem>
-              <ClubInfo>새로운 동아리 설명이 써있습니다</ClubInfo>
-              <ClubPicture />
-            </ListItem>
-            <ListItem>
-              <ClubInfo>새로운 동아리 설명이 써있습니다</ClubInfo>
-              <ClubPicture />
-            </ListItem>
-            <ListItem>
-              <ClubInfo>새로운 동아리 설명이 써있습니다</ClubInfo>
-              <ClubPicture />
-            </ListItem>
-          </ClubList>
+          {newGroupList.length ? (
+            newGroupList.map((data) => (
+              <ClubList
+                name={data.name}
+                description={data.description}
+                profileUrl={data.profileUrl}
+                key={data.id}
+              />
+            ))
+          ) : (
+            <NoneClubList />
+          )}
         </FindGroup>
       </CreateGroupBoxWrraper>
     </Wrap>
