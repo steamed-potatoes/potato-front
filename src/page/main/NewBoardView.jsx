@@ -56,7 +56,9 @@ const NewBoardView = () => {
       <NewBoardViewTitle>최근 게시글</NewBoardViewTitle>
       <NewBoardItem>
         {newBoardData.length ? (
-          newBoardData.map((data) => <BoardThumbnail itemData={data} />)
+          newBoardData.map((data) => (
+            <BoardThumbnail itemData={data} key={data.boardId} />
+          ))
         ) : (
           <ItemDetail />
         )}

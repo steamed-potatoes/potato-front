@@ -81,7 +81,9 @@ const CreateGroupBox = () => {
         <FindGroup>
           <Title>신규 그룹 살펴보기</Title>
           {newGroupList.length ? (
-            newGroupList.map((data) => <ClubList itemData={data} />)
+            newGroupList.map((data) => (
+              <ClubList itemData={data} key={data.id} />
+            ))
           ) : (
             <NoneClubList />
           )}

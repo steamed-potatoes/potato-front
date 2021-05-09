@@ -29,14 +29,14 @@ const ClubDesc = styled.div`
   font-size: 16px;
 `;
 
-const ClubList = ({ itemData }) => {
+const ClubList = ({ itemData: { name, description, profileUrl } }) => {
   return (
     <ListItem>
       <ClubInfo>
-        <ClubName>{itemData.name}</ClubName>
-        <ClubDesc>{itemData.description}</ClubDesc>
+        <ClubName>{name}</ClubName>
+        <ClubDesc>{description}</ClubDesc>
       </ClubInfo>
-      <ClubPicture src={itemData.profileUrl} alt={itemData.name} />
+      <ClubPicture src={profileUrl} alt={name} />
     </ListItem>
   );
 };
