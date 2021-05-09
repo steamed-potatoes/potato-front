@@ -32,17 +32,20 @@ const Title = styled.div`
   font-weight: bold;
   margin-bottom: 8px;
 `;
-const ApplyBtn = styled.button`
+const AddGroupButton = styled.a`
   border: none;
-  margin-top: 30px;
+  background-color: white;
+  margin-top: 90px;
 `;
-const BtnDiv = styled.div`
-  background: gray;
+const ButtonDiv = styled.div`
+  background: #f0b138;
+  border-radius: 40px;
   width: 336px;
   height: 63px;
   color: white;
   font-size: 30px;
   padding-top: 20px;
+  font-weight: bold;
 `;
 const NoneClubList = styled.ul`
   width: 524px;
@@ -70,9 +73,9 @@ const CreateGroupBox = () => {
         <CreateGroup>
           <Title>새로운 그룹 만들기</Title>
           신규 그룹을 만들어 다양한 사람들을 만나 보세요
-          <ApplyBtn>
-            <BtnDiv>그룹 신청하기→</BtnDiv>
-          </ApplyBtn>
+          <AddGroupButton href="/makeGroup">
+            <ButtonDiv>그룹 신청하기→</ButtonDiv>
+          </AddGroupButton>
         </CreateGroup>
         <FindGroup>
           <Title>신규 그룹 살펴보기</Title>
