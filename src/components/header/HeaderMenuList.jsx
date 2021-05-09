@@ -97,7 +97,7 @@ const HeaderMenuList = () => {
           onOpenChange={onOpenChange}
           style={{ width: 150, height: 50 }}
         >
-          <SubMenu key="sub1" title="이민호">
+          <SubMenu key="sub1" title={myInfo.name}>
             <Menu.Item
               key="1"
               onClick={() => {
