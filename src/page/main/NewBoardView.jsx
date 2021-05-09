@@ -55,9 +55,10 @@ const NewBoardView = () => {
     const receivedData = async () => {
       try {
         const { data } = await sendApi.newBoardData();
+
         setNewBoardData(data.data);
       } catch (e) {
-        swal(`${e.reponse.data.message}`);
+        swal(`${e.response.data.message}`);
       }
     };
     receivedData();
