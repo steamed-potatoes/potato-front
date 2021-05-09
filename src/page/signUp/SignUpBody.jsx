@@ -45,7 +45,9 @@ const Button = styled.button`
 
   &:hover {
     cursor: pointer;
-    border: 1px solid #cfcece;
+    border: 3px solid #f0b138;
+    background-color: #ffffff;
+    color: #000000;
   }
   &:focus {
     outline: none;
