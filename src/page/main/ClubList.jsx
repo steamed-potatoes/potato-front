@@ -4,15 +4,19 @@ import styled from 'styled-components';
 const ListItem = styled.li`
   display: flex;
   align-items: center;
+  width: 524px;
   height: 136px;
   position: relative;
-  width: 524px;
-  list-style: none;
+  border-top: solid #ededed 3px;
+  &:last-child {
+    border-bottom: solid #ededed 3px;
+  }
 `;
 const ClubPicture = styled.img`
-  background: gray;
-  width: 109px;
-  height: 109px;
+  background: #bababa;
+  border-radius: 24px;
+  width: 104px;
+  height: 104px;
   position: absolute;
   right: 8px;
 `;
