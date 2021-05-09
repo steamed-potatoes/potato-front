@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import LogoSymbol from '../../images/LogoSymbol.png';
 import HeaderMenuList from './HeaderMenuList';
@@ -31,9 +32,13 @@ const MenuTitle = styled.p`
 `;
 
 export const HeaderMenu = () => {
+  const history = useHistory();
+  const onClick = () => {
+    history.push('/Main');
+  };
   return (
     <Menu>
-      <MenuTitleSet>
+      <MenuTitleSet onClick={onClick}>
         <MenuTitleImg />
         <MenuTitle>슬기로운 감자생활</MenuTitle>
       </MenuTitleSet>
