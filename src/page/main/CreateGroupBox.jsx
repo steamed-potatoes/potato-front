@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
 import ClubList from './ClubList';
+import LinkButtonImg from '../../images/LinkButtonImg.png';
 
 const Wrap = styled.div`
   display: flex;
@@ -32,7 +33,15 @@ const FindGroup = styled.div`
 const Title = styled.div`
   font-size: 40px;
   font-weight: bold;
-  margin-bottom: 8px;
+`;
+const LinkButton = styled.a`
+  padding: 16px;
+  margin: 16px 0 32px;
+  border-radius: 48px;
+  background-image: url(${LinkButtonImg});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
 `;
 const AddGroupButton = styled.a`
   border: none;
@@ -82,6 +91,7 @@ const CreateGroupBox = () => {
         </CreateGroup>
         <FindGroup>
           <Title>신규 그룹 살펴보기</Title>
+          <LinkButton />
           {newGroupList.length ? (
             newGroupList.map((data) => (
               <ClubList

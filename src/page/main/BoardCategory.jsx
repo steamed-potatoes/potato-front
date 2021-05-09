@@ -80,19 +80,19 @@ const BoardCategory = () => {
       <Line>
         <Category>
           <CategorySymbol>
-            <AiOutlineAppstore size="70" />
+            <AiOutlineAppstore size="70" color="#172B4D" />
           </CategorySymbol>
           <CategoryName>전체보기</CategoryName>
         </Category>
         <Category>
           <CategorySymbol>
-            <AiOutlineUnorderedList size="70" />
+            <AiOutlineUnorderedList size="70" color="#172B4D" />
           </CategorySymbol>
           <CategoryName>학사일정</CategoryName>
         </Category>
         <Category>
           <CategorySymbol>
-            <HiOutlineSpeakerphone size="70" />
+            <HiOutlineSpeakerphone size="70" color="#172B4D" />
           </CategorySymbol>
           <CategoryName>공지</CategoryName>
         </Category>
@@ -100,19 +100,19 @@ const BoardCategory = () => {
       <Line>
         <Category>
           <CategorySymbol>
-            <AiOutlineGift size="70" />
+            <AiOutlineGift size="70" color="#172B4D" />
           </CategorySymbol>
           <CategoryName>이벤트</CategoryName>
         </Category>
         <Category>
           <CategorySymbol>
-            <AiOutlineUsergroupAdd size="70" />
+            <AiOutlineUsergroupAdd size="70" color="#172B4D" />
           </CategorySymbol>
           <CategoryName>모집</CategoryName>
         </Category>
         <Category>
           <CategorySymbol>
-            <RiCalendarCheckLine size="70" />
+            <RiCalendarCheckLine size="70" color="#172B4D" />
           </CategorySymbol>
           <CategoryName>행사</CategoryName>
         </Category>

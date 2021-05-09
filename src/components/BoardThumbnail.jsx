@@ -13,7 +13,7 @@ const NewBoard = styled.div`
   justify-content: space-between;
   align-content: center;
   width: 240px;
-  height: 260px;
+  height: 264px;
   border: none;
   border-radius: 32px;
   &:hover {
@@ -36,14 +36,14 @@ const BoardSummary = styled.div`
   background-color: #ededed;
   text-align: center;
   width: 240px;
-  height: 60px;
+  height: 64px;
 `;
 
 const BoardTitle = styled.div`
   font-size: 20px;
   font-weight: 600;
   color: black;
-  margin: 4px 0 4px 0;
+  margin: 4px 0 0 0;
 `;
 const BoardWriter = styled.div`
   font-size: 16px;
