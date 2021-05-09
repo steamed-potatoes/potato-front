@@ -44,7 +44,8 @@ const ButtonDiv = styled.div`
   height: 63px;
   color: white;
   font-size: 30px;
-  padding-top: 20px;
+  padding-top: 8px;
+  text-align: center;
   font-weight: bold;
 `;
 const NoneClubList = styled.ul`
