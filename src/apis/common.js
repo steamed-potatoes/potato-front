@@ -49,7 +49,7 @@ export default {
   },
 
   put: (url, req) => {
-    return axios.post(AUTH_KEY.apiUrl + url, req, {
+    return axios.put(AUTH_KEY.apiUrl + url, req, {
       headers: {
         Authorization: `Bearer ${localStorageService.get('authToken')}`,
       },
