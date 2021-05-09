@@ -1,40 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-
-const CreateGroupBox = () => {
-  return (
-    <Wrap>
-      <CreateGroupBoxWrraper>
-        <CreateGroup>
-          <Title>새로운 그룹 만들기</Title>
-          신규 그룹을 만들어 다양한 사람들을 만나 보세요
-          <ApplyBtn>
-            <BtnDiv>그룹 신청하기→</BtnDiv>
-          </ApplyBtn>
-        </CreateGroup>
-        <FindGroup>
-          <Title>신규 그룹 살펴보기</Title>
-          <ClubList>
-            <ListItem>
-              <ClubInfo>새로운 동아리 설명이 써있습니다</ClubInfo>
-              <ClubPicture />
-            </ListItem>
-            <hr />
-            <ListItem>
-              <ClubInfo>새로운 동아리 설명이 써있습니다</ClubInfo>
-              <ClubPicture />
-            </ListItem>
-            <hr />
-            <ListItem>
-              <ClubInfo>새로운 동아리 설명이 써있습니다</ClubInfo>
-              <ClubPicture />
-            </ListItem>
-          </ClubList>
-        </FindGroup>
-      </CreateGroupBoxWrraper>
-    </Wrap>
-  );
-};
+import sendApi from 'apis/sendApi';
+import ClubList from './ClubList';
 
 const Wrap = styled.div`
   display: flex;
@@ -77,25 +44,47 @@ const BtnDiv = styled.div`
   font-size: 30px;
   padding-top: 20px;
 `;
-const ClubList = styled.ul`
+const NoneClubList = styled.ul`
   width: 524px;
   list-style: none;
 `;
-const ListItem = styled.li`
-  display: flex;
-  align-items: center;
-  height: 136px;
-  position: relative;
-`;
-const ClubPicture = styled.div`
-  background: gray;
-  width: 109px;
-  height: 109px;
-  position: absolute;
-  right: 8px;
-`;
-const ClubInfo = styled.div`
-  font-size: 24px;
-`;
+
+const CreateGroupBox = () => {
+  const [newGroupList, setNewGroupList] = useState([]);
+
+  useEffect(() => {
+    const getNewGroup = async () => {
+      try {
+        const { data } = await sendApi.getNewGroupList();
+        setNewGroupList(data.data);
+      } catch (e) {
+        alert(e.reponse.data.message);
+      }
+    };
+    getNewGroup();
+  }, []);
+
+  return (
+    <Wrap>
+      <CreateGroupBoxWrraper>
+        <CreateGroup>
+          <Title>새로운 그룹 만들기</Title>
+          신규 그룹을 만들어 다양한 사람들을 만나 보세요
+          <ApplyBtn>
+            <BtnDiv>그룹 신청하기→</BtnDiv>
+          </ApplyBtn>
+        </CreateGroup>
+        <FindGroup>
+          <Title>신규 그룹 살펴보기</Title>
+          {newGroupList.length ? (
+            newGroupList.map((data) => <ClubList itemData={data} />)
+          ) : (
+            <NoneClubList />
+          )}
+        </FindGroup>
+      </CreateGroupBoxWrraper>
+    </Wrap>
+  );
+};
 
 export default CreateGroupBox;
