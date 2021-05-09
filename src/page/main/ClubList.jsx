@@ -29,7 +29,7 @@ const ClubDesc = styled.div`
   font-size: 16px;
 `;
 
-const ClubList = ({ itemData: { name, description, profileUrl } }) => {
+const ClubList = ({ name, description, profileUrl }) => {
   return (
     <ListItem>
       <ClubInfo>

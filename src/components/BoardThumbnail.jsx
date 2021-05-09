@@ -51,16 +51,13 @@ const BoardWriter = styled.div`
   text-align: center;
 `;
 
-export const BoardThumbnail = (itemData) => {
+export const BoardThumbnail = ({ boardImageUrl, boardTitle, orgName }) => {
   return (
     <NewBoard>
-      <BoardThumb
-        src={itemData.itemData.boardImageUrl}
-        alt={itemData.itemData.boardTitle}
-      />
+      <BoardThumb src={boardImageUrl} alt={boardTitle} />
       <BoardSummary>
-        <BoardTitle>{itemData.itemData.boardTitle}</BoardTitle>
-        <BoardWriter>{itemData.itemData.orgName}</BoardWriter>
+        <BoardTitle>{boardTitle}</BoardTitle>
+        <BoardWriter>{orgName}</BoardWriter>
       </BoardSummary>
     </NewBoard>
   );

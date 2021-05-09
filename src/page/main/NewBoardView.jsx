@@ -70,7 +70,12 @@ const NewBoardView = () => {
       <NewBoardItem>
         {newBoardData.length ? (
           newBoardData.map((data) => (
-            <BoardThumbnail itemData={data} key={data.boardId} />
+            <BoardThumbnail
+              boardImageUrl={data.boardImageUrl}
+              boardTitle={data.boardTitle}
+              orgName={data.orgName}
+              key={data.boardId}
+            />
           ))
         ) : (
           <ItemDetail />

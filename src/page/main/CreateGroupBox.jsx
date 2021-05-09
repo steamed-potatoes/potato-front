@@ -84,7 +84,12 @@ const CreateGroupBox = () => {
           <Title>신규 그룹 살펴보기</Title>
           {newGroupList.length ? (
             newGroupList.map((data) => (
-              <ClubList itemData={data} key={data.id} />
+              <ClubList
+                name={data.name}
+                description={data.description}
+                profileUrl={data.profileUrl}
+                key={data.id}
+              />
             ))
           ) : (
             <NoneClubList />
