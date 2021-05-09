@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 import sendApi from 'apis/sendApi';
-import { useEffect } from 'react/cjs/react.development';
 import { BoardThumbnail } from 'components/BoardThumbnail';
 import LinkButtonImg from '../../images/LinkButtonImg.png';
 
