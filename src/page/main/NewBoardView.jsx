@@ -4,7 +4,7 @@ import swal from 'sweetalert';
 import sendApi from 'apis/sendApi';
 import { useEffect } from 'react/cjs/react.development';
 import { BoardThumbnail } from 'components/BoardThumbnail';
-import LogoSymbol from '../../images/LogoSymbol.png';
+import LinkButtonImg from '../../images/LinkButtonImg.png';
 
 const NewBoardViewWrapper = styled.div`
   display: flex;
@@ -12,27 +12,31 @@ const NewBoardViewWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   margin-top: 192px;
-
-  background-image: url(${LogoSymbol});
-  background-position: center bottom;
-  background-repeat: no-repeat;
-  background-size: initial;
-  padding-bottom: 80px;
 `;
 
 const NewBoardViewTitle = styled.div`
   text-align: center;
-  margin: 0 0 32px;
+  margin: 0;
   font-size: 40px;
   font-weight: bold;
 `;
 
 const NewBoardItem = styled.div`
-  width: 60%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
+`;
+
+const LinkButton = styled.a`
+  padding: 16px;
+  margin: 24px 0;
+  border-radius: 48px;
+
+  background-image: url(${LinkButtonImg});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
 `;
 
 const ItemDetail = styled.div`
@@ -62,6 +66,7 @@ const NewBoardView = () => {
   return (
     <NewBoardViewWrapper>
       <NewBoardViewTitle>최근 게시글</NewBoardViewTitle>
+      <LinkButton />
       <NewBoardItem>
         {newBoardData.length ? (
           newBoardData.map((data) => <BoardThumbnail itemData={data} />)

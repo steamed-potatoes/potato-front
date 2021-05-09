@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LinkButtonImg from '../../images/LinkButtonImg.png';
 
 const Wrap = styled.div`
   display: flex;
@@ -32,12 +33,12 @@ const Title = styled.div`
   font-weight: bold;
   margin-bottom: 8px;
 `;
-const ApplyBtn = styled.button`
+const AddGroupButton = styled.button`
   border: none;
   background-color: white;
   margin-top: 90px;
 `;
-const BtnDiv = styled.div`
+const ButtonDiv = styled.div`
   background: #f0b138;
   border-radius: 40px;
   width: 336px;
@@ -45,16 +46,32 @@ const BtnDiv = styled.div`
   color: white;
   font-size: 30px;
   padding-top: 20px;
+  font-weight: bold;
 `;
 const ClubList = styled.ul`
   width: 524px;
   list-style: none;
+`;
+const LinkButton = styled.a`
+  padding: 16px;
+  margin: 16px 0 24px;
+  border-radius: 48px;
+
+  background-image: url(${LinkButtonImg});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
 `;
 const ListItem = styled.li`
   display: flex;
   align-items: center;
   height: 136px;
   position: relative;
+  border-top: solid #ededed 3px;
+
+  &:last-child {
+    border-bottom: solid #ededed 3px;
+  }
 `;
 const ClubPicture = styled.div`
   background: #bababa;
@@ -75,23 +92,22 @@ const CreateGroupBox = () => {
         <CreateGroup>
           <Title>새로운 그룹 만들기</Title>
           신규 그룹을 만들어 다양한 사람들을 만나 보세요
-          <ApplyBtn>
-            <BtnDiv>그룹 신청하기→</BtnDiv>
-          </ApplyBtn>
+          <AddGroupButton>
+            <ButtonDiv>그룹 신청하기→</ButtonDiv>
+          </AddGroupButton>
         </CreateGroup>
         <FindGroup>
           <Title>신규 그룹 살펴보기</Title>
+          <LinkButton />
           <ClubList>
             <ListItem>
               <ClubInfo>새로운 동아리 설명이 써있습니다</ClubInfo>
               <ClubPicture />
             </ListItem>
-            <hr />
             <ListItem>
               <ClubInfo>새로운 동아리 설명이 써있습니다</ClubInfo>
               <ClubPicture />
             </ListItem>
-            <hr />
             <ListItem>
               <ClubInfo>새로운 동아리 설명이 써있습니다</ClubInfo>
               <ClubPicture />

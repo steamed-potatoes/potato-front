@@ -1,6 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CategoryWrapper } from 'components/CategoryWrapper';
+import {
+  AiOutlineAppstore,
+  AiOutlineUnorderedList,
+  AiOutlineUsergroupAdd,
+  AiOutlineGift,
+} from 'react-icons/ai';
+import { RiCalendarCheckLine } from 'react-icons/ri';
+import { HiOutlineSpeakerphone } from 'react-icons/hi';
 
 const BoardCategoryWrapper = styled.div`
   display: flex;
@@ -30,19 +37,85 @@ const Line = styled.div`
   align-items: center;
 `;
 
+const Category = styled.a`
+  cursor: pointer;
+  width: 192px;
+  height: 192px;
+  margin: 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: white;
+  border: none;
+  &:hover {
+    border: none;
+    outline: none;
+    background-color: #e8e8e9;
+    border-radius: 32px;
+  }
+`;
+
+const CategoryName = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: -48px;
+  color: black;
+`;
+
+const CategorySymbol = styled.div`
+  width: 100px;
+  height: 100px;
+  border-radius: 40px;
+  background-color: #f1f3f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
 const BoardCategory = () => {
   return (
     <BoardCategoryWrapper>
       <BoardCategoryTitle>Menu</BoardCategoryTitle>
       <Line>
-        <CategoryWrapper titleText="전체보기" />
-        <CategoryWrapper titleText="학사일정" />
-        <CategoryWrapper titleText="공지" />
+        <Category>
+          <CategorySymbol>
+            <AiOutlineAppstore size="70" />
+          </CategorySymbol>
+          <CategoryName>전체보기</CategoryName>
+        </Category>
+        <Category>
+          <CategorySymbol>
+            <AiOutlineUnorderedList size="70" />
+          </CategorySymbol>
+          <CategoryName>학사일정</CategoryName>
+        </Category>
+        <Category>
+          <CategorySymbol>
+            <HiOutlineSpeakerphone size="70" />
+          </CategorySymbol>
+          <CategoryName>공지</CategoryName>
+        </Category>
       </Line>
       <Line>
-        <CategoryWrapper titleText="이벤트" />
-        <CategoryWrapper titleText="모집" />
-        <CategoryWrapper titleText="행사" />
+        <Category>
+          <CategorySymbol>
+            <AiOutlineGift size="70" />
+          </CategorySymbol>
+          <CategoryName>이벤트</CategoryName>
+        </Category>
+        <Category>
+          <CategorySymbol>
+            <AiOutlineUsergroupAdd size="70" />
+          </CategorySymbol>
+          <CategoryName>모집</CategoryName>
+        </Category>
+        <Category>
+          <CategorySymbol>
+            <RiCalendarCheckLine size="70" />
+          </CategorySymbol>
+          <CategoryName>행사</CategoryName>
+        </Category>
       </Line>
     </BoardCategoryWrapper>
   );

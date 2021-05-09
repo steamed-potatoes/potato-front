@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LinkButtonImg from '../../images/LinkButtonImg.png';
 
 const Wrapper = styled.div`
   display: flex;
@@ -9,30 +10,26 @@ const Wrapper = styled.div`
 `;
 
 const Title = styled.p`
-  line-height: 8px;
   font-size: 40px;
-  margin: 0 0 24px 8px;
-
+  margin: 0 8px 16px;
   font-weight: bold;
 `;
 
 const SubTitle = styled.p`
   line-height: 8px;
   font-size: 16px;
-  margin-left: 8px;
+  margin: 8px 8px 0;
 `;
 
-const LinkBtn = styled.a`
-  background-color: #f0b138;
-  width: 32px;
-  height: 32px;
-  font-size: 32px;
-  font-weight: bold;
-  text-align: center;
-  color: white;
-  padding: 0 8px 16px 8px;
-  margin: 16px 0 24px 0;
-  border-radius: 32px;
+const LinkButton = styled.a`
+  padding: 16px;
+  margin: 24px 0;
+  border-radius: 48px;
+
+  background-image: url(${LinkButtonImg});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
 `;
 
 const ContentWreapper = styled.div`
@@ -82,7 +79,7 @@ const Intermissionless = () => {
     <Wrapper>
       <Title>마감이 얼마 남지 않은 일정</Title>
       <SubTitle>마감이 얼마 남지 않았어요</SubTitle>
-      <LinkBtn>+</LinkBtn>
+      <LinkButton />
       <ContentWreapper>
         <Content>
           <LeftButton>&#60;</LeftButton>

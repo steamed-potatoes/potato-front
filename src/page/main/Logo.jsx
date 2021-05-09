@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BiSearch } from 'react-icons/bi';
 
 const LogoWrapper = styled.div`
   display: flex;
@@ -12,25 +13,21 @@ const LogoWrapper = styled.div`
 const Search = styled.div`
   width: 300px;
   margin: 24px 40px;
-  padding: 0px 16px;
+  padding: 8px 16px 0;
   background-color: white;
-
   border: none;
-  border-radius: 12px;
+  border-radius: 32px;
 `;
 
 const SearchInput = styled.input`
-  width: 80%;
-  padding: 8px;
+  width: 84%;
+  font-size: 16px;
+  vertical-align: middle;
   outline: none;
   border: none;
+  margin-bottom: 8px;
 `;
 
-const SearchButton = styled.button`
-  border: none;
-  background-color: white;
-  outline: none;
-`;
 const LogoImg = styled.p`
   margin: 80px 80px;
 
@@ -42,7 +39,7 @@ const Logo = () => {
     <LogoWrapper>
       <Search>
         <SearchInput />
-        <SearchButton>검색</SearchButton>
+        <BiSearch size="30" />
       </Search>
       <LogoImg>LOGO</LogoImg>
     </LogoWrapper>

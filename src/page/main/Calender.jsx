@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LinkButtonImg from '../../images/LinkButtonImg.png';
 
 const MainCalenderWrapper = styled.div`
   display: flex;
@@ -22,6 +23,16 @@ const MainCalenderSubTitle = styled.p`
   text-align: center;
   font-size: 18px;
   margin: 8px;
+`;
+const LinkButton = styled.a`
+  padding: 16px;
+  margin: 8px 0;
+  border-radius: 48px;
+
+  background-image: url(${LinkButtonImg});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
 `;
 
 const CalendersWrapper = styled.div`
@@ -70,6 +81,7 @@ const Calender = () => {
           중요한 일정을 픽하여 자신만의 일정을 완성하세요!
         </MainCalenderSubTitle>
       </TitleWrapper>
+      <LinkButton />
       <CalendersWrapper>
         <MainCalender>캘린더</MainCalender>
         <SubCalenderWrapper>
