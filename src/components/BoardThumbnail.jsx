@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const NewBoard = styled.div`
+  background-color: #bababa;
   margin: 10px;
   flex-basis: auto;
   flex-shrink: 2;
@@ -11,9 +12,10 @@ const NewBoard = styled.div`
   align-items: center;
   justify-content: space-between;
   align-content: center;
-  width: 200px;
-  height: 232px;
-  border: solid black 1px;
+  width: 240px;
+  height: 260px;
+  border: none;
+  border-radius: 32px;
   &:hover {
     border: none;
     outline: none;
@@ -23,14 +25,25 @@ const NewBoard = styled.div`
 `;
 
 const BoardThumb = styled.img`
-  width: 200px;
-  height: 184px;
+  border-radius: 32px 32px 0 0;
+  width: 240px;
+  height: 200px;
+  object-fit: cover;
+`;
+
+const BoardSummary = styled.div`
+  border-radius: 0 0 32px 32px;
+  background-color: #ededed;
+  text-align: center;
+  width: 240px;
+  height: 60px;
 `;
 
 const BoardTitle = styled.div`
   font-size: 20px;
   font-weight: 600;
   color: black;
+  margin: 4px 0 4px 0;
 `;
 const BoardWriter = styled.div`
   font-size: 16px;
@@ -45,8 +58,10 @@ export const BoardThumbnail = (itemData) => {
         src={itemData.itemData.boardImageUrl}
         alt={itemData.itemData.boardTitle}
       />
-      <BoardTitle>{itemData.itemData.boardTitle}</BoardTitle>
-      <BoardWriter>{itemData.itemData.orgName}</BoardWriter>
+      <BoardSummary>
+        <BoardTitle>{itemData.itemData.boardTitle}</BoardTitle>
+        <BoardWriter>{itemData.itemData.orgName}</BoardWriter>
+      </BoardSummary>
     </NewBoard>
   );
 };

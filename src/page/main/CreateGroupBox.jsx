@@ -10,25 +10,27 @@ const Wrap = styled.div`
 `;
 const CreateGroupBoxWrraper = styled.div`
   display: flex;
-  margin-top: 100px;
+  margin-top: 192px;
   width: 1136px;
   height: 560px;
 `;
 const CreateGroup = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  font-size: 18px;
   height: 560px;
   width: 568px;
 `;
 const FindGroup = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: column;
   height: 560px;
   width: 568px;
 `;
 const Title = styled.div`
-  font-size: 48px;
+  font-size: 40px;
   font-weight: bold;
   margin-bottom: 8px;
 `;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import LinkButtonImg from '../../images/LinkButtonImg.png';
 
 const MainCalenderWrapper = styled.div`
   display: flex;
@@ -7,23 +8,31 @@ const MainCalenderWrapper = styled.div`
   align-items: center;
 `;
 
-const TitleWrapper = styled.div`
-`;
+const TitleWrapper = styled.div``;
 
 const MainCalenderTitle = styled.p`
-  text-align: left;
-  
-  margin: 8px 0;
+  text-align: center;
 
-  font-size: 32px;
+  margin: 90px 0 0;
+
+  font-size: 40px;
   font-weight: bold;
-  
 `;
 
 const MainCalenderSubTitle = styled.p`
-  text-align: left;
-  
-  margin: 0px;
+  text-align: center;
+  font-size: 18px;
+  margin: 8px;
+`;
+const LinkButton = styled.a`
+  padding: 16px;
+  margin: 8px 0;
+  border-radius: 48px;
+
+  background-image: url(${LinkButtonImg});
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto;
 `;
 
 const CalendersWrapper = styled.div`
@@ -32,8 +41,8 @@ const CalendersWrapper = styled.div`
 `;
 
 const MainCalender = styled.p`
-  width: 400px;
-  height: 400px;
+  width: 600px;
+  height: 560px;
   margin: 16px;
 
   background-color: gray;
@@ -45,16 +54,16 @@ const SubCalenderWrapper = styled.div`
 `;
 
 const SubCalender = styled.p`
-  width: 200px;
-  height: 200px;
+  width: 320px;
+  height: 280px;
   margin: 16px;
 
   background-color: gray;
 `;
 
 const SubCalenderDetail = styled.p`
-  width: 200px;
-  height: 120px;
+  width: 320px;
+  height: 200px;
   margin: 16px;
 
   background-color: gray;
@@ -72,6 +81,7 @@ const Calender = () => {
           중요한 일정을 픽하여 자신만의 일정을 완성하세요!
         </MainCalenderSubTitle>
       </TitleWrapper>
+      <LinkButton />
       <CalendersWrapper>
         <MainCalender>캘린더</MainCalender>
         <SubCalenderWrapper>
@@ -81,6 +91,6 @@ const Calender = () => {
       </CalendersWrapper>
     </MainCalenderWrapper>
   );
-}
+};
 
 export default Calender;
