@@ -3,8 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import localStorageService from 'libs/localStorageService';
 import { Menu } from 'antd';
-import GoogleBell from './GoogleBell';
-import GoogleMessage from './GoogleMessage';
+import { AiOutlineBell, AiOutlineMessage } from 'react-icons/ai';
 import sendApi from '../../apis/sendApi';
 
 const MenuList = styled.div`
@@ -24,6 +23,11 @@ const MenuUserSet = styled.div`
   flex-direction: row;
   align-items: center;
   margin-left: 16px;
+`;
+
+const MenuSet = styled.div`
+  width: 150px;
+  height: 50px;
 `;
 
 const Picture = styled.img`
@@ -54,6 +58,10 @@ const HeaderMenuList = () => {
     history.push('/Main');
   };
 
+  const handleMyPageClick = () => {
+    history.push('/MyPage');
+  };
+
   const onOpenChange = (keys) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
     if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
@@ -67,11 +75,16 @@ const HeaderMenuList = () => {
     const getMyInfo = async () => {
       try {
         if (localStorage.authToken) {
-          const { data } = await sendApi.getMyInfo();
+          const { data } = await sendApi.getMyProfile();
           setMyInfo(data.data);
         }
       } catch (error) {
-        alert(error.response.data.message);
+        if (error.response.status === 401) {
+          localStorageService.delete('authToken');
+          history.push('/Main');
+        } else {
+          alert(error.response.data.message);
+        }
       }
     };
 
@@ -84,33 +97,25 @@ const HeaderMenuList = () => {
   return (
     <MenuList>
       <MenuIcon>
-        <GoogleBell />
+        <AiOutlineBell size="35px" />
       </MenuIcon>
       <MenuIcon>
-        <GoogleMessage />
+        <AiOutlineMessage size="35px" />
       </MenuIcon>
       <MenuUserSet>
         <Picture src={myInfo.profileUrl} />
-        <Menu
-          mode="inline"
-          openKeys={openKeys}
-          onOpenChange={onOpenChange}
-          style={{ width: 150, height: 50 }}
-        >
-          <SubMenu key="sub1" title={myInfo.name}>
-            <Menu.Item
-              key="1"
-              onClick={() => {
-                history.push('/MyPage');
-              }}
-            >
-              마이페이지
-            </Menu.Item>
-            <Menu.Item key="2" onClick={handleLogOutClick}>
-              로그아웃
-            </Menu.Item>
-          </SubMenu>
-        </Menu>
+        <MenuSet>
+          <Menu mode="inline" openKeys={openKeys} onOpenChange={onOpenChange}>
+            <SubMenu key="sub1" title={myInfo.name}>
+              <Menu.Item key="1" onClick={handleMyPageClick}>
+                마이페이지
+              </Menu.Item>
+              <Menu.Item key="2" onClick={handleLogOutClick}>
+                로그아웃
+              </Menu.Item>
+            </SubMenu>
+          </Menu>
+        </MenuSet>
       </MenuUserSet>
     </MenuList>
   );
