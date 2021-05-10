@@ -14,9 +14,9 @@ import UpButtonImg from '../../images/UpButtonImg.png';
 const Wrapper = styled.div`
   height: 100%;
   background-image: url(${BackgroundImg});
-  background-position: center bottom;
+  background-position: bottom;
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: 100%;
   padding-bottom: 520px;
 `;
 
