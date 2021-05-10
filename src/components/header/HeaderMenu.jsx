@@ -17,6 +17,7 @@ const MenuTitleSet = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  cursor: pointer;
 `;
 
 const MenuTitleImg = styled.img`
