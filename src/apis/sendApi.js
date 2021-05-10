@@ -22,4 +22,7 @@ export default {
   getNewGroupList: async (req) => {
     return await api.send('/api/v1/organization/list?size=3', req, 'get');
   },
+  getMyProfile: () => {
+    return api.get('/api/v1/member');
+  },
 };
