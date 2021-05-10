@@ -5,6 +5,7 @@ import sendApi from 'apis/sendApi';
 import { useHistory } from 'react-router-dom';
 import localStorageService from 'libs/localStorageService';
 import * as actions from 'store/modules/user';
+import { SESSION_ID } from 'constant';
 
 const InputWrapper = styled.form`
   display: flex;
@@ -146,7 +147,7 @@ const SignUpBody = () => {
       };
       const { data } = await sendApi.signUpMember(ans);
 
-      localStorageService.set('authToken', data.data);
+      localStorageService.set(SESSION_ID, data.data);
       history.push('/Main');
     } catch (error) {
       alert(error.response.data.message);

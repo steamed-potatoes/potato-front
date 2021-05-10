@@ -5,6 +5,7 @@ import localStorageService from 'libs/localStorageService';
 import { Menu } from 'antd';
 import { AiOutlineBell, AiOutlineMessage } from 'react-icons/ai';
 import userHook from 'hooks/userHook';
+import { SESSION_ID } from 'constant';
 
 const MenuList = styled.div`
   display: flex;
@@ -47,14 +48,14 @@ const LoginButton = styled.a`
 `;
 
 const HeaderMenuList = () => {
-  const myInfo = userHook(localStorageService.get('authToken'));
+  const myInfo = userHook(localStorageService.get(SESSION_ID));
   const history = useHistory();
   const [openKeys, setOpenKeys] = useState(['']);
   const { SubMenu } = Menu;
   const rootSubmenuKeys = ['sub1'];
 
   const handleLogOutClick = () => {
-    localStorageService.delete('authToken');
+    localStorageService.delete(SESSION_ID);
     history.push('/Main');
   };
 
@@ -71,8 +72,11 @@ const HeaderMenuList = () => {
     }
   };
 
-  if (!localStorage.authToken)
-    return <LoginButton href="/">로그인하기</LoginButton>;
+  if (!localStorageService.get(SESSION_ID)) {
+    return (
+      <LoginButton onClick={() => history.push('/')}>로그인하기</LoginButton>
+    );
+  }
 
   return (
     <MenuList>

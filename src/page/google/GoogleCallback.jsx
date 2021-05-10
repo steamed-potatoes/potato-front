@@ -4,7 +4,7 @@ import querystring from 'querystring';
 import { useDispatch } from 'react-redux';
 import * as actions from 'store/modules/user';
 import sendApi from 'apis/sendApi';
-import { AUTH_KEY } from 'constant';
+import { AUTH_KEY, SESSION_ID } from 'constant';
 import localStorageService from 'libs/localStorageService';
 import { Loading } from 'components/Loading';
 
@@ -22,12 +22,11 @@ const GoogleCallback = () => {
       const { email, name, profileUrl, token, type } = data.data;
 
       if (type === 'LOGIN') {
-        // TODO 상수로 빼기
-        localStorageService.set('authToken', token);
+        localStorageService.set(SESSION_ID, token);
         history.push('/Main');
       } else {
         dispatch(actions.changeUserInfo(email, name, profileUrl));
-        localStorageService.delete('authToken');
+        localStorageService.delete(SESSION_ID);
         history.push('/SignUp');
       }
     } catch (error) {
