@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import localStorageService from 'libs/localStorageService';
 import { Menu } from 'antd';
 import { AiOutlineBell, AiOutlineMessage } from 'react-icons/ai';
-import sendApi from '../../apis/sendApi';
+import userHook from 'hooks/userHook';
 
 const MenuList = styled.div`
   display: flex;
@@ -47,7 +47,7 @@ const LoginButton = styled.a`
 `;
 
 const HeaderMenuList = () => {
-  const [myInfo, setMyInfo] = useState({});
+  const myInfo = userHook(localStorageService.get('authToken'));
   const history = useHistory();
   const [openKeys, setOpenKeys] = useState(['']);
   const { SubMenu } = Menu;
@@ -70,26 +70,6 @@ const HeaderMenuList = () => {
       setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
     }
   };
-
-  useEffect(() => {
-    const getMyInfo = async () => {
-      try {
-        if (localStorage.authToken) {
-          const { data } = await sendApi.getMyProfile();
-          setMyInfo(data.data);
-        }
-      } catch (error) {
-        if (error.response.status === 401) {
-          localStorageService.delete('authToken');
-          history.push('/Main');
-        } else {
-          alert(error.response.data.message);
-        }
-      }
-    };
-
-    getMyInfo();
-  }, []);
 
   if (!localStorage.authToken)
     return <LoginButton href="/">로그인하기</LoginButton>;

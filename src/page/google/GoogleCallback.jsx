@@ -25,12 +25,11 @@ const GoogleCallback = () => {
         // TODO 상수로 빼기
         localStorageService.set('authToken', token);
         history.push('/Main');
-        return;
+      } else {
+        dispatch(actions.changeUserInfo(email, name, profileUrl));
+        localStorageService.delete('authToken');
+        history.push('/SignUp');
       }
-
-      dispatch(actions.changeUserInfo(email, name, profileUrl));
-      localStorageService.delete('authToken');
-      history.push('/SignUp');
     } catch (error) {
       alert(error.response.data.message);
       history.push('/');
