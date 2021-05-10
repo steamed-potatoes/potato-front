@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 import sendApi from '../../apis/sendApi';
@@ -37,6 +38,8 @@ const SendButton = styled.button`
 `;
 
 const MakeGroupBox = () => {
+  const history = useHistory();
+
   const [form, setForm] = useState({
     subDomain: '',
     name: '',
@@ -59,6 +62,8 @@ const MakeGroupBox = () => {
         description: form.description,
         profileUrl: form.profileUrl,
       });
+      swal('새로운 그룹이 개설되었습니다.');
+      history.push('/Main');
     } catch (e) {
       swal(e.response.data.message);
     }
