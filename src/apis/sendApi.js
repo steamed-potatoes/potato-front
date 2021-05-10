@@ -1,26 +1,23 @@
 import api from './common';
 
 export default {
-  onTest: async (req) => {
-    return await api.send('/api/test', req, 'post');
+  sendGoogleAuth: (req) => {
+    return api.post('/api/v1/auth/google', req);
   },
-  sendGoogleAuth: async (req) => {
-    return await api.send('/api/v1/auth/google', req, 'post');
+  signUpMember: (req) => {
+    return api.post('/api/v1/member', req);
   },
-  signUpMember: async (req) => {
-    return await api.send('/api/v1/member', req, 'post');
+  newBoardData: () => {
+    return api.get('/api/v2/organization/board/list?size=5');
   },
-  newBoardData: async (req) => {
-    return await api.send('/api/v2/organization/board/list?size=5', req, 'get');
+  getMajors: () => {
+    return api.get('/api/v1/major/list');
   },
-  getMajors: async (req) => {
-    return await api.send('/api/v1/major/list', req, 'get');
+  makeGroup: (req) => {
+    return api.post('/api/v1/organization', req);
   },
-  makeGroup: async (req) => {
-    return await api.sendAuth('/api/v1/organization', req, 'post');
-  },
-  getNewGroupList: async (req) => {
-    return await api.send('/api/v1/organization/list?size=3', req, 'get');
+  getNewGroupList: () => {
+    return api.get('/api/v1/organization/list?size=3');
   },
   getMyProfile: () => {
     return api.get('/api/v1/member');
