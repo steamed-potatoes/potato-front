@@ -10,7 +10,6 @@ const Menu = styled.div`
   align-items: center;
   width: 100%;
   height: 100px;
-  box-shadow: 9px 9px 7px rgb(0, 0, 0, 0.3);
 `;
 
 const MenuTitleSet = styled.div`
