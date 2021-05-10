@@ -31,10 +31,8 @@ export const SignUpHeader = () => {
     <Header>
       <Manager>관리자</Manager>
       <MenuList>
-        <MenuItem>Sign up</MenuItem>
         <MenuItem>Home</MenuItem>
-        <MenuItem>Login</MenuItem>
       </MenuList>
     </Header>
   );
-}
+};

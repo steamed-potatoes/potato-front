@@ -8,8 +8,7 @@ const LoginWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  margin-top: 304px;
-  
+  margin-top: 264px;
 `;
 
 const Title = styled.p`
@@ -23,7 +22,7 @@ const Title = styled.p`
 const SubTitle = styled.p`
   margin: 0px;
   padding: 0px 0px 40px 0px;
-  
+
   font-size: 16px;
 `;
 
@@ -37,6 +36,6 @@ const LoginBody = () => {
       <LoginBodyButton />
     </LoginWrapper>
   );
-}
+};
 
 export default LoginBody;

@@ -45,7 +45,9 @@ const Button = styled.button`
 
   &:hover {
     cursor: pointer;
-    border: 1px solid #cfcece;
+    border: 3px solid #f0b138;
+    background-color: #ffffff;
+    color: #000000;
   }
   &:focus {
     outline: none;
@@ -142,7 +144,6 @@ const SignUpBody = () => {
         major: inputs.selectedMajor,
         classNumber: inputs.classNumber,
       };
-
       const { data } = await sendApi.signUpMember(ans);
 
       localStorageService.set('authToken', data.data);
@@ -158,7 +159,7 @@ const SignUpBody = () => {
   };
 
   const handleChange = (e) => {
-    const { value, name, key } = e.target;
+    const { value, name } = e.target;
     if (name === 'classNumber') {
       setInputs({
         ...inputs,
@@ -174,7 +175,7 @@ const SignUpBody = () => {
     } else if (name === 'selectedMajor') {
       setInputs({
         ...inputs,
-        [name]: key,
+        [name]: value,
       });
     }
   };
@@ -199,7 +200,7 @@ const SignUpBody = () => {
             onChange={handleChange}
           >
             {major.map((data) => (
-              <Option key={data.majorCode}>
+              <Option key={data.majorCode} value={data.majorCode}>
                 {data.department} - {data.major}
               </Option>
             ))}

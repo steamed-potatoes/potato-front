@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { GOOGLE_AUTH_URL } from 'constant';
+import { FcGoogle } from 'react-icons/fc';
 import GoogleArrow from './GoogleArrow';
-
 
 const LoginButton = styled.a`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   margin: 0px 0px 0px 0px;
@@ -17,7 +17,7 @@ const LoginButton = styled.a`
   border: 0px solid #ffffff;
   border-radius: 96px;
   background-color: #ffffff;
-  box-shadow: 9px 9px 6px rgb(0 , 0, 0, 0.3);
+  box-shadow: 9px 9px 6px rgb(0, 0, 0, 0.3);
 
   color: #000000;
   text-decoration: none;
@@ -34,16 +34,17 @@ const LoginButton = styled.a`
 const LoginButtonText = styled.p`
   display: block;
 
-  margin: 0px 100px 0px 214px;
+  margin: 0px 24px;
   padding: 0px;
 
-  font-size: 28px;
+  font-size: 32px;
 `;
 
 const LoginBodyButton = () => {
   return (
     <LoginButton href={GOOGLE_AUTH_URL}>
-      <LoginButtonText>구글 아이디로 시작하기</LoginButtonText>
+      <FcGoogle size="50px" />
+      <LoginButtonText>구글아이디로 시작하기</LoginButtonText>
       <GoogleArrow />
     </LoginButton>
   );
