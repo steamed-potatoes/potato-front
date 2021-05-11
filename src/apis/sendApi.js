@@ -25,4 +25,10 @@ export default {
   getMyProfile: () => {
     return api.get('/api/v1/member');
   },
+  putMyProfile: (req) => {
+    return api.put('/api/v1/member', req);
+  },
+  getMyGroupList: () => {
+    return api.get('/api/v1/organization/my');
+  },
 };
