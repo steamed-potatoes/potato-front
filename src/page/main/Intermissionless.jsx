@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import LinkButtonImg from '../../images/LinkButtonImg.png';
+import LeftIcon from '../../images/LeftIcon.png';
+import RightIcon from '../../images/RightIcon.png';
 
 const Wrapper = styled.div`
   display: flex;
@@ -49,29 +51,33 @@ const Content = styled.div`
 const LeftButton = styled.button`
   position: relative;
   top: 100px;
-  float: left;
-  font-size: 32px;
-  font-weight: bold;
   color: gray;
   border-radius: 0 24px 24px 0;
   border: none;
   width: 40px;
   height: 40px;
-  text-align: left;
+
+  background-image: url(${LeftIcon});
+  background-position: 35% 50%;
+  background-repeat: no-repeat;
+  background-size: 16px;
 `;
 
 const RightButton = styled.button`
   position: relative;
   top: 100px;
   float: right;
-  font-size: 32px;
-  font-weight: bold;
+
   color: gray;
   border-radius: 24px 0 0 24px;
   border: none;
   width: 40px;
   height: 40px;
-  text-align: right;
+
+  background-image: url(${RightIcon});
+  background-position: 65% 50%;
+  background-repeat: no-repeat;
+  background-size: 16px;
 `;
 
 const Intermissionless = () => {
@@ -82,13 +88,13 @@ const Intermissionless = () => {
       <LinkButton />
       <ContentWreapper>
         <Content>
-          <LeftButton>&#60;</LeftButton>
+          <LeftButton />
         </Content>
         <Content />
         <Content />
         <Content />
         <Content>
-          <RightButton>&#62;</RightButton>
+          <RightButton />
         </Content>
       </ContentWreapper>
     </Wrapper>
