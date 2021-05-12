@@ -22,4 +22,12 @@ export default {
   getMyProfile: () => {
     return api.get('/api/v1/member');
   },
+  retrievePopluarBoards: (size) => {
+    return api.get(`/api/v1/organization/list/popular?size=${size}`);
+  },
+  retrieveIntermissionlessBoards: (size, datetime) => {
+    return api.get(
+      `/api/v2/organization/board/list/imminentBoards?size=${size}&dateTime=${datetime}`
+    );
+  },
 };
