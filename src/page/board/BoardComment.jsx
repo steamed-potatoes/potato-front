@@ -40,7 +40,7 @@ const AddCommentInputBox = styled.input`
   font-size: 18px;
   border-radius: 24px;
   margin: 8px 0;
-  width: 96vh;
+  width: 88vh;
   height: 40px;
   border: solid #606060 1px;
 `;
