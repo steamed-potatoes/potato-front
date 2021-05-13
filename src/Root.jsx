@@ -13,6 +13,7 @@ const MakeGroup = lazy(() => import('page/makeGroup/MakeGroupMain'));
 const Main = lazy(() => import('page/main/Main'));
 const MyPage = lazy(() => import('./page/myPage/MyPage'));
 const NotFound = lazy(() => import('page/NotFound/NotFound'));
+const BoardMain = lazy(() => import('page/board/BoardMain'));
 const store = createStore(rootReducer);
 
 const Root = () => {
@@ -28,6 +29,7 @@ const Root = () => {
             <Route path="/makeGroup" component={MakeGroup} />
             <Route path="/Main" component={Main} />
             <Route path="/MyPage" component={MyPage} />
+            <Route path="/Board" component={BoardMain} />
             <Route component={NotFound} />
           </Switch>
         </Suspense>
