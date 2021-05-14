@@ -30,4 +30,8 @@ export default {
       `/api/v2/organization/board/list/imminentBoards?size=${size}&dateTime=${datetime}`
     );
   },
+
+  getBoardDetail: (id) => {
+    return api.get(`/api/v2/organization/board?organizationBoardId=${id}`);
+  },
 };

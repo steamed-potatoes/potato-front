@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import swal from 'sweetalert';
+
+import sendApi from 'apis/sendApi';
 import BoardContent from './BoardContent';
 import BoardComment from './BoardComment';
 
@@ -49,21 +52,54 @@ const BoardTitle = styled.div`
   font-weight: bold;
 `;
 
-const BoardDetail = () => {
-  return (
-    <DetailWrapper>
-      <Information>
-        <Group>
-          <WriterGroupImg />
-          <Writer>찐감자(정윤미)</Writer>
-        </Group>
-        <CreatedDate>게시물 작성 시간: 2021.05.14</CreatedDate>
-      </Information>
-      <BoardTitle>오늘은 휴강입니다</BoardTitle>
-      <BoardContent />
-      <BoardComment />
-    </DetailWrapper>
-  );
+const BoardDetail = ({ boardId }) => {
+  const [boardDetailData, setBoardDetailData] = useState(null);
+
+  useEffect(() => {
+    const receivedData = async () => {
+      try {
+        const { data } = await sendApi.getBoardDetail(boardId);
+        setBoardDetailData(data.data);
+        console.log('data: ', data);
+      } catch (e) {
+        swal(`${e.response.data.message}`);
+      }
+    };
+    receivedData();
+  }, []);
+
+  console.log('boardDetailData: ', boardDetailData);
+
+  if (boardDetailData) {
+    return (
+      <DetailWrapper>
+        <Information>
+          <Group>
+            <WriterGroupImg
+              src={boardDetailData.organization.profileUrl}
+              alt={boardDetailData.organization.name}
+            />
+            <Writer>
+              {boardDetailData.organization.name}({boardDetailData.creator.name}
+              )
+            </Writer>
+          </Group>
+          <CreatedDate>
+            일정 시작 시간: {boardDetailData.board.startDateTime.split('T')[0]}
+          </CreatedDate>
+        </Information>
+        <BoardTitle>{boardDetailData.board.title}</BoardTitle>
+        <BoardContent
+          BoardImg={boardDetailData.board.imageUrl}
+          BoardLikeCount={boardDetailData.board.likesCount}
+          BoardContent={boardDetailData.board.content}
+          boardHashTags={boardDetailData.hashTags}
+        />
+        <BoardComment />
+      </DetailWrapper>
+    );
+  }
+  return <DetailWrapper>Loading Weather...</DetailWrapper>;
 };
 
 export default BoardDetail;

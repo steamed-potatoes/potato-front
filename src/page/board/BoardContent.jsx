@@ -62,35 +62,38 @@ const HashTag = styled.div`
   margin: 8px;
 `;
 
+const NoneHashTag = styled.div``;
+
 const ContentDetail = styled.div`
   margin-top: 32px;
 `;
 
-const BoardContent = () => {
+const BoardContent = ({
+  BoardImg,
+  BoardLikeCount,
+  BoardContent,
+  BoardHashTags,
+}) => {
+  console.log('BoardHashTags', BoardHashTags);
   return (
     <ContentWrapper>
       <ContentTop>
-        <ContentImg />
+        <ContentImg src={BoardImg} />
         <Summary>
           <BoardLike>
             <LikeSymbol />
-            <LikeCount>좋아요 243개</LikeCount>
+            <LikeCount>좋아요 {BoardLikeCount}개</LikeCount>
           </BoardLike>
           <BoardHashtags>
-            <HashTag>#이벤트</HashTag>
-            <HashTag>#이벤트</HashTag>
-            <HashTag>#이벤트</HashTag>
-            <HashTag>#이벤트</HashTag>
-            <HashTag>#이벤트</HashTag>
-            <HashTag>#이벤트</HashTag>
-            <HashTag>#이벤트</HashTag>
-            <HashTag>#이벤트</HashTag>
-            <HashTag>#이벤트</HashTag>
-            <HashTag>#이벤트</HashTag>
+            {BoardHashTags ? (
+              BoardHashTags.map((data) => <HashTag>{data}</HashTag>)
+            ) : (
+              <NoneHashTag />
+            )}
           </BoardHashtags>
         </Summary>
       </ContentTop>
-      <ContentDetail>진짜였으면 좋겠네</ContentDetail>
+      <ContentDetail>{BoardContent}</ContentDetail>
     </ContentWrapper>
   );
 };

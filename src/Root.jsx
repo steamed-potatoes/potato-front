@@ -29,7 +29,7 @@ const Root = () => {
             <Route path="/makeGroup" component={MakeGroup} />
             <Route path="/Main" component={Main} />
             <Route path="/MyPage" component={MyPage} />
-            <Route path="/Board" component={BoardMain} />
+            <Route path="/Board/:boardId" component={BoardMain} />
             <Route component={NotFound} />
           </Switch>
         </Suspense>

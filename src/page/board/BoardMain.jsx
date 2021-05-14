@@ -16,11 +16,12 @@ const Wrapper = styled.div`
   padding-bottom: 520px;
 `;
 
-const BoardMain = () => {
+const BoardMain = ({ match }) => {
+  const { boardId } = match.params;
   return (
     <Wrapper>
       <HeaderMenu />
-      <BoardDetail />
+      <BoardDetail boardId={boardId} />
     </Wrapper>
   );
 };
