@@ -100,15 +100,14 @@ const Scroll = styled.button`
 const BoardSearch = () => {
   const [searchItem, setSearchItem] = useState([]);
   const [lastBoard, setLastBoard] = useState('0');
-  const [type, setType] = useState('EVENT');
-  
+  const [type, setType] = useState('');
+
   useEffect(() => {
     const receivedData = async () => {
       try {
         const { data } = await sendApi.getBoard(lastBoard, type);
         setSearchItem(data.data);
         setLastBoard(data.data[data.data.length-1].boardId);
-        setType("EVENT");
       } catch (e) {
         swal(`${e.response.data.message}`);
       }
@@ -119,8 +118,7 @@ const BoardSearch = () => {
   const ScrollButton = async() => {
     try {
       const { data } = await sendApi.getBoard(lastBoard, type);
-      if(data.length !== 0)
-      {
+      if(data.length !== 0) {
         setSearchItem(searchItem.concat(data.data));
         setLastBoard(data.data[data.data.length-1].boardId);
       }
@@ -128,12 +126,23 @@ const BoardSearch = () => {
       document.getElementById("Scroll").style.display="none";
     }
   }
-
+  
   const chageTypeButton = (e) => {
-    setLastBoard(0);
-    setSearchItem([]);
-    document.getElementById("Scroll").style.display="";
-    setType(e.target.name);
+    if(e.target.id !== type) {
+      if(type !== '')
+      document.getElementById(type).style.background='white';
+      document.getElementById(e.target.id).style.background='#F0B138';
+      setLastBoard(0);
+      setSearchItem([]);
+      document.getElementById("Scroll").style.display="";
+      setType(e.target.id);
+    } else {
+      document.getElementById(type).style.background='white';
+      setLastBoard(0);
+      setSearchItem([]);
+      document.getElementById("Scroll").style.display="";
+      setType('');
+    }
   }
   
   return (
@@ -148,8 +157,8 @@ const BoardSearch = () => {
       <HashButtonWrapper>
         <HashButton>학사일정</HashButton>
         <HashButton>공지</HashButton>
-        <HashButton type="button" name="EVENT" onClick={chageTypeButton}>이벤트</HashButton>
-        <HashButton type="button" name="RECRUIT" onClick={chageTypeButton}>모집</HashButton>
+        <HashButton type="button" id="EVENT" onClick={chageTypeButton}>이벤트</HashButton>
+        <HashButton type="button" id="RECRUIT" onClick={chageTypeButton}>모집</HashButton>
         <HashButton>행사</HashButton>
         <HashButton>동아리</HashButton>
       </HashButtonWrapper>
