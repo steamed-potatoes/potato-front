@@ -8,7 +8,9 @@ export default {
     return api.post('/api/v1/member', req);
   },
   newBoardData: () => {
-    return api.get('/api/v2/organization/board/list?size=5');
+    return api.get(
+      '/api/v2/organization/board/list?size=5&lastOrganizationBoardId=0'
+    );
   },
   getMajors: () => {
     return api.get('/api/v1/major/list');
