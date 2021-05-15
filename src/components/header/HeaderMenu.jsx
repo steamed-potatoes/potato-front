@@ -7,6 +7,7 @@ const Menu = styled.div`
   align-items: center;
 
   padding: 0px 40px;
+  box-shadow: 16px 8px 4px 0px #b9b9b9;
 `;
 
 const MenuList = styled.ul`
