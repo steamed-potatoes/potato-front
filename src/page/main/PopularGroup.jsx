@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import LinkButtonImg from '../../images/LinkButtonImg.png';
+import { BoardThumbnail } from 'components/BoardThumbnail';
+import LinkButtonImg from 'images/LinkButtonImg.png';
+// import LeftIcon from 'images/LeftIcon.png';
+// import RightIcon from 'images/RightIcon.png';
+import sendApi from 'apis/sendApi';
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,60 +40,60 @@ const ContentWreapper = styled.div`
   display: flex;
 `;
 
-const Content = styled.div`
-  background-color: #bababa;
-  width: 240px;
-  height: 240px;
-  border: none;
-  border-radius: 32px;
-  margin-right: 8px;
-  margin-left: 8px;
-`;
+// const LeftButton = styled.button`
+//   position: relative;
+//   top: 100px;
+//   color: gray;
+//   border-radius: 0 24px 24px 0;
+//   border: none;
+//   width: 40px;
+//   height: 40px;
 
-const LeftButton = styled.button`
-  position: relative;
-  top: 100px;
-  float: left;
-  font-size: 32px;
-  font-weight: bold;
-  color: gray;
-  border-radius: 0 24px 24px 0;
-  border: none;
-  width: 40px;
-  height: 40px;
-  text-align: left;
-`;
+//   background-image: url(${LeftIcon});
+//   background-position: 35% 50%;
+//   background-repeat: no-repeat;
+//   background-size: 16px;
+// `;
 
-const RightButton = styled.button`
-  position: relative;
-  top: 100px;
-  float: right;
-  font-size: 32px;
-  font-weight: bold;
-  color: gray;
-  border-radius: 24px 0 0 24px;
-  border: none;
-  width: 40px;
-  height: 40px;
-  text-align: right;
-`;
+// const RightButton = styled.button`
+//   position: relative;
+//   top: 100px;
+//   float: right;
+
+//   color: gray;
+//   border-radius: 24px 0 0 24px;
+//   border: none;
+//   width: 40px;
+//   height: 40px;
+
+//   background-image: url(${RightIcon});
+//   background-position: 65% 50%;
+//   background-repeat: no-repeat;
+//   background-size: 16px;
+// `;
 
 const PopularGroup = () => {
+  const [popularBoards, setPopularBoards] = useState([]);
+
+  useEffect(async () => {
+    const { data } = await sendApi.retrievePopluarBoards(5);
+    setPopularBoards(data.data);
+  }, []);
+
   return (
     <Wrapper>
       <Title>인기있는 그룹</Title>
       <SubTitle>현재 슬기로운 감자 생활에서 핫한 그룹들을 보고 가세요</SubTitle>
       <LinkButton />
       <ContentWreapper>
-        <Content>
-          <LeftButton>&#60;</LeftButton>
-        </Content>
-        <Content />
-        <Content />
-        <Content />
-        <Content>
-          <RightButton>&#62;</RightButton>
-        </Content>
+        {popularBoards.map((board) => (
+          <BoardThumbnail
+            key={board.id}
+            boardImageUrl={board.profileUrl}
+            boardTitle={board.name}
+            orgName={board.description}
+          />
+        ))}
       </ContentWreapper>
     </Wrapper>
   );

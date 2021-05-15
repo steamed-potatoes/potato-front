@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import LinkButtonImg from '../../images/LinkButtonImg.png';
+import { BoardThumbnail } from 'components/BoardThumbnail';
+import LinkButtonImg from 'images/LinkButtonImg.png';
+import sendApi from 'apis/sendApi';
+// import LeftIcon from 'images/LeftIcon.png';
+// import RightIcon from 'images/RightIcon.png';
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,60 +40,60 @@ const ContentWreapper = styled.div`
   display: flex;
 `;
 
-const Content = styled.div`
-  background-color: #bababa;
-  width: 240px;
-  height: 240px;
-  border: none;
-  border-radius: 32px;
-  margin-right: 8px;
-  margin-left: 8px;
-`;
+// const LeftButton = styled.button`
+//   position: relative;
+//   top: 100px;
+//   color: gray;
+//   border-radius: 0 24px 24px 0;
+//   border: none;
+//   width: 40px;
+//   height: 40px;
 
-const LeftButton = styled.button`
-  position: relative;
-  top: 100px;
-  float: left;
-  font-size: 32px;
-  font-weight: bold;
-  color: gray;
-  border-radius: 0 24px 24px 0;
-  border: none;
-  width: 40px;
-  height: 40px;
-  text-align: left;
-`;
+//   background-image: url(${LeftIcon});
+//   background-position: 35% 50%;
+//   background-repeat: no-repeat;
+//   background-size: 16px;
+// `;
 
-const RightButton = styled.button`
-  position: relative;
-  top: 100px;
-  float: right;
-  font-size: 32px;
-  font-weight: bold;
-  color: gray;
-  border-radius: 24px 0 0 24px;
-  border: none;
-  width: 40px;
-  height: 40px;
-  text-align: right;
-`;
+// const RightButton = styled.button`
+//   position: relative;
+//   top: 100px;
+//   float: right;
+
+//   color: gray;
+//   border-radius: 24px 0 0 24px;
+//   border: none;
+//   width: 40px;
+//   height: 40px;
+
+//   background-image: url(${RightIcon});
+//   background-position: 65% 50%;
+//   background-repeat: no-repeat;
+//   background-size: 16px;
+// `;
 
 const Intermissionless = () => {
+  const [boards, setBoards] = useState([]);
+  useEffect(async () => {
+    const now = new Date().toISOString().split('.')[0];
+    const { data } = await sendApi.retrieveIntermissionlessBoards(4, now);
+    setBoards(data.data);
+  }, []);
+
   return (
     <Wrapper>
       <Title>마감이 얼마 남지 않은 일정</Title>
       <SubTitle>마감이 얼마 남지 않았어요</SubTitle>
       <LinkButton />
       <ContentWreapper>
-        <Content>
-          <LeftButton>&#60;</LeftButton>
-        </Content>
-        <Content />
-        <Content />
-        <Content />
-        <Content>
-          <RightButton>&#62;</RightButton>
-        </Content>
+        {boards.map((board) => (
+          <BoardThumbnail
+            key={board.id}
+            boardImageUrl={board.imageUrl}
+            boardTitle={board.title}
+            orgName={`${board.endDateTime} 까지`}
+          />
+        ))}
       </ContentWreapper>
     </Wrapper>
   );

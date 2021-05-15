@@ -5,6 +5,7 @@ import sendApi from 'apis/sendApi';
 import { useHistory } from 'react-router-dom';
 import localStorageService from 'libs/localStorageService';
 import * as actions from 'store/modules/user';
+import { SESSION_ID } from 'constant';
 
 const InputWrapper = styled.form`
   display: flex;
@@ -45,7 +46,9 @@ const Button = styled.button`
 
   &:hover {
     cursor: pointer;
-    border: 1px solid #cfcece;
+    border: 3px solid #f0b138;
+    background-color: #ffffff;
+    color: #000000;
   }
   &:focus {
     outline: none;
@@ -124,7 +127,7 @@ const SignUpBody = () => {
     const getMajors = async () => {
       try {
         const { data } = await sendApi.getMajors();
-        setMajor(data);
+        setMajor(data.data);
       } catch (e) {
         alert(e.response.data.message);
       }
@@ -142,10 +145,9 @@ const SignUpBody = () => {
         major: inputs.selectedMajor,
         classNumber: inputs.classNumber,
       };
-
       const { data } = await sendApi.signUpMember(ans);
 
-      localStorageService.set('authToken', data.data);
+      localStorageService.set(SESSION_ID, data.data);
       history.push('/Main');
     } catch (error) {
       alert(error.response.data.message);
@@ -158,7 +160,7 @@ const SignUpBody = () => {
   };
 
   const handleChange = (e) => {
-    const { value, name, key } = e.target;
+    const { value, name } = e.target;
     if (name === 'classNumber') {
       setInputs({
         ...inputs,
@@ -174,7 +176,7 @@ const SignUpBody = () => {
     } else if (name === 'selectedMajor') {
       setInputs({
         ...inputs,
-        [name]: key,
+        [name]: value,
       });
     }
   };
@@ -199,7 +201,7 @@ const SignUpBody = () => {
             onChange={handleChange}
           >
             {major.map((data) => (
-              <Option key={data.majorCode}>
+              <Option key={data.majorCode} value={data.majorCode}>
                 {data.department} - {data.major}
               </Option>
             ))}

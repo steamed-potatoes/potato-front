@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { LoginHeader } from './LoginHeader';
+import { HeaderMenu } from 'components/header/HeaderMenu';
+import BackgroundImg from 'images/BackgroundImg.png';
 import LoginBody from './LoginBody';
-import BackgroundImg from '../../images/BackgroundImg.png';
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 const Login = () => {
   return (
     <Wrapper>
-      <LoginHeader />
+      <HeaderMenu />
       <LoginBody />
     </Wrapper>
   );

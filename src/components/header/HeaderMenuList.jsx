@@ -1,26 +1,106 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import localStorageService from 'libs/localStorageService';
+import { Menu } from 'antd';
+import { AiOutlineBell, AiOutlineMessage } from 'react-icons/ai';
+import userHook from 'hooks/userHook';
+import { SESSION_ID } from 'constant';
 
-const MenuList = styled.ul`
-  margin: 0;
-  padding: 0;
-
-  list-style-type: none;
+const MenuList = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 40px;
 `;
 
-const MenuItem = styled.li`
-  float: right;
+const MenuIcon = styled.div`
+  align-items: center;
+  margin: 0px 16px;
+`;
 
-  display: block;
+const MenuUserSet = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 16px;
+`;
 
-  padding: 16px 16px;
+const MenuSet = styled.div`
+  width: 150px;
+  height: 50px;
+`;
+
+const Picture = styled.img`
+  height: 40px;
+  width: 40px;
+  background-color: #e2e2e2;
+  border: 1px solid black;
+  border-radius: 20px;
+`;
+
+const LoginButton = styled.a`
+  margin: 0px 24px 0px 0px;
+  font-size: 16px;
+  color: black;
+  background-color: white;
+  border: none;
 `;
 
 const HeaderMenuList = () => {
+  const myInfo = userHook(localStorageService.get(SESSION_ID));
+  const history = useHistory();
+  const [openKeys, setOpenKeys] = useState(['']);
+  const { SubMenu } = Menu;
+  const rootSubmenuKeys = ['sub1'];
+
+  const handleLogOutClick = () => {
+    localStorageService.delete(SESSION_ID);
+    history.push('/Main');
+  };
+
+  const handleMyPageClick = () => {
+    history.push('/MyPage');
+  };
+
+  const onOpenChange = (keys) => {
+    const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
+    if (rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      setOpenKeys(keys);
+    } else {
+      setOpenKeys(latestOpenKey ? [latestOpenKey] : []);
+    }
+  };
+
+  if (!localStorageService.get(SESSION_ID)) {
+    return (
+      <LoginButton onClick={() => history.push('/')}>로그인하기</LoginButton>
+    );
+  }
+
   return (
     <MenuList>
-      <MenuItem>Home</MenuItem>
-      <MenuItem>Login</MenuItem>
+      <MenuIcon>
+        <AiOutlineBell size="35px" />
+      </MenuIcon>
+      <MenuIcon>
+        <AiOutlineMessage size="35px" />
+      </MenuIcon>
+      <MenuUserSet>
+        <Picture src={myInfo.profileUrl} />
+        <MenuSet>
+          <Menu mode="inline" openKeys={openKeys} onOpenChange={onOpenChange}>
+            <SubMenu key="sub1" title={myInfo.name}>
+              <Menu.Item key="1" onClick={handleMyPageClick}>
+                마이페이지
+              </Menu.Item>
+              <Menu.Item key="2" onClick={handleLogOutClick}>
+                로그아웃
+              </Menu.Item>
+            </SubMenu>
+          </Menu>
+        </MenuSet>
+      </MenuUserSet>
     </MenuList>
   );
 };
