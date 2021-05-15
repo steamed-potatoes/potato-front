@@ -24,13 +24,8 @@ export default {
   getMyProfile: () => {
     return api.get('/api/v1/member');
   },
-  getBoardSearch: async (req) => {
-    return await api.get('/api/v2/organization/board/list?size=12', req, 'get');
-  },
-  getBoardScroll: async (lastId, size, req) => {
-    let url = '/api/v2/organization/board/list?size=12&lastOrganizationBoardId=';
-    url += lastId;
-    return await api.get(url, req, 'get');
+  getBoard: async (lastId,type, req) => {
+    return await api.get(`/api/v2/organization/board/list?size=12&lastOrganizationBoardId=${lastId}&type=${type}`, req, 'get');
   },
   retrievePopluarBoards: (size) => {
     return api.get(`/api/v1/organization/list/popular?size=${size}`);

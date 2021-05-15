@@ -60,6 +60,7 @@ const HashButton = styled.button`
   font-weight: bold;
   padding: 8px 16px 8px 16px;
   margin: 8px;
+  cursor: pointer;
 `
 
 const BoardSearchItemWrapper = styled.div`
@@ -98,24 +99,26 @@ const Scroll = styled.button`
 
 const BoardSearch = () => {
   const [searchItem, setSearchItem] = useState([]);
-  const [lastBoard, setLastBoard] = useState();
-
+  const [lastBoard, setLastBoard] = useState('0');
+  const [type, setType] = useState('EVENT');
+  
   useEffect(() => {
     const receivedData = async () => {
       try {
-        const { data } = await sendApi.getBoardSearch();
+        const { data } = await sendApi.getBoard(lastBoard, type);
         setSearchItem(data.data);
         setLastBoard(data.data[data.data.length-1].boardId);
+        setType("EVENT");
       } catch (e) {
         swal(`${e.response.data.message}`);
       }
     };
     receivedData();
-  }, []);
+  }, [type]);
 
   const ScrollButton = async() => {
     try {
-      const { data } = await sendApi.getBoardScroll(lastBoard, 10);
+      const { data } = await sendApi.getBoard(lastBoard, type);
       if(data.length !== 0)
       {
         setSearchItem(searchItem.concat(data.data));
@@ -124,6 +127,13 @@ const BoardSearch = () => {
     } catch {
       document.getElementById("Scroll").style.display="none";
     }
+  }
+
+  const chageTypeButton = (e) => {
+    setLastBoard(0);
+    setSearchItem([]);
+    document.getElementById("Scroll").style.display="";
+    setType(e.target.name);
   }
   
   return (
@@ -136,12 +146,12 @@ const BoardSearch = () => {
         </Search>
       </BoardSearchWrapper>
       <HashButtonWrapper>
-        <HashButton>#학사일정</HashButton>
-        <HashButton>#공지</HashButton>
-        <HashButton>#이벤트</HashButton>
-        <HashButton>#모집</HashButton>
-        <HashButton>#행사</HashButton>
-        <HashButton>#동아리</HashButton>
+        <HashButton>학사일정</HashButton>
+        <HashButton>공지</HashButton>
+        <HashButton type="button" name="EVENT" onClick={chageTypeButton}>이벤트</HashButton>
+        <HashButton type="button" name="RECRUIT" onClick={chageTypeButton}>모집</HashButton>
+        <HashButton>행사</HashButton>
+        <HashButton>동아리</HashButton>
       </HashButtonWrapper>
       <BoardSearchItemWrapper>
         <BoardSearchItem>
