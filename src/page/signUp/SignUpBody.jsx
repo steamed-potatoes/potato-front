@@ -127,7 +127,7 @@ const SignUpBody = () => {
     const getMajors = async () => {
       try {
         const { data } = await sendApi.getMajors();
-        setMajor(data);
+        setMajor(data.data);
       } catch (e) {
         alert(e.response.data.message);
       }
