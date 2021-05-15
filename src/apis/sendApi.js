@@ -30,8 +30,16 @@ export default {
       `/api/v2/organization/board/list/imminentBoards?size=${size}&dateTime=${datetime}`
     );
   },
-
   getBoardDetail: (id) => {
     return api.get(`/api/v2/organization/board?organizationBoardId=${id}`);
+  },
+  addComment: (req) => {
+    return api.post(`/api/v2/board/comment`, req);
+  },
+
+  getCommentList: (id) => {
+    return api.get(
+      `/api/v2/board/comment/list?type=ORGANIZATION_BOARD&boardId=${id}`
+    );
   },
 };

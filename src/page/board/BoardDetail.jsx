@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import swal from 'sweetalert';
-
 import sendApi from 'apis/sendApi';
 import BoardContent from './BoardContent';
 import BoardComment from './BoardComment';
@@ -54,21 +53,19 @@ const BoardTitle = styled.div`
 
 const BoardDetail = ({ boardId }) => {
   const [boardDetailData, setBoardDetailData] = useState(null);
+  const PresentBoardId = boardId;
 
   useEffect(() => {
     const receivedData = async () => {
       try {
         const { data } = await sendApi.getBoardDetail(boardId);
         setBoardDetailData(data.data);
-        console.log('data: ', data);
       } catch (e) {
         swal(`${e.response.data.message}`);
       }
     };
     receivedData();
   }, []);
-
-  console.log('boardDetailData: ', boardDetailData);
 
   if (boardDetailData) {
     return (
@@ -93,9 +90,9 @@ const BoardDetail = ({ boardId }) => {
           BoardImg={boardDetailData.board.imageUrl}
           BoardLikeCount={boardDetailData.board.likesCount}
           BoardContent={boardDetailData.board.content}
-          boardHashTags={boardDetailData.hashTags}
+          BoardHashTags={boardDetailData.hashTags}
         />
-        <BoardComment />
+        <BoardComment PresentBoardId={PresentBoardId} />
       </DetailWrapper>
     );
   }

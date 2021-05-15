@@ -74,7 +74,6 @@ const BoardContent = ({
   BoardContent,
   BoardHashTags,
 }) => {
-  console.log('BoardHashTags', BoardHashTags);
   return (
     <ContentWrapper>
       <ContentTop>
