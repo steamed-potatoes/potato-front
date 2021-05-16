@@ -49,7 +49,8 @@ const CommentLikeCount = styled.div`
   margin: 0 8px;
 `;
 
-const ReComment = () => {
+const ReComment = ({ childrenData }) => {
+  console.log('childrenData', childrenData);
   return (
     <RecommentWrapper>
       <WriterImg />

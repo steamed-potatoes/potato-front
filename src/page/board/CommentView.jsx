@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+
+import sendApi from 'apis/sendApi';
+import swal from 'sweetalert';
 import UnLikeLogo from '../../images/UnLikeLogo.png';
 import Recomment from './Recomment';
+import MyComment from './MyComment';
 
 const CommentViewWrap = styled.div``;
 
@@ -33,6 +38,7 @@ const CommentButtonWrap = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  margin-bottom: 16px;
 `;
 
 const CommentContent = styled.div`
@@ -62,20 +68,84 @@ const AddReComment = styled.button`
   border: none;
 `;
 
-const CommentView = () => {
+const CommentView = ({
+  memberId,
+  content,
+  boardCommentLikeCounts,
+  PresentBoardId,
+  parentId,
+  childrenData,
+}) => {
+  const history = useHistory();
+  console.log('현재 코멘트 아이디:', parentId);
+  const [addRecomentView, setAddRecommentView] = useState(1);
+  const [recommentContent, setRecommentContent] = useState('');
+
+  const addReComment = async () => {
+    try {
+      await sendApi.addComment({
+        type: 'ORGANIZATION_BOARD',
+        boardId: PresentBoardId,
+        parentCommentId: parentId,
+        content: recommentContent,
+      });
+      swal('댓글이 추가되었습니다');
+      setRecommentContent('');
+      console.log('recomment 추가 데이터', parentId, recommentContent.content);
+      setAddRecommentView(0);
+      history.push(`/Board/${PresentBoardId}`);
+    } catch (e) {
+      swal(e.response.data.message);
+    }
+  };
+
+  const onClickAddRecomment = () => {
+    console.log('fjkdf');
+
+    setAddRecommentView(!addRecomentView);
+  };
+
+  console.log(
+    'Comment',
+    memberId,
+    content,
+    boardCommentLikeCounts,
+    childrenData
+  );
+
   return (
     <CommentViewWrap>
       <Comment>
         <WriterImg />
         <Summary>
-          <WriterNickname>정윤미2</WriterNickname>
-          <CommentContent>종강을 원해</CommentContent>
+          <WriterNickname>{memberId}</WriterNickname>
+          <CommentContent>{content}</CommentContent>
           <CommentButtonWrap>
             <CommentLikeSymbol />
-            <CommentLikeCount>32</CommentLikeCount>
-            <AddReComment>답글 작성</AddReComment>
+            <CommentLikeCount>{boardCommentLikeCounts}</CommentLikeCount>
+            <AddReComment
+              onClick={() => {
+                onClickAddRecomment;
+              }}
+            >
+              답글 작성
+            </AddReComment>
           </CommentButtonWrap>
-          <Recomment />
+          {addRecomentView ? (
+            <MyComment
+              commentContent={recommentContent}
+              setCommentContent={setRecommentContent}
+              addComment={addReComment}
+              key={parentId}
+            />
+          ) : (
+            ''
+          )}
+          {childrenData.length ? (
+            <Recomment RecommentData={childrenData} key={childrenData.id} />
+          ) : (
+            ''
+          )}
         </Summary>
       </Comment>
     </CommentViewWrap>

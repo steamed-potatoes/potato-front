@@ -19,13 +19,18 @@ const CommentCount = styled.div`
   margin-bottom: 16px;
 `;
 
+const NoneComment = styled.div`
+  font-size: 18px;
+  text-align: center;
+`;
+
 const BoardComment = ({ PresentBoardId }) => {
   const history = useHistory();
   const [commentContent, setCommentContent] = useState({
     content: '',
-    parentCommentId: 1,
+    parentCommentId: 0,
   });
-  const [boarCommentList, setBoarCommentList] = useState({});
+  const [boardCommentList, setBoarCommentList] = useState([]);
 
   useEffect(() => {
     const receivedData = async () => {
@@ -45,13 +50,11 @@ const BoardComment = ({ PresentBoardId }) => {
       await sendApi.addComment({
         type: 'ORGANIZATION_BOARD',
         boardId: PresentBoardId,
-        parentCommentId: commentContent.parentCommentId,
         content: commentContent.content,
       });
       swal('댓글이 추가되었습니다');
       setCommentContent({
         content: '',
-        parentCommentId: 1,
       });
       history.push(`/Board/${PresentBoardId}`);
     } catch (e) {
@@ -59,15 +62,30 @@ const BoardComment = ({ PresentBoardId }) => {
     }
   };
 
+  boardCommentList.map((Comment) => console.log('d', Comment));
+
   return (
     <Wrapper>
-      <CommentCount>댓글 {boarCommentList.length}개</CommentCount>
+      <CommentCount>댓글 {boardCommentList.length}개</CommentCount>
       <MyComment
         commentContent={commentContent}
         setCommentContent={setCommentContent}
         addComment={addComment}
       />
-      <CommentView />
+      {boardCommentList.length ? (
+        boardCommentList.map((Comment) => (
+          <CommentView
+            memberId={Comment.memberId}
+            content={Comment.content}
+            boardCommentLikeCounts={Comment.boardCommentLikeCounts}
+            PresentBoardId={PresentBoardId}
+            childrenData={Comment.children}
+            key={Comment.id}
+          />
+        ))
+      ) : (
+        <NoneComment>등록된 코멘트가 없습니다.</NoneComment>
+      )}
     </Wrapper>
   );
 };

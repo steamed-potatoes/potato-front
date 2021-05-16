@@ -82,7 +82,8 @@ const BoardDetail = ({ boardId }) => {
             </Writer>
           </Group>
           <CreatedDate>
-            일정 시작 시간: {boardDetailData.board.startDateTime.split('T')[0]}
+            게시글 작성 시간{' '}
+            {boardDetailData.board.createdDateTime.split('T')[0]}
           </CreatedDate>
         </Information>
         <BoardTitle>{boardDetailData.board.title}</BoardTitle>

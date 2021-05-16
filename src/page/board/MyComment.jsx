@@ -60,17 +60,11 @@ const MyComment = ({ addComment, commentContent, setCommentContent }) => {
       }
     };
     receivedData();
-    setCommentContent({
-      content: '',
-      parentCommentId: 1,
-    });
+    setCommentContent('');
   }, []);
 
   const onChangeContent = (e) => {
-    setCommentContent({
-      ...commentContent,
-      [e.target.name]: e.target.value,
-    });
+    setCommentContent(e.target.value);
   };
 
   if (!userInfomation) {
@@ -81,7 +75,7 @@ const MyComment = ({ addComment, commentContent, setCommentContent }) => {
           <WriterNickname>로딩중</WriterNickname>
           <AddCommentInputBox
             name="content"
-            value={commentContent.content}
+            value={commentContent}
             onChange={onChangeContent}
           />
           <AddCommentButton onClick={() => addComment()}>
