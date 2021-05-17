@@ -68,6 +68,8 @@ const AddReComment = styled.button`
   border: none;
 `;
 
+const NoneRecomment = styled.div``;
+
 const CommentView = ({
   memberId,
   content,
@@ -78,7 +80,7 @@ const CommentView = ({
 }) => {
   const history = useHistory();
   console.log('현재 코멘트 아이디:', parentId);
-  const [addRecomentView, setAddRecommentView] = useState(1);
+  const [addRecomentView, setAddRecommentView] = useState(0);
   const [recommentContent, setRecommentContent] = useState('');
 
   const addReComment = async () => {
@@ -142,9 +144,16 @@ const CommentView = ({
             ''
           )}
           {childrenData.length ? (
-            <Recomment RecommentData={childrenData} key={childrenData.id} />
+            childrenData.map((data) => (
+              <Recomment
+                RecommentMemberId={data.memberId}
+                RecommentContent={data.content}
+                RecommentLike={data.boardCommentLikeCounts}
+                key={data.id}
+              />
+            ))
           ) : (
-            ''
+            <NoneRecomment />
           )}
         </Summary>
       </Comment>

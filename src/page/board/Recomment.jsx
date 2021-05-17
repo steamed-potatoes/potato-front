@@ -49,17 +49,22 @@ const CommentLikeCount = styled.div`
   margin: 0 8px;
 `;
 
-const ReComment = ({ childrenData }) => {
-  console.log('childrenData', childrenData);
+const ReComment = ({ RecommentMemberId, RecommentContent, RecommentLike }) => {
+  console.log(
+    'RecommentData',
+    RecommentMemberId,
+    RecommentContent,
+    RecommentLike
+  );
   return (
     <RecommentWrapper>
       <WriterImg />
       <Summary>
-        <WriterNickname>정윤미2</WriterNickname>
-        <CommentContent>종강을 원해</CommentContent>
+        <WriterNickname>{RecommentMemberId}</WriterNickname>
+        <CommentContent>{RecommentContent}</CommentContent>
         <CommentButtonWrap>
           <CommentLikeSymbol />
-          <CommentLikeCount>12</CommentLikeCount>
+          <CommentLikeCount>{RecommentLike}</CommentLikeCount>
         </CommentButtonWrap>
       </Summary>
     </RecommentWrapper>
