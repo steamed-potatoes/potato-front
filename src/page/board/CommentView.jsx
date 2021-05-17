@@ -96,7 +96,6 @@ const CommentView = ({
       }
     };
     receivedData();
-    console.log('commentview 새로 고침');
   }, []);
 
   const addReComment = async () => {
@@ -111,7 +110,6 @@ const CommentView = ({
       setRecommentContent('');
       setAddRecommentView(0);
       history.go(0);
-      console.log('history: ', history.location.pathname);
     } catch (e) {
       swal(e.response.data.message);
     }
