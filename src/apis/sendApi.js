@@ -42,4 +42,8 @@ export default {
       `/api/v2/board/comment/list?type=ORGANIZATION_BOARD&boardId=${id}`
     );
   },
+
+  getUserProfile: (id) => {
+    return api.get(`/api/v1/member/${id}`);
+  },
 };

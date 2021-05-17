@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
@@ -79,9 +79,21 @@ const CommentView = ({
   childrenData,
 }) => {
   const history = useHistory();
-  console.log('현재 코멘트 아이디:', parentId);
   const [addRecomentView, setAddRecommentView] = useState(0);
   const [recommentContent, setRecommentContent] = useState('');
+  const [memberInfomation, setMemberInformation] = useState({});
+
+  useEffect(() => {
+    const receivedData = async () => {
+      try {
+        const { data } = await sendApi.getUserProfile(memberId);
+        setMemberInformation(data.data);
+      } catch (e) {
+        swal(`${e.response.data.message}`);
+      }
+    };
+    receivedData();
+  }, []);
 
   const addReComment = async () => {
     try {
@@ -93,7 +105,6 @@ const CommentView = ({
       });
       swal('댓글이 추가되었습니다');
       setRecommentContent('');
-      console.log('recomment 추가 데이터', parentId, recommentContent.content);
       setAddRecommentView(0);
       history.push(`/Board/${PresentBoardId}`);
     } catch (e) {
@@ -102,25 +113,15 @@ const CommentView = ({
   };
 
   const onClickAddRecomment = () => {
-    console.log('fjkdf');
-
     setAddRecommentView(!addRecomentView);
   };
-
-  console.log(
-    'Comment',
-    memberId,
-    content,
-    boardCommentLikeCounts,
-    childrenData
-  );
 
   return (
     <CommentViewWrap>
       <Comment>
-        <WriterImg />
+        <WriterImg src={memberInfomation.profileUrl} />
         <Summary>
-          <WriterNickname>{memberId}</WriterNickname>
+          <WriterNickname>{memberInfomation.name}</WriterNickname>
           <CommentContent>{content}</CommentContent>
           <CommentButtonWrap>
             <CommentLikeSymbol />

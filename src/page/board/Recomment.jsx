@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import sendApi from 'apis/sendApi';
+import swal from 'sweetalert';
 import UnLikeLogo from '../../images/UnLikeLogo.png';
 
 const RecommentWrapper = styled.div`
@@ -50,17 +52,23 @@ const CommentLikeCount = styled.div`
 `;
 
 const ReComment = ({ RecommentMemberId, RecommentContent, RecommentLike }) => {
-  console.log(
-    'RecommentData',
-    RecommentMemberId,
-    RecommentContent,
-    RecommentLike
-  );
+  const [memberInfomation, setMemberInformation] = useState({});
+  useEffect(() => {
+    const receivedData = async () => {
+      try {
+        const { data } = await sendApi.getUserProfile(RecommentMemberId);
+        setMemberInformation(data.data);
+      } catch (e) {
+        swal(`${e.response.data.message}`);
+      }
+    };
+    receivedData();
+  }, []);
   return (
     <RecommentWrapper>
-      <WriterImg />
+      <WriterImg src={memberInfomation.profileUrl} />
       <Summary>
-        <WriterNickname>{RecommentMemberId}</WriterNickname>
+        <WriterNickname>{memberInfomation.name}</WriterNickname>
         <CommentContent>{RecommentContent}</CommentContent>
         <CommentButtonWrap>
           <CommentLikeSymbol />

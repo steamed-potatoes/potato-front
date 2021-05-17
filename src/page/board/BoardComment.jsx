@@ -37,7 +37,6 @@ const BoardComment = ({ PresentBoardId }) => {
       try {
         const { data } = await sendApi.getCommentList(PresentBoardId);
         setBoarCommentList(data.data);
-        console.log('commentList 확인중: ', data.data);
       } catch (e) {
         swal(`${e.response.data.message}`);
       }
@@ -61,9 +60,6 @@ const BoardComment = ({ PresentBoardId }) => {
       swal(e.response.data.message);
     }
   };
-
-  boardCommentList.map((Comment) => console.log('d', Comment));
-
   return (
     <Wrapper>
       <CommentCount>댓글 {boardCommentList.length}개</CommentCount>
