@@ -31,7 +31,7 @@ const WriterImg = styled.img`
 `;
 
 const WriterNickname = styled.div`
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 const CommentButtonWrap = styled.div`
@@ -42,7 +42,8 @@ const CommentButtonWrap = styled.div`
 `;
 
 const CommentContent = styled.div`
-  margin: 4px 0;
+  font-size: 16px;
+  margin: 0 0 4px;
 `;
 
 const CommentLikeSymbol = styled.img`
@@ -61,6 +62,8 @@ const CommentLikeCount = styled.div`
 const AddReComment = styled.button`
   font-size: 12px;
   border-radius: 56px;
+  font-weight: bold;
+
   background-color: #f0b138;
   color: white;
   width: 72px;
@@ -93,17 +96,10 @@ const CommentView = ({
       }
     };
     receivedData();
+    console.log('commentview 새로 고침');
   }, []);
 
   const addReComment = async () => {
-    console.log(
-      '왜 대댓글 안돼ㅜㅜ\nboardId: ',
-      PresentBoardId,
-      'parentCommentId: ',
-      parentId,
-      'content: ',
-      recommentContent
-    );
     try {
       await sendApi.addComment({
         type: 'ORGANIZATION_BOARD',
@@ -114,14 +110,11 @@ const CommentView = ({
       swal('댓글이 추가되었습니다');
       setRecommentContent('');
       setAddRecommentView(0);
-      history.push(`/Board/${PresentBoardId}`);
+      history.go(0);
+      console.log('history: ', history.location.pathname);
     } catch (e) {
       swal(e.response.data.message);
     }
-  };
-
-  const onClickAddRecomment = () => {
-    setAddRecommentView(!addRecomentView);
   };
 
   return (
@@ -135,8 +128,9 @@ const CommentView = ({
             <CommentLikeSymbol />
             <CommentLikeCount>{boardCommentLikeCounts}</CommentLikeCount>
             <AddReComment
+              key={parentId}
               onClick={() => {
-                onClickAddRecomment;
+                setAddRecommentView(!addRecomentView);
               }}
             >
               답글 작성

@@ -27,13 +27,26 @@ const NoneComment = styled.div`
 const BoardComment = ({ PresentBoardId }) => {
   const history = useHistory();
   const [commentContent, setCommentContent] = useState('');
+  const [commentCount, setCommentCount] = useState(0);
   const [boardCommentList, setBoarCommentList] = useState([]);
 
   useEffect(() => {
+    const commentListCount = (dataList) => {
+      let count = 0;
+      dataList.forEach((comment) => {
+        if (comment.children.length) {
+          count += comment.children.length;
+        }
+      });
+      count += dataList.length;
+      setCommentCount(count);
+    };
+
     const receivedData = async () => {
       try {
         const { data } = await sendApi.getCommentList(PresentBoardId);
         setBoarCommentList(data.data);
+        await commentListCount(data.data);
       } catch (e) {
         swal(`${e.response.data.message}`);
       }
@@ -49,17 +62,16 @@ const BoardComment = ({ PresentBoardId }) => {
         content: commentContent,
       });
       swal('댓글이 추가되었습니다');
-      setCommentContent({
-        content: '',
-      });
-      history.push(`/Board/${PresentBoardId}`);
+      setCommentContent('');
+      history.go(0);
     } catch (e) {
       swal(e.response.data.message);
     }
   };
+
   return (
     <Wrapper>
-      <CommentCount>댓글 {boardCommentList.length}개</CommentCount>
+      <CommentCount>댓글 {commentCount}개</CommentCount>
       <MyComment
         commentContent={commentContent}
         setCommentContent={setCommentContent}

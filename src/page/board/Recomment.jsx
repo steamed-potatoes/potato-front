@@ -25,7 +25,7 @@ const WriterImg = styled.img`
 `;
 
 const WriterNickname = styled.div`
-  font-size: 18px;
+  font-size: 16px;
 `;
 
 const CommentButtonWrap = styled.div`
@@ -35,7 +35,8 @@ const CommentButtonWrap = styled.div`
 `;
 
 const CommentContent = styled.div`
-  margin: 4px 0;
+  font-size: 16px;
+  margin: 0 0 4px;
 `;
 
 const CommentLikeSymbol = styled.img`

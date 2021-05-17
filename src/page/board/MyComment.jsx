@@ -15,12 +15,14 @@ const WriterImg = styled.img`
   height: 32px;
   border-radius: 16px;
   box-shadow: 4px 4px 5px 0 rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
 `;
 
 const Summary = styled.div`
   margin: 0 16px 8px;
   display: flex;
   flex-direction: column;
+  flex-shrink: 1;
 `;
 
 const AddCommentButton = styled.button`
@@ -38,7 +40,7 @@ const AddCommentInputBox = styled.input`
   font-size: 18px;
   border-radius: 24px;
   margin: 8px 0;
-  width: 88vh;
+  width: 120vh;
   height: 40px;
   border: solid #606060 1px;
 `;
@@ -64,7 +66,6 @@ const MyComment = ({ addComment, commentContent, setCommentContent }) => {
   }, []);
 
   const onChangeContent = (e) => {
-    console.log('입력한 constent: ', commentContent);
     setCommentContent(e.target.value);
   };
 
