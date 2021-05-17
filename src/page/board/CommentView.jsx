@@ -96,6 +96,14 @@ const CommentView = ({
   }, []);
 
   const addReComment = async () => {
+    console.log(
+      '왜 대댓글 안돼ㅜㅜ\nboardId: ',
+      PresentBoardId,
+      'parentCommentId: ',
+      parentId,
+      'content: ',
+      recommentContent
+    );
     try {
       await sendApi.addComment({
         type: 'ORGANIZATION_BOARD',

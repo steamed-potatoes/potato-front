@@ -64,6 +64,7 @@ const MyComment = ({ addComment, commentContent, setCommentContent }) => {
   }, []);
 
   const onChangeContent = (e) => {
+    console.log('입력한 constent: ', commentContent);
     setCommentContent(e.target.value);
   };
 

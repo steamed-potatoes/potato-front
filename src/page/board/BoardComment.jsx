@@ -26,10 +26,7 @@ const NoneComment = styled.div`
 
 const BoardComment = ({ PresentBoardId }) => {
   const history = useHistory();
-  const [commentContent, setCommentContent] = useState({
-    content: '',
-    parentCommentId: 0,
-  });
+  const [commentContent, setCommentContent] = useState('');
   const [boardCommentList, setBoarCommentList] = useState([]);
 
   useEffect(() => {
@@ -49,7 +46,7 @@ const BoardComment = ({ PresentBoardId }) => {
       await sendApi.addComment({
         type: 'ORGANIZATION_BOARD',
         boardId: PresentBoardId,
-        content: commentContent.content,
+        content: commentContent,
       });
       swal('댓글이 추가되었습니다');
       setCommentContent({
@@ -75,6 +72,7 @@ const BoardComment = ({ PresentBoardId }) => {
             content={Comment.content}
             boardCommentLikeCounts={Comment.boardCommentLikeCounts}
             PresentBoardId={PresentBoardId}
+            parentId={Comment.id}
             childrenData={Comment.children}
             key={Comment.id}
           />
