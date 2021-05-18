@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { BoardThumbnail } from 'components/BoardThumbnail';
 import LinkButtonImg from 'images/LinkButtonImg.png';
 import sendApi from 'apis/sendApi';
+import moment from 'moment';
 // import LeftIcon from 'images/LeftIcon.png';
 // import RightIcon from 'images/RightIcon.png';
 
@@ -75,7 +76,7 @@ const ContentWreapper = styled.div`
 const Intermissionless = () => {
   const [boards, setBoards] = useState([]);
   useEffect(async () => {
-    const now = new Date().toISOString().split('.')[0];
+    const now = moment().format('YYYY-MM-DDTHH:mm:ss');
     const { data } = await sendApi.retrieveIntermissionlessBoards(4, now);
     setBoards(data.data);
   }, []);
