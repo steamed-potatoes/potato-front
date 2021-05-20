@@ -126,7 +126,7 @@ const BoardSearch = () => {
       document.getElementById("Scroll").style.display="none";
     }
   }
-  
+
   const chageTypeButton = (e) => {
     if(e.target.id !== type) {
       if(type !== '')
@@ -141,7 +141,7 @@ const BoardSearch = () => {
       setLastBoard(0);
       setSearchItem([]);
       document.getElementById("Scroll").style.display="";
-      setType('');
+      setType();
     }
   }
   
