@@ -76,7 +76,6 @@ const Select = styled.select`
 const Option = styled.option``;
 
 export const TextBox = () => {
-  // 등록된 학과들이 담김
   const [majorsForm, setMajorsFrom] = useState([{ majorCode: '', major: '' }]);
   const [name, setName] = useState('');
   const [myMajor, setMyMajor] = useState([
@@ -91,9 +90,15 @@ export const TextBox = () => {
   const fetchData = async () => {
     try {
       const { data: getMyProfile } = await sendApi.getMyProfile();
-      const { email, name, major, classNumber, profileUrl } = getMyProfile.data;
+      const {
+        email,
+        name,
+        major: MD,
+        classNumber,
+        profileUrl,
+      } = getMyProfile.data;
       setName(name);
-      setMyMajor(...myMajor, major);
+      setMyMajor({ major: MD.major, majorCode: MD.majorCode });
       setClassNumber(classNumber);
       setEmail(email);
       setMyProfileUrl(profileUrl);
@@ -149,13 +154,13 @@ export const TextBox = () => {
         </PTag>
         <PTag>
           학과 :{' '}
-          <Select
-            type="text"
-            value={majorsForm.majorCode}
-            onChange={ChoiceMajor}
-          >
+          <Select type="text" value={majorsForm.major} onChange={ChoiceMajor}>
             {majorsForm.map((data) => (
-              <Option key={data.majorCode} value={data.majorCode}>
+              <Option
+                key={data.majorCode}
+                value={data.majorCode}
+                selected={data.majorCode === myMajor.majorCode}
+              >
                 {data.major}
               </Option>
             ))}
