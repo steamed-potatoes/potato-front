@@ -118,6 +118,8 @@ export const TextBox = () => {
   }, []);
 
   const ChoiceMajor = (e) => {
+    // 이부분 에러남
+    // 이런식으로 하고싶음
     setMyMajor(...myMajor, (majorCode: e.target.value));
   };
 
