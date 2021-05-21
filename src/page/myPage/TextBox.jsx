@@ -59,52 +59,81 @@ const ModifyBtn = styled.button`
     transform: scale(1.3);
   }
 `;
+const Select = styled.select`
+  width: 512px;
+
+  border: none;
+  border-bottom: solid 2px #cfcece;
+
+  &:hover {
+    cursor: pointer;
+    border-bottom: 2px solid #808080;
+  }
+  &:focus {
+    outline: none;
+  }
+`;
+const Option = styled.option``;
+
 export const TextBox = () => {
+  // 등록된 학과들이 담김
+  const [majorsForm, setMajorsFrom] = useState([{ majorCode: '', major: '' }]);
   const [name, setName] = useState('');
-  const [major, setMajor] = useState('');
+  const [myMajor, setMyMajor] = useState([
+    { majorCode: 'IT_ICT', major: 'ICT융합학과' },
+  ]);
   const [classNumber, setClassNumber] = useState('');
   const [email, setEmail] = useState('');
   const [myProfileUrl, setMyProfileUrl] = useState('');
+
   const [groupNameList, setGroupNameList] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data: getMyProfile } = await sendApi.getMyProfile();
-        const {
-          email,
-          name,
-          major,
-          classNumber,
-          profileUrl,
-        } = getMyProfile.data;
-        setName(name);
-        setMajor(major);
-        setClassNumber(classNumber);
-        setEmail(email);
-        setMyProfileUrl(profileUrl);
-
-        const { data: groupListData } = await sendApi.getMyGroupList();
-        setGroupNameList(groupListData.data.map((data) => data.name));
-      } catch (error) {
-        alert(error.response.data.message);
-      }
-    };
-    fetchData();
-  }, []);
-  const handleClick = async () => {
+  const fetchData = async () => {
     try {
-      await sendApi.putMyProfile({
-        name,
-        myProfileUrl,
-        major,
-        classNumber,
-      });
+      const { data: getMyProfile } = await sendApi.getMyProfile();
+      const { email, name, major, classNumber, profileUrl } = getMyProfile.data;
+      setName(name);
+      setMyMajor(...myMajor, major);
+      setClassNumber(classNumber);
+      setEmail(email);
+      setMyProfileUrl(profileUrl);
+
+      const { data: groupListData } = await sendApi.getMyGroupList();
+      setGroupNameList(groupListData.data.map((data) => data.name));
+
+      const { data: majors } = await sendApi.getMajors();
+      setMajorsFrom(
+        majors.data.map((data) => ({
+          majorCode: data.majorCode,
+          major: data.major,
+        }))
+      );
     } catch (error) {
       alert(error.response.data.message);
     }
   };
 
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const ChoiceMajor = (e) => {
+    setMyMajor(...myMajor, (majorCode: e.target.value));
+  };
+
+  const handleClick = async () => {
+    try {
+      await sendApi.putMyProfile({
+        name,
+        profileUrl: myProfileUrl,
+        major: myMajor.majorCode,
+        classNumber,
+      });
+      alert('내 정보 수정완료');
+    } catch (error) {
+      alert(error.response.data.message);
+    }
+  };
   return (
     <Wrapper>
       <Field>
@@ -118,11 +147,17 @@ export const TextBox = () => {
         </PTag>
         <PTag>
           학과 :{' '}
-          <Input
+          <Select
             type="text"
-            value={major}
-            onChange={(e) => setMajor(e.target.value)}
-          />
+            value={majorsForm.majorCode}
+            onChange={ChoiceMajor}
+          >
+            {majorsForm.map((data) => (
+              <Option key={data.majorCode} value={data.majorCode}>
+                {data.major}
+              </Option>
+            ))}
+          </Select>
         </PTag>
         <PTag>
           학번 :{' '}
