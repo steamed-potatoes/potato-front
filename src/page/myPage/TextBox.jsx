@@ -118,9 +118,7 @@ export const TextBox = () => {
   }, []);
 
   const ChoiceMajor = (e) => {
-    // 이부분 에러남
-    // 이런식으로 하고싶음
-    setMyMajor(...myMajor, (majorCode: e.target.value));
+    setMyMajor({ ...myMajor, majorCode: e.target.value });
   };
 
   const handleClick = async () => {
@@ -132,10 +130,12 @@ export const TextBox = () => {
         classNumber,
       });
       alert('내 정보 수정완료');
+      console.log(majorsForm.majorCode);
     } catch (error) {
       alert(error.response.data.message);
     }
   };
+
   return (
     <Wrapper>
       <Field>
