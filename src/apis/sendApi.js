@@ -24,6 +24,9 @@ export default {
   getMyProfile: () => {
     return api.get('/api/v1/member');
   },
+  putMyProfile: (req) => {
+    return api.put('/api/v1/member',req);
+  },
   retrievePopluarBoards: (size) => {
     return api.get(`/api/v1/organization/list/popular?size=${size}`);
   },
@@ -32,4 +35,7 @@ export default {
       `/api/v2/organization/board/list/imminentBoards?size=${size}&dateTime=${datetime}`
     );
   },
+  getMyGroupList: () => {
+    return api.get('/api/v1/organization/my');
+  }
 };
