@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-size: auto;
   padding-bottom: 520px;
+  float: left;
 `;
 
 const Search = styled.div`
@@ -49,7 +50,7 @@ const HashButtonWrapper = styled.div`
   align-items: left;
   justify-content: flex-start;
   margin-left: 144px;
-`
+`;
 
 const HashButton = styled.button`
   background-color: white;
@@ -61,7 +62,7 @@ const HashButton = styled.button`
   padding: 8px 16px 8px 16px;
   margin: 8px;
   cursor: pointer;
-`
+`;
 
 const BoardSearchItemWrapper = styled.div`
   display: flex;
@@ -69,6 +70,7 @@ const BoardSearchItemWrapper = styled.div`
   align-items: center;
   justify-content: flex-start;
   margin: 144px;
+  float: left;
 `;
 
 const BoardSearchItem = styled.div`
@@ -95,6 +97,16 @@ const Scroll = styled.button`
   border: 0;
   margin-top: 24px;
   cursor: pointer;
+`
+
+const TopWrapper = styled.div``
+
+const LeftWrapper = styled.div`
+  float: left;
+`
+
+const RightWrapper = styled.div`
+  float: right;
 `
 
 const BoardSearch = () => {
@@ -126,7 +138,7 @@ const BoardSearch = () => {
       document.getElementById("Scroll").style.display="none";
     }
   }
-
+  
   const chageTypeButton = (e) => {
     if(e.target.id !== type) {
       if(type !== '')
@@ -141,27 +153,34 @@ const BoardSearch = () => {
       setLastBoard(0);
       setSearchItem([]);
       document.getElementById("Scroll").style.display="";
-      setType();
+      setType('');
     }
   }
   
   return (
     <Wrapper>
       <HeaderMenu />
-      <BoardSearchWrapper>
-        <Search>
-          <SearchInput />
-          <BiSearch size="30" />
-        </Search>
-      </BoardSearchWrapper>
-      <HashButtonWrapper>
-        <HashButton>학사일정</HashButton>
-        <HashButton>공지</HashButton>
-        <HashButton type="button" id="EVENT" onClick={chageTypeButton}>이벤트</HashButton>
-        <HashButton type="button" id="RECRUIT" onClick={chageTypeButton}>모집</HashButton>
-        <HashButton>행사</HashButton>
-        <HashButton>동아리</HashButton>
-      </HashButtonWrapper>
+      <TopWrapper>
+        <LeftWrapper>
+          <BoardSearchWrapper>
+            <Search>
+              <SearchInput />
+              <BiSearch size="30" />
+            </Search>
+          </BoardSearchWrapper>
+          <HashButtonWrapper>
+            <HashButton>학사일정</HashButton>
+            <HashButton>공지</HashButton>
+            <HashButton type="button" id="EVENT" onClick={chageTypeButton}>이벤트</HashButton>
+            <HashButton type="button" id="RECRUIT" onClick={chageTypeButton}>모집</HashButton>
+            <HashButton>행사</HashButton>
+            <HashButton>동아리</HashButton>
+          </HashButtonWrapper>
+        </LeftWrapper>
+        <RightWrapper>
+          test
+        </RightWrapper>
+      </TopWrapper>
       <BoardSearchItemWrapper>
         <BoardSearchItem>
           {searchItem.length ? (
