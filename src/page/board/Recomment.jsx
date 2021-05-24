@@ -54,17 +54,20 @@ const CommentLikeCount = styled.div`
 
 const ReComment = ({ RecommentMemberId, RecommentContent, RecommentLike }) => {
   const [memberInfomation, setMemberInformation] = useState({});
+
+  const receivedData = async () => {
+    try {
+      const { data } = await sendApi.getUserProfile(RecommentMemberId);
+      setMemberInformation(data.data);
+    } catch (e) {
+      swal(`${e.response.data.message}`);
+    }
+  };
+
   useEffect(() => {
-    const receivedData = async () => {
-      try {
-        const { data } = await sendApi.getUserProfile(RecommentMemberId);
-        setMemberInformation(data.data);
-      } catch (e) {
-        swal(`${e.response.data.message}`);
-      }
-    };
     receivedData();
   }, []);
+
   return (
     <RecommentWrapper>
       <WriterImg src={memberInfomation.profileUrl} />

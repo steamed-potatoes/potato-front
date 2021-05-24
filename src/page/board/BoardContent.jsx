@@ -69,30 +69,33 @@ const ContentDetail = styled.div`
 `;
 
 const BoardContent = ({
-  BoardImg,
-  BoardLikeCount,
-  BoardContent,
-  BoardHashTags,
+  boardImg,
+  boardLikeCount,
+  boardContent,
+  boardHashTags,
+  boardId,
 }) => {
   return (
     <ContentWrapper>
       <ContentTop>
-        <ContentImg src={BoardImg} />
+        <ContentImg src={boardImg} />
         <Summary>
           <BoardLike>
             <LikeSymbol />
-            <LikeCount>좋아요 {BoardLikeCount}개</LikeCount>
+            <LikeCount>좋아요 {boardLikeCount}개</LikeCount>
           </BoardLike>
           <BoardHashtags>
-            {BoardHashTags ? (
-              BoardHashTags.map((data) => <HashTag>{data}</HashTag>)
+            {boardHashTags ? (
+              boardHashTags.map((data) => (
+                <HashTag key={boardId}>{data}</HashTag>
+              ))
             ) : (
               <NoneHashTag />
             )}
           </BoardHashtags>
         </Summary>
       </ContentTop>
-      <ContentDetail>{BoardContent}</ContentDetail>
+      <ContentDetail>{boardContent}</ContentDetail>
     </ContentWrapper>
   );
 };

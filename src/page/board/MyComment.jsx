@@ -52,15 +52,16 @@ const WriterNickname = styled.div`
 const MyComment = ({ addComment, commentContent, setCommentContent }) => {
   const [userInfomation, setUserInfomation] = useState(null);
 
+  const receivedData = async () => {
+    try {
+      const { data } = await sendApi.getMyProfile();
+      setUserInfomation(data.data);
+    } catch (e) {
+      swal(`${e.response.data.message}`);
+    }
+  };
+
   useEffect(() => {
-    const receivedData = async () => {
-      try {
-        const { data } = await sendApi.getMyProfile();
-        setUserInfomation(data.data);
-      } catch (e) {
-        swal(`${e.response.data.message}`);
-      }
-    };
     receivedData();
     setCommentContent('');
   }, []);

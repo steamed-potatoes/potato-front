@@ -145,14 +145,16 @@ const CommentView = ({
             ''
           )}
           {childrenData.length ? (
-            childrenData.map((data) => (
-              <Recomment
-                RecommentMemberId={data.memberId}
-                RecommentContent={data.content}
-                RecommentLike={data.boardCommentLikeCounts}
-                key={data.id}
-              />
-            ))
+            childrenData.map(
+              ({ memberId, content, boardCommentLikeCounts, id }) => (
+                <Recomment
+                  RecommentMemberId={memberId}
+                  RecommentContent={content}
+                  RecommentLike={boardCommentLikeCounts}
+                  key={id}
+                />
+              )
+            )
           ) : (
             <NoneRecomment />
           )}

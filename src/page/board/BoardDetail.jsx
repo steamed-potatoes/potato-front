@@ -53,7 +53,7 @@ const BoardTitle = styled.div`
 
 const BoardDetail = ({ boardId }) => {
   const [boardDetailData, setBoardDetailData] = useState(null);
-  const PresentBoardId = boardId;
+  const presentBoardId = boardId;
 
   useEffect(() => {
     const receivedData = async () => {
@@ -88,12 +88,13 @@ const BoardDetail = ({ boardId }) => {
         </Information>
         <BoardTitle>{boardDetailData.board.title}</BoardTitle>
         <BoardContent
-          BoardImg={boardDetailData.board.imageUrl}
-          BoardLikeCount={boardDetailData.board.likesCount}
-          BoardContent={boardDetailData.board.content}
-          BoardHashTags={boardDetailData.hashTags}
+          boardImg={boardDetailData.board.imageUrl}
+          boardLikeCount={boardDetailData.board.likesCount}
+          boardContent={boardDetailData.board.content}
+          boardHashTags={boardDetailData.hashTags}
+          boardId={presentBoardId}
         />
-        <BoardComment PresentBoardId={PresentBoardId} />
+        <BoardComment PresentBoardId={presentBoardId} />
       </DetailWrapper>
     );
   }

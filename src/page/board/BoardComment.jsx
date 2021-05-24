@@ -30,27 +30,28 @@ const BoardComment = ({ PresentBoardId }) => {
   const [commentCount, setCommentCount] = useState(0);
   const [boardCommentList, setBoarCommentList] = useState([]);
 
-  useEffect(() => {
-    const commentListCount = (dataList) => {
-      let count = 0;
-      dataList.forEach((comment) => {
-        if (comment.children.length) {
-          count += comment.children.length;
-        }
-      });
-      count += dataList.length;
-      setCommentCount(count);
-    };
-
-    const receivedData = async () => {
-      try {
-        const { data } = await sendApi.getCommentList(PresentBoardId);
-        setBoarCommentList(data.data);
-        await commentListCount(data.data);
-      } catch (e) {
-        swal(`${e.response.data.message}`);
+  const commentListCount = (dataList) => {
+    let count = 0;
+    dataList.forEach((comment) => {
+      if (comment.children.length) {
+        count += comment.children.length;
       }
-    };
+    });
+    count += dataList.length;
+    setCommentCount(count);
+  };
+
+  const receivedData = async () => {
+    try {
+      const { data } = await sendApi.getCommentList(PresentBoardId);
+      setBoarCommentList(data.data);
+      await commentListCount(data.data);
+    } catch (e) {
+      swal(`${e.response.data.message}`);
+    }
+  };
+
+  useEffect(() => {
     receivedData();
   }, []);
 
@@ -78,15 +79,15 @@ const BoardComment = ({ PresentBoardId }) => {
         addComment={addComment}
       />
       {boardCommentList.length ? (
-        boardCommentList.map((Comment) => (
+        boardCommentList.map((comment) => (
           <CommentView
-            memberId={Comment.memberId}
-            content={Comment.content}
-            boardCommentLikeCounts={Comment.boardCommentLikeCounts}
+            memberId={comment.memberId}
+            content={comment.content}
+            boardCommentLikeCounts={comment.boardCommentLikeCounts}
             PresentBoardId={PresentBoardId}
-            parentId={Comment.id}
-            childrenData={Comment.children}
-            key={Comment.id}
+            parentId={comment.id}
+            childrenData={comment.children}
+            key={comment.id}
           />
         ))
       ) : (
