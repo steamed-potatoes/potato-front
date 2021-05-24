@@ -86,7 +86,6 @@ const ReComment = ({
   }, [recommentLikeState]);
 
   const onClickCommentLike = async () => {
-    console.log('리코멘트  좋아요~~~~');
     try {
       await sendApi.commentLike({
         boardCommentId: recommentId,
@@ -99,11 +98,8 @@ const ReComment = ({
   };
 
   const onClickCommentUnLike = async () => {
-    console.log('리코멘트 안좋아요');
     try {
-      await sendApi.commentUnLike({
-        boardCommentId: recommentId,
-      });
+      await sendApi.commentUnLike(recommentId);
       setRecommentLikeCount(recommentLikeState - 1);
       setRecommentLikeState(false);
     } catch (e) {

@@ -128,7 +128,6 @@ const CommentView = ({
   };
 
   const onClickCommentLike = async () => {
-    console.log('좋아요~~~~');
     try {
       await sendApi.commentLike({
         boardCommentId: parentId,
@@ -141,11 +140,8 @@ const CommentView = ({
   };
 
   const onClickCommentUnLike = async () => {
-    console.log('안좋아요');
     try {
-      await sendApi.commentUnLike({
-        boardCommentId: parentId,
-      });
+      await sendApi.commentUnLike(parentId);
       setLikeCountState(likeCountState - 1);
       setIsLikeState(false);
     } catch (e) {
