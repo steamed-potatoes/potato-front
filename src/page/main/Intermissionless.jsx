@@ -4,6 +4,7 @@ import { BoardThumbnail } from 'components/BoardThumbnail';
 import LinkButtonImg from 'images/LinkButtonImg.png';
 import sendApi from 'apis/sendApi';
 import moment from 'moment';
+import { getMainPicture } from '../../utils/getMainPicture';
 // import LeftIcon from 'images/LeftIcon.png';
 // import RightIcon from 'images/RightIcon.png';
 
@@ -90,7 +91,7 @@ const Intermissionless = () => {
         {boards.map((board) => (
           <BoardThumbnail
             key={board.id}
-            boardImageUrl={board.imageUrl}
+            boardImageUrl={getMainPicture(board.imageUrlList)}
             boardTitle={board.title}
             orgName={`${board.endDateTime} 까지`}
           />

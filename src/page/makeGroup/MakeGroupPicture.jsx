@@ -1,16 +1,16 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div``
+const Wrapper = styled.div``;
 
 const Picture = styled.img`
   border-radius: 400px;
-  background-color: #E2E2E2;
+  background-color: #e2e2e2;
   height: 150px;
   width: 150px;
   margin-top: 16px;
-  border:1px solid black;
-`
+  border: 1px solid black;
+`;
 
 const PictureWrapper = styled.div`
   height: 150px;
@@ -18,14 +18,14 @@ const PictureWrapper = styled.div`
   margin: 16px;
   margin-left: auto;
   margin-right: auto;
-`
+`;
 
 const InputPicture = styled.input`
   display: none;
-`
+`;
 
 const Change = styled.button`
-  background-color: #F0B138;
+  background-color: #f0b138;
   border: 0;
   border-radius: 48px;
   width: 180px;
@@ -35,11 +35,11 @@ const Change = styled.button`
   padding: 4px;
   &:hover {
     cursor: pointer;
-    border: 1px solid #CFCECE;
+    border: 1px solid #cfcece;
   }
-`
+`;
 
-const MakeGroupPicture = ({onChangeForm}) => {
+const MakeGroupPicture = ({ onChangeForm }) => {
   const [file, setFile] = useState(null);
   const inputFiled = useRef(null);
 
@@ -47,22 +47,27 @@ const MakeGroupPicture = ({onChangeForm}) => {
     const [imageFile] = event.target.files;
     const imageUrl = URL.createObjectURL(imageFile);
     setFile(imageUrl);
-    onChangeForm(event); 
-  }
+    onChangeForm(event);
+  };
 
   const onClickInput = () => {
     inputFiled.current.click();
-  }
+  };
 
   return (
     <Wrapper>
       <PictureWrapper>
         <Picture src={file} />
       </PictureWrapper>
-      <InputPicture type="file" name="profileUrl" ref={inputFiled} onChange={onChangeFile} />
+      <InputPicture
+        type="file"
+        name="profileUrl"
+        ref={inputFiled}
+        onChange={onChangeFile}
+      />
       <Change onClick={onClickInput}>사진 수정</Change>
     </Wrapper>
-	);
-}
+  );
+};
 
 export default MakeGroupPicture;

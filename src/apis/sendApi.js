@@ -27,6 +27,9 @@ export default {
   getBoard: async (lastId,type, req) => {
     return await api.get(`/api/v2/organization/board/list?size=12&lastOrganizationBoardId=${lastId}&type=${type}`, req, 'get');
   },
+  putMyProfile: (req) => {
+    return api.put('/api/v1/member',req);
+  },
   retrievePopluarBoards: (size) => {
     return api.get(`/api/v1/organization/list/popular?size=${size}`);
   },
@@ -35,4 +38,7 @@ export default {
       `/api/v2/organization/board/list/imminentBoards?size=${size}&dateTime=${datetime}`
     );
   },
+  getMyGroupList: () => {
+    return api.get('/api/v1/organization/my');
+  }
 };
