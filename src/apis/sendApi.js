@@ -46,4 +46,12 @@ export default {
   getUserProfile: (id) => {
     return api.get(`/api/v1/member/${id}`);
   },
+
+  commentLike: (req) => {
+    return api.post(`/api/v2/board/comment/like`, req);
+  },
+
+  commentUnLike: (req) => {
+    return api.delete(`/api/v2/board/comment/like`, req);
+  },
 };

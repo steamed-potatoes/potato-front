@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import sendApi from 'apis/sendApi';
 import swal from 'sweetalert';
 import UnLikeLogo from '../../images/UnLikeLogo.png';
+import LikeLogo from '../../images/LikeLogo.png';
 import Recomment from './Recomment';
 import MyComment from './MyComment';
 
@@ -50,6 +51,14 @@ const CommentLikeSymbol = styled.img`
   width: 24px;
   height: 24px;
   border: none;
+  background-image: url(${LikeLogo});
+  background-size: 100%;
+`;
+
+const CommentUnLikeSymbol = styled.img`
+  width: 24px;
+  height: 24px;
+  border: none;
   background-image: url(${UnLikeLogo});
   background-size: 100%;
 `;
@@ -79,12 +88,15 @@ const CommentView = ({
   boardCommentLikeCounts,
   PresentBoardId,
   parentId,
+  isLike,
   childrenData,
 }) => {
   const history = useHistory();
   const [addRecomentView, setAddRecommentView] = useState(0);
   const [recommentContent, setRecommentContent] = useState('');
   const [memberInfomation, setMemberInformation] = useState({});
+  const [isLikeState, setIsLikeState] = useState(isLike);
+  const [likeCountState, setLikeCountState] = useState(boardCommentLikeCounts);
 
   useEffect(() => {
     const receivedData = async () => {
@@ -96,7 +108,7 @@ const CommentView = ({
       }
     };
     receivedData();
-  }, []);
+  }, [isLikeState]);
 
   const addReComment = async () => {
     try {
@@ -115,6 +127,32 @@ const CommentView = ({
     }
   };
 
+  const onClickCommentLike = async () => {
+    console.log('좋아요~~~~');
+    try {
+      await sendApi.commentLike({
+        boardCommentId: parentId,
+      });
+      setLikeCountState(likeCountState + 1);
+      setIsLikeState(true);
+    } catch (e) {
+      swal(e.response.data.message);
+    }
+  };
+
+  const onClickCommentUnLike = async () => {
+    console.log('안좋아요');
+    try {
+      await sendApi.commentUnLike({
+        boardCommentId: parentId,
+      });
+      setLikeCountState(likeCountState - 1);
+      setIsLikeState(false);
+    } catch (e) {
+      swal(e.response.data.message);
+    }
+  };
+
   return (
     <CommentViewWrap>
       <Comment>
@@ -123,8 +161,12 @@ const CommentView = ({
           <WriterNickname>{memberInfomation.name}</WriterNickname>
           <CommentContent>{content}</CommentContent>
           <CommentButtonWrap>
-            <CommentLikeSymbol />
-            <CommentLikeCount>{boardCommentLikeCounts}</CommentLikeCount>
+            {isLikeState ? (
+              <CommentLikeSymbol onClick={onClickCommentUnLike} />
+            ) : (
+              <CommentUnLikeSymbol onClick={onClickCommentLike} />
+            )}
+            <CommentLikeCount>{likeCountState}</CommentLikeCount>
             <AddReComment
               key={parentId}
               onClick={() => {
@@ -146,11 +188,13 @@ const CommentView = ({
           )}
           {childrenData.length ? (
             childrenData.map(
-              ({ memberId, content, boardCommentLikeCounts, id }) => (
+              ({ memberId, content, boardCommentLikeCounts, id, isLike }) => (
                 <Recomment
-                  RecommentMemberId={memberId}
-                  RecommentContent={content}
-                  RecommentLike={boardCommentLikeCounts}
+                  recommentMemberId={memberId}
+                  recommentContent={content}
+                  recommentLike={boardCommentLikeCounts}
+                  recommentId={id}
+                  recommentIsLike={isLike}
                   key={id}
                 />
               )

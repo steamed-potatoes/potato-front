@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
 import swal from 'sweetalert';
 import UnLikeLogo from '../../images/UnLikeLogo.png';
+import LikeLogo from '../../images/LikeLogo.png';
 
 const RecommentWrapper = styled.div`
   display: flex;
@@ -43,6 +44,14 @@ const CommentLikeSymbol = styled.img`
   width: 24px;
   height: 24px;
   border: none;
+  background-image: url(${LikeLogo});
+  background-size: 100%;
+`;
+
+const CommentUnLikeSymbol = styled.img`
+  width: 24px;
+  height: 24px;
+  border: none;
   background-image: url(${UnLikeLogo});
   background-size: 100%;
 `;
@@ -52,12 +61,20 @@ const CommentLikeCount = styled.div`
   margin: 0 8px;
 `;
 
-const ReComment = ({ RecommentMemberId, RecommentContent, RecommentLike }) => {
+const ReComment = ({
+  recommentMemberId,
+  recommentContent,
+  recommentLike,
+  recommentIsLike,
+  recommentId,
+}) => {
   const [memberInfomation, setMemberInformation] = useState({});
+  const [recommentLikeState, setRecommentLikeState] = useState(recommentIsLike);
+  const [recommentLikeCount, setRecommentLikeCount] = useState(recommentLike);
 
   const receivedData = async () => {
     try {
-      const { data } = await sendApi.getUserProfile(RecommentMemberId);
+      const { data } = await sendApi.getUserProfile(recommentMemberId);
       setMemberInformation(data.data);
     } catch (e) {
       swal(`${e.response.data.message}`);
@@ -66,17 +83,47 @@ const ReComment = ({ RecommentMemberId, RecommentContent, RecommentLike }) => {
 
   useEffect(() => {
     receivedData();
-  }, []);
+  }, [recommentLikeState]);
+
+  const onClickCommentLike = async () => {
+    console.log('리코멘트  좋아요~~~~');
+    try {
+      await sendApi.commentLike({
+        boardCommentId: recommentId,
+      });
+      setRecommentLikeCount(recommentLikeState + 1);
+      setRecommentLikeState(true);
+    } catch (e) {
+      swal(e.response.data.message);
+    }
+  };
+
+  const onClickCommentUnLike = async () => {
+    console.log('리코멘트 안좋아요');
+    try {
+      await sendApi.commentUnLike({
+        boardCommentId: recommentId,
+      });
+      setRecommentLikeCount(recommentLikeState - 1);
+      setRecommentLikeState(false);
+    } catch (e) {
+      swal(e.response.data.message);
+    }
+  };
 
   return (
     <RecommentWrapper>
       <WriterImg src={memberInfomation.profileUrl} />
       <Summary>
         <WriterNickname>{memberInfomation.name}</WriterNickname>
-        <CommentContent>{RecommentContent}</CommentContent>
+        <CommentContent>{recommentContent}</CommentContent>
         <CommentButtonWrap>
-          <CommentLikeSymbol />
-          <CommentLikeCount>{RecommentLike}</CommentLikeCount>
+          {recommentLikeState ? (
+            <CommentLikeSymbol onClick={onClickCommentUnLike} />
+          ) : (
+            <CommentUnLikeSymbol onClick={onClickCommentLike} />
+          )}
+          <CommentLikeCount>{recommentLikeCount}</CommentLikeCount>
         </CommentButtonWrap>
       </Summary>
     </RecommentWrapper>

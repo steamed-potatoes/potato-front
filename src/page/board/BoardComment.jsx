@@ -86,6 +86,7 @@ const BoardComment = ({ PresentBoardId }) => {
             boardCommentLikeCounts={comment.boardCommentLikeCounts}
             PresentBoardId={PresentBoardId}
             parentId={comment.id}
+            isLike={comment.isLike}
             childrenData={comment.children}
             key={comment.id}
           />
