@@ -54,4 +54,14 @@ export default {
   commentUnLike: (id) => {
     return api.delete(`/api/v2/board/comment/like?boardCommentId=${id}`);
   },
+
+  boardLike: (req) => {
+    return api.post(`/api/v2/organization/board/like`, req);
+  },
+
+  boardUnLike: (id) => {
+    return api.delete(
+      `/api/v2/organization/board/like?organizationBoardId=${id}`
+    );
+  },
 };

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import sendApi from 'apis/sendApi';
+import swal from 'sweetalert';
 import LikeLogo from '../../images/LikeLogo.png';
+import UnLikeLogo from '../../images/UnLikeLogo.png';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -43,6 +46,14 @@ const LikeSymbol = styled.img`
   background-size: 100%;
 `;
 
+const UnLikeSymbol = styled.img`
+  width: 24px;
+  height: 24px;
+  border: none;
+  background-image: url(${UnLikeLogo});
+  background-size: 100%;
+`;
+
 const LikeCount = styled.div`
   margin-left: 8px;
 `;
@@ -73,16 +84,48 @@ const BoardContent = ({
   boardLikeCount,
   boardContent,
   boardHashTags,
+  boardIsLike,
   boardId,
 }) => {
+  const [boardLikeState, setBoardLikeState] = useState(boardIsLike);
+  const [boardLikeCountState, setBoardLikeCountState] = useState(
+    boardLikeCount
+  );
+
+  const onClickBoardLike = async () => {
+    try {
+      await sendApi.boardLike({
+        organizationBoardId: boardId,
+      });
+      setBoardLikeCountState(boardLikeCountState + 1);
+      setBoardLikeState(true);
+    } catch (e) {
+      swal(e.response.data.message);
+    }
+  };
+
+  const onClickBoardUnLike = async () => {
+    try {
+      await sendApi.boardUnLike(boardId);
+      setBoardLikeCountState(boardLikeCountState - 1);
+      setBoardLikeState(false);
+    } catch (e) {
+      swal(e.response.data.message);
+    }
+  };
+
   return (
     <ContentWrapper>
       <ContentTop>
         <ContentImg src={boardImg} />
         <Summary>
           <BoardLike>
-            <LikeSymbol />
-            <LikeCount>좋아요 {boardLikeCount}개</LikeCount>
+            {boardLikeState ? (
+              <LikeSymbol onClick={onClickBoardUnLike} />
+            ) : (
+              <UnLikeSymbol onClick={onClickBoardLike} />
+            )}
+            <LikeCount>좋아요 {boardLikeCountState}개</LikeCount>
           </BoardLike>
           <BoardHashtags>
             {boardHashTags ? (
