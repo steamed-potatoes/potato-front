@@ -4,6 +4,8 @@ import sendApi from 'apis/sendApi';
 import swal from 'sweetalert';
 import LikeLogo from '../../images/LikeLogo.png';
 import UnLikeLogo from '../../images/UnLikeLogo.png';
+import LeftIcon from '../../images/LeftIcon.png';
+import RightIcon from '../../images/RightIcon.png';
 
 const ContentWrapper = styled.div`
   display: flex;
@@ -79,6 +81,46 @@ const ContentDetail = styled.div`
   margin-top: 32px;
 `;
 
+const ImgWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  position: relative;
+  left: -24px;
+`;
+
+const LeftButton = styled.button`
+  position: relative;
+  right: -40px;
+  color: #80808032;
+  border-radius: 0 24px 24px 0;
+  border: none;
+  width: 40px;
+  height: 40px;
+
+  background-image: url(${LeftIcon});
+  background-position: 35% 50%;
+  background-repeat: no-repeat;
+  background-size: 16px;
+`;
+
+const RightButton = styled.button`
+  position: relative;
+  left: -40px;
+  float: right;
+
+  color: #80808032;
+  border-radius: 24px 0 0 24px;
+  border: none;
+  width: 40px;
+  height: 40px;
+
+  background-image: url(${RightIcon});
+  background-position: 65% 50%;
+  background-repeat: no-repeat;
+  background-size: 16px;
+`;
+
 const BoardContent = ({
   boardImg,
   boardLikeCount,
@@ -91,6 +133,10 @@ const BoardContent = ({
   const [boardLikeCountState, setBoardLikeCountState] = useState(
     boardLikeCount
   );
+
+  const [boardImgListCount, setBoardImgListCount] = useState(0);
+
+  const imgListMaxCount = boardImg.length;
 
   const onClickBoardLike = async () => {
     try {
@@ -114,10 +160,27 @@ const BoardContent = ({
     }
   };
 
+  const onClickNextImg = () => {
+    if (boardImgListCount + 1 < imgListMaxCount) {
+      setBoardImgListCount(boardImgListCount + 1);
+    }
+  };
+
+  const onClickPrevImg = () => {
+    if (boardImgListCount - 1 >= 0) {
+      setBoardImgListCount(boardImgListCount - 1);
+    }
+  };
+
   return (
     <ContentWrapper>
       <ContentTop>
-        <ContentImg src={boardImg} />
+        <ImgWrap>
+          <LeftButton onClick={onClickPrevImg} />
+          <ContentImg src={boardImg[boardImgListCount]} />
+          <RightButton onClick={onClickNextImg} />
+        </ImgWrap>
+
         <Summary>
           <BoardLike>
             {boardLikeState ? (

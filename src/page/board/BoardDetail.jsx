@@ -59,6 +59,7 @@ const BoardDetail = ({ boardId }) => {
     const receivedData = async () => {
       try {
         const { data } = await sendApi.getBoardDetail(boardId);
+
         setBoardDetailData(data.data);
       } catch (e) {
         swal(`${e.response.data.message}`);
@@ -88,7 +89,7 @@ const BoardDetail = ({ boardId }) => {
         </Information>
         <BoardTitle>{boardDetailData.board.title}</BoardTitle>
         <BoardContent
-          boardImg={boardDetailData.board.imageUrl}
+          boardImg={boardDetailData.imageUrlList}
           boardLikeCount={boardDetailData.board.likesCount}
           boardIsLike={boardDetailData.isLike}
           boardContent={boardDetailData.board.content}
