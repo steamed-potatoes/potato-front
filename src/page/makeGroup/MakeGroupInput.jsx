@@ -31,11 +31,11 @@ const MakeGroupInput = ({onChangeForm}) => {
   return (
     <Wrapper>
       <TagName>도메인주소</TagName>
-      <InputName name="subDomain" onChange={onChangeForm} />
+      <InputName name="subDomain" onChange={onChangeForm} placeholder="그룹의 영어이름을 작성해주세요" />
       <TagName>그룹 이름</TagName>
-      <InputName name="name" onChange={onChangeForm} />
+      <InputName name="name" onChange={onChangeForm} placeholder="그룹의 이름을 작성해주세요" />
       <TagName>그룹 소개</TagName>
-      <Textarea name="description" onChange={onChangeForm} />
+      <Textarea name="description" onChange={onChangeForm} placeholder="그룹의 소개를 작성해주세요" />
     </Wrapper>
   )
 }
