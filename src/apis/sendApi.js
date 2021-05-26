@@ -25,7 +25,7 @@ export default {
     return api.get('/api/v1/member');
   },
   putMyProfile: (req) => {
-    return api.put('/api/v1/member',req);
+    return api.put('/api/v1/member', req);
   },
   retrievePopluarBoards: (size) => {
     return api.get(`/api/v1/organization/list/popular?size=${size}`);
@@ -37,5 +37,8 @@ export default {
   },
   getMyGroupList: () => {
     return api.get('/api/v1/organization/my');
-  }
+  },
+  postProfilePhoto: (req) => {
+    return api.post('/api/v1/upload',req);
+  },
 };

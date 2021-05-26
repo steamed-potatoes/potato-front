@@ -1,58 +1,89 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {IoPersonCircleOutline,IoCameraOutline} from 'react-icons/io5'
-
-export const PhotoBox = () => {
-  return (
-    <Wrapper>
-      <ProfileImgText>프로필 이미지</ProfileImgText>
-      <IoPersonCircleOutline size="400" />
-      <CameraBtn>
-        <IoCameraOutline size="56" />
-      </CameraBtn>
-      <ImgDeleteBtn>이미지 삭제</ImgDeleteBtn>
-    </Wrapper>
-  );
-};
+import sendApi from 'apis/sendApi';
+import { IoCameraOutline } from 'react-icons/io5';
 
 const Wrapper = styled.div`
-  display : flex;
-  flex-flow : column;
+  display: flex;
+  flex-flow: column;
   position: relative;
-  margin-left : 56px;
-  align-items : center;
+  margin-left: 56px;
+  align-items: center;
   height: 400px;
 `;
-const CameraBtn = styled.button`
-  position: absolute;
-  border: none;
-  border-radius : 50px;
-  right: 64px;
-  bottom: 32px;
-  z-index: 1;
-  transition: transform 0.5s;
 
-  &:hover{
-    cursor: pointer;
-    transform: scale(1.3);
-  }
-`;
 const ImgDeleteBtn = styled.button`
   border: none;
-  margin-top: 30px;
-  background : none;
-  font-size : 18px;
-  margin-top : -20px;
+  background: none;
+  font-size: 18px;
   transition: transform 0.5s;
-
   &:hover {
     cursor: pointer;
-    font-weight:bold;
+    font-weight: bold;
     transform: scale(1.3);
   }
 `;
 const ProfileImgText = styled.div`
-  font-size : 28px;
-  margin-bottom : -10px;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: -10px;
+`;
+const ProfilePhoto = styled.img`
+  border-radius: 400px;
+  background-color: #e2e2e2;
+  height: 300px;
+  width: 300px;
+  border: none;
+`;
+const InputPhoto = styled.input`
+  display: none;
+`;
+const Label = styled.label`
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 50px;
+  right: 10px;
+  bottom: 64px;
+  z-index: 1;
+  transition: transform 0.5s;
+  background: #e2e2e2;
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.3);
+  }
 `;
 
+export const PhotoBox = () => {
+  const [photo, setPhoto] = useState('');
+
+  const onChange = async (e) => {
+    if (e.target.files[0]) {
+      const img = new FormData();
+      img.append('file', e.target.files[0]);
+      try {
+        const { data } = await sendApi.postProfilePhoto(img);
+        setPhoto(data.data);
+        alert('프로필 사진이 변경되었습니다.');
+      } catch (error) {
+        alert(error.response.data.message);
+      }
+    }
+  };
+
+  return (
+    <Wrapper>
+      <ProfileImgText>프로필 이미지</ProfileImgText>
+      <ProfilePhoto src={photo} alt="프로필 사진" />
+      <Label for="profilePhoto">
+        <IoCameraOutline size="60" />
+      </Label>
+      <InputPhoto
+        type="file"
+        id="profilePhoto"
+        accept="image/*"
+        onChange={onChange}
+      />
+      <ImgDeleteBtn onClick={() => setPhoto('')}>이미지 삭제</ImgDeleteBtn>
+    </Wrapper>
+  );
+};
