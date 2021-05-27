@@ -26,7 +26,7 @@ const ImgDeleteBtn = styled.button`
 const ProfileImgText = styled.div`
   font-size: 28px;
   font-weight: bold;
-  margin-bottom: -10px;
+  margin-bottom: 10px;
 `;
 const ProfilePhoto = styled.img`
   border-radius: 400px;
@@ -54,8 +54,15 @@ const Label = styled.label`
 `;
 
 export const PhotoBox = () => {
-  const [photo, setPhoto] = useState('');
+  const [photo, setPhoto] = useState(
+    'https://potato-bucket-dev.s3.ap-northeast-2.amazonaws.com/7108d3d2-72e0-4f48-b2c1-86d2b8a41d22.png'
+  );
 
+  const clickDeleteBtn = () => {
+    setPhoto(
+      'https://potato-bucket-dev.s3.ap-northeast-2.amazonaws.com/7108d3d2-72e0-4f48-b2c1-86d2b8a41d22.png'
+    );
+  };
   const onChange = async (e) => {
     if (e.target.files[0]) {
       const img = new FormData();
@@ -83,7 +90,7 @@ export const PhotoBox = () => {
         accept="image/*"
         onChange={onChange}
       />
-      <ImgDeleteBtn onClick={() => setPhoto('')}>이미지 삭제</ImgDeleteBtn>
+      <ImgDeleteBtn onClick={clickDeleteBtn}>이미지 삭제</ImgDeleteBtn>
     </Wrapper>
   );
 };
