@@ -38,7 +38,7 @@ export default {
   getMyGroupList: () => {
     return api.get('/api/v1/organization/my');
   },
-  postProfilePhoto: (req) => {
-    return api.post('/api/v1/upload',req);
+  postProfilePhoto: (req, type) => {
+    return api.post(`/api/v1/upload'?type=${type}`, req);
   },
 };

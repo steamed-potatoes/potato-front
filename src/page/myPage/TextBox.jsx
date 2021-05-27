@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
+import { DEFAULT_PROFILE } from 'constant/defaultProfileIMG';
 
 const Wrapper = styled.div`
   height: 480px;
@@ -76,14 +77,17 @@ const Select = styled.select`
 const Option = styled.option``;
 
 export const TextBox = () => {
-  const [majorsForm, setMajorsFrom] = useState([{ majorCode: '', major: '' }]);
+  // select할 state들
+  // 삭제할 것들
+  const [email, setEmail] = useState('');
   const [name, setName] = useState('');
+  const [myProfileUrl, setMyProfileUrl] = useState(DEFAULT_PROFILE);
+
+  const [majorsForm, setMajorsFrom] = useState([{ majorCode: '', major: '' }]);
   const [myMajor, setMyMajor] = useState([
     { majorCode: 'IT_ICT', major: 'ICT융합학과' },
   ]);
   const [classNumber, setClassNumber] = useState('');
-  const [email, setEmail] = useState('');
-  const [myProfileUrl, setMyProfileUrl] = useState('');
 
   const [groupNameList, setGroupNameList] = useState([]);
 
@@ -97,11 +101,12 @@ export const TextBox = () => {
         classNumber,
         profileUrl,
       } = getMyProfile.data;
-      setName(name);
-      setMyMajor({ major: MD.major, majorCode: MD.majorCode });
+      // 각각의 state들 변경하는 액션함수만들기
+      setName(name); // 디스패치, 이름헷갈리니 변경할것
+      setEmail(email); // 디스패치, 이름헷갈리니 변경할것
+      setMyProfileUrl(profileUrl); // 디스패치, 이름헷갈리니 변경할것
       setClassNumber(classNumber);
-      setEmail(email);
-      setMyProfileUrl(profileUrl);
+      setMyMajor({ major: MD.major, majorCode: MD.majorCode });
 
       const { data: groupListData } = await sendApi.getMyGroupList();
       setGroupNameList(groupListData.data.map((data) => data.name));
@@ -129,13 +134,12 @@ export const TextBox = () => {
   const handleClick = async () => {
     try {
       await sendApi.putMyProfile({
-        name,
-        profileUrl: myProfileUrl,
+        name, //state넘기기
+        profileUrl: myProfileUrl, // state넘기기
         major: myMajor.majorCode,
         classNumber,
       });
       alert('내 정보 수정완료');
-      console.log(majorsForm.majorCode);
     } catch (error) {
       alert(error.response.data.message);
     }
@@ -148,8 +152,8 @@ export const TextBox = () => {
           이름 :{' '}
           <Input
             type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={name} // state
+            onChange={(e) => setName(e.target.value)} //디스패치
           />
         </PTag>
         <PTag>
@@ -178,8 +182,8 @@ export const TextBox = () => {
           이메일 :{' '}
           <Input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={email} // state
+            onChange={(e) => setEmail(e.target.value)} // 액션생성함수
           />
         </PTag>
         <hr />

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
 import { IoCameraOutline } from 'react-icons/io5';
+import { DEFAULT_PROFILE } from 'constant/defaultProfileIMG';
 
 const Wrapper = styled.div`
   display: flex;
@@ -54,22 +55,19 @@ const Label = styled.label`
 `;
 
 export const PhotoBox = () => {
-  const [photo, setPhoto] = useState(
-    'https://potato-bucket-dev.s3.ap-northeast-2.amazonaws.com/7108d3d2-72e0-4f48-b2c1-86d2b8a41d22.png'
-  );
+  // 여기서 state를 받아야함
+  const [photo, setPhoto] = useState(DEFAULT_PROFILE);
 
   const clickDeleteBtn = () => {
-    setPhoto(
-      'https://potato-bucket-dev.s3.ap-northeast-2.amazonaws.com/7108d3d2-72e0-4f48-b2c1-86d2b8a41d22.png'
-    );
+    setPhoto(DEFAULT_PROFILE); // dispatch사용할 공간
   };
   const onChange = async (e) => {
     if (e.target.files[0]) {
       const img = new FormData();
       img.append('file', e.target.files[0]);
       try {
-        const { data } = await sendApi.postProfilePhoto(img);
-        setPhoto(data.data);
+        const { data } = await sendApi.postProfilePhoto(img, 'MEMBER_PROFILE');
+        setPhoto(data.data); // 이부분도 dispatch로
         alert('프로필 사진이 변경되었습니다.');
       } catch (error) {
         alert(error.response.data.message);

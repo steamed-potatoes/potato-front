@@ -1,3 +1,5 @@
+import { DEFAULT_PROFILE } from 'constant/defaultProfileIMG';
+
 const CHANGE_USER_INFO = 'user/CHANGE_USER_INFO';
 
 export const changeUserInfo = (email, name, profileUrl) => {
@@ -9,7 +11,7 @@ export const changeUserInfo = (email, name, profileUrl) => {
   };
 };
 
-const initialState = { email: '', name: '', profileUrl: '' };
+const initialState = { email: '', name: '', profileUrl: DEFAULT_PROFILE };
 
 export default function user(state = initialState, action) {
   switch (action.type) {
