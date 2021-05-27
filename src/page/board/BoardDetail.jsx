@@ -89,7 +89,7 @@ const BoardDetail = ({ boardId }) => {
         </Information>
         <BoardTitle>{boardDetailData.board.title}</BoardTitle>
         <BoardContent
-          boardImg={boardDetailData.imageUrlList}
+          boardImgList={boardDetailData.imageUrlList}
           boardLikeCount={boardDetailData.board.likesCount}
           boardIsLike={boardDetailData.isLike}
           boardContent={boardDetailData.board.content}

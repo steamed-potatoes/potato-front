@@ -31,14 +31,13 @@ const BoardComment = ({ PresentBoardId }) => {
   const [boardCommentList, setBoarCommentList] = useState([]);
 
   const commentListCount = (dataList) => {
-    let count = 0;
-    dataList.forEach((comment) => {
-      if (comment.children.length) {
-        count += comment.children.length;
-      }
-    });
-    count += dataList.length;
-    setCommentCount(count);
+    setCommentCount(
+      dataList.reduce((accumulator, comment) => {
+        return comment.children.length
+          ? accumulator + comment.children.length
+          : accumulator;
+      }, dataList.length)
+    );
   };
 
   const receivedData = async () => {

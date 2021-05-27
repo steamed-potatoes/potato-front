@@ -122,7 +122,7 @@ const RightButton = styled.button`
 `;
 
 const BoardContent = ({
-  boardImg,
+  boardImgList,
   boardLikeCount,
   boardContent,
   boardHashTags,
@@ -136,7 +136,7 @@ const BoardContent = ({
 
   const [boardImgListCount, setBoardImgListCount] = useState(0);
 
-  const imgListMaxCount = boardImg.length;
+  const imgListMaxCount = boardImgList.length;
 
   const onClickBoardLike = async () => {
     try {
@@ -177,7 +177,7 @@ const BoardContent = ({
       <ContentTop>
         <ImgWrap>
           <LeftButton onClick={onClickPrevImg} />
-          <ContentImg src={boardImg[boardImgListCount]} />
+          <ContentImg src={boardImgList[boardImgListCount]} />
           <RightButton onClick={onClickNextImg} />
         </ImgWrap>
 

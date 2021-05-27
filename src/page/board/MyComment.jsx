@@ -81,9 +81,7 @@ const MyComment = ({ addComment, commentContent, setCommentContent }) => {
             value={commentContent}
             onChange={onChangeContent}
           />
-          <AddCommentButton onClick={() => addComment()}>
-            댓글작성
-          </AddCommentButton>
+          <AddCommentButton onClick={addComment}>댓글작성</AddCommentButton>
         </Summary>
       </MyCommentWrapper>
     );
@@ -94,9 +92,7 @@ const MyComment = ({ addComment, commentContent, setCommentContent }) => {
       <Summary>
         <WriterNickname>{userInfomation.name}</WriterNickname>
         <AddCommentInputBox name="content" onChange={onChangeContent} />
-        <AddCommentButton onClick={() => addComment()}>
-          댓글작성
-        </AddCommentButton>
+        <AddCommentButton onClick={addComment}>댓글작성</AddCommentButton>
       </Summary>
     </MyCommentWrapper>
   );
