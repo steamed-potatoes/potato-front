@@ -5,15 +5,16 @@ import { HeaderMenu } from 'components/header';
 import swal from 'sweetalert';
 import sendApi from 'apis/sendApi';
 import styled from 'styled-components';
-import BackgroundImg from '../../images/BackgroundImg.png';
-import ScrollImg from '../../images/ScrollImg.png';
+import { getMainPicture } from 'utils/getMainPicture';
+import BackgroundImg from 'images/BackgroundImg.png';
+import ScrollImg from 'images/ScrollImg.png';
 
 const Wrapper = styled.div`
   height: 100%;
   background-image: url(${BackgroundImg});
   background-position: center bottom;
   background-repeat: no-repeat;
-  background-size: auto;
+  background-size: cover;
   padding-bottom: 520px;
   float: left;
 `;
@@ -53,9 +54,9 @@ const HashButtonWrapper = styled.div`
 `;
 
 const HashButton = styled.button`
-  background-color: ${props => props.color || 'white'};
+  background-color: ${(props) => props.color || 'white'};
   border-radius: 32px;
-  border: 4px solid #F0B138;
+  border: 4px solid #f0b138;
   height: 64px;
   font-size: 20px;
   font-weight: bold;
@@ -63,7 +64,6 @@ const HashButton = styled.button`
   margin: 8px;
   cursor: pointer;
 `;
-
 
 const BoardSearchItemWrapper = styled.div`
   display: flex;
@@ -98,7 +98,7 @@ const Scroll = styled.button`
   border: 0;
   margin-top: 24px;
   cursor: pointer;
-`
+`;
 
 const BoardSearch = () => {
   const [searchItem, setSearchItem] = useState([]);
@@ -110,7 +110,7 @@ const BoardSearch = () => {
     EVENT: 'white',
     RECRUIT: 'white',
     행사: 'white',
-    동아리: 'white'
+    동아리: 'white',
   });
 
   useEffect(() => {
@@ -118,7 +118,7 @@ const BoardSearch = () => {
       try {
         const { data } = await sendApi.getBoard(lastBoard, type);
         setSearchItem(data.data);
-        setLastBoard(data.data[data.data.length-1].boardId);
+        setLastBoard(data.data[data.data.length - 1].boardId);
       } catch (e) {
         swal(`${e.response.data.message}`);
       }
@@ -126,32 +126,30 @@ const BoardSearch = () => {
     receivedData();
   }, [type]);
 
-  const ScrollButton = async() => {
+  const ScrollButton = async () => {
     try {
       const { data } = await sendApi.getBoard(lastBoard, type);
-      if(data.length !== 0) {
+      if (data.length !== 0) {
         setSearchItem(searchItem.concat(data.data));
-        setLastBoard(data.data[data.data.length-1].boardId);
+        setLastBoard(data.data[data.data.length - 1].boardId);
       }
-    } catch {
-      document.getElementById("Scroll").style.display="none";
+    } catch (e) {
+      document.getElementById('Scroll').style.display = 'none';
     }
-  }
-  
+  };
+
   const chageTypeButton = (e) => {
-    if(type !== '')
-    {
-      if(type === e.target.id)
-      {
+    if (type !== '') {
+      if (type === e.target.id) {
         setColor({
           ...color,
           [e.target.id]: 'white',
-        })
+        });
         setLastBoard(0);
         setSearchItem([]);
-        document.getElementById("Scroll").style.display="";
+        document.getElementById('Scroll').style.display = '';
         setType('');
-      }else {
+      } else {
         setColor({
           학사일정: 'white',
           공지: 'white',
@@ -160,24 +158,24 @@ const BoardSearch = () => {
           행사: 'white',
           동아리: 'white',
           [e.target.id]: '#F0B138',
-        })
+        });
         setLastBoard(0);
         setSearchItem([]);
-        document.getElementById("Scroll").style.display="";
+        document.getElementById('Scroll').style.display = '';
         setType(e.target.id);
       }
     } else {
       setColor({
         ...color,
         [e.target.id]: '#F0B138',
-      })
+      });
       setLastBoard(0);
       setSearchItem([]);
-      document.getElementById("Scroll").style.display="";
+      document.getElementById('Scroll').style.display = '';
       setType(e.target.id);
     }
-  }
-  
+  };
+
   return (
     <Wrapper>
       <HeaderMenu />
@@ -190,8 +188,22 @@ const BoardSearch = () => {
       <HashButtonWrapper>
         <HashButton>학사일정</HashButton>
         <HashButton>공지</HashButton>
-        <HashButton type="button" id="EVENT" onClick={chageTypeButton} color={color.EVENT}>이벤트</HashButton>
-        <HashButton type="button" id="RECRUIT" onClick={chageTypeButton} color={color.RECRUIT}>모집</HashButton>
+        <HashButton
+          type="button"
+          id="EVENT"
+          onClick={chageTypeButton}
+          color={color.EVENT}
+        >
+          이벤트
+        </HashButton>
+        <HashButton
+          type="button"
+          id="RECRUIT"
+          onClick={chageTypeButton}
+          color={color.RECRUIT}
+        >
+          모집
+        </HashButton>
         <HashButton>행사</HashButton>
         <HashButton>동아리</HashButton>
       </HashButtonWrapper>
@@ -200,7 +212,7 @@ const BoardSearch = () => {
           {searchItem.length ? (
             searchItem.map((data) => (
               <BoardThumbnail
-                boardImageUrl={data.boardImageUrl}
+                boardImageUrl={getMainPicture(data.imageUrls)}
                 boardTitle={data.boardTitle}
                 orgName={data.orgName}
                 key={data.boardId}
@@ -210,10 +222,10 @@ const BoardSearch = () => {
             <ItemDetail />
           )}
         </BoardSearchItem>
-        <Scroll type="button" id="Scroll" onClick={ScrollButton} />  
+        <Scroll type="button" id="Scroll" onClick={ScrollButton} />
       </BoardSearchItemWrapper>
     </Wrapper>
-  )
-}
+  );
+};
 
 export default BoardSearch;
