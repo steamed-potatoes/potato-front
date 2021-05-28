@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NewBoard = styled.div`
@@ -51,9 +52,15 @@ const BoardWriter = styled.div`
   text-align: center;
 `;
 
-export const BoardThumbnail = ({ boardImageUrl, boardTitle, orgName }) => {
+export const BoardThumbnail = ({
+  link,
+  boardImageUrl,
+  boardTitle,
+  orgName,
+}) => {
+  const history = useHistory();
   return (
-    <NewBoard>
+    <NewBoard onClick={() => history.push(link)}>
       <BoardThumb src={boardImageUrl} alt={boardTitle} />
       <BoardSummary>
         <BoardTitle>{boardTitle}</BoardTitle>

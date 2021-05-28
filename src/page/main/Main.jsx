@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { HeaderMenu } from 'components/header';
 import Logo from './Logo';
 import Calender from './Calender';
-import BoardCategory from './BoardCategory';
+import BoardCategory from './menu/BoardCategories';
 import NewBoardView from './NewBoardView';
 import CreateGroupBox from './CreateGroupBox';
 import PopularGroup from './PopularGroup';
