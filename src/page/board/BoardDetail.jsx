@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 import sendApi from 'apis/sendApi';
+import moment from 'moment';
 import BoardContent from './BoardContent';
 import BoardComment from './BoardComment';
 
@@ -84,7 +85,7 @@ const BoardDetail = ({ boardId }) => {
           </Group>
           <CreatedDate>
             게시글 작성 시간{' '}
-            {boardDetailData.board.createdDateTime.split('T')[0]}
+            {moment(boardDetailData.board.createdDateTime).format('YYYY.MM.DD')}
           </CreatedDate>
         </Information>
         <BoardTitle>{boardDetailData.board.title}</BoardTitle>
