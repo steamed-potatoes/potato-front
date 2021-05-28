@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import styled from 'styled-components';
 import swal from 'sweetalert';
@@ -25,7 +24,6 @@ const NoneComment = styled.div`
 `;
 
 const BoardComment = ({ PresentBoardId }) => {
-  const history = useHistory();
   const [commentContent, setCommentContent] = useState('');
   const [commentCount, setCommentCount] = useState(0);
   const [boardCommentList, setBoarCommentList] = useState([]);
@@ -40,7 +38,7 @@ const BoardComment = ({ PresentBoardId }) => {
     );
   };
 
-  const receivedData = async () => {
+  const getCommentList = async () => {
     try {
       const { data } = await sendApi.getCommentList(PresentBoardId);
       setBoarCommentList(data.data);
@@ -51,7 +49,7 @@ const BoardComment = ({ PresentBoardId }) => {
   };
 
   useEffect(() => {
-    receivedData();
+    getCommentList();
   }, []);
 
   const addComment = async () => {
@@ -63,7 +61,7 @@ const BoardComment = ({ PresentBoardId }) => {
       });
       swal('댓글이 추가되었습니다');
       setCommentContent('');
-      history.go(0);
+      getCommentList();
     } catch (e) {
       swal(e.response.data.message);
     }
@@ -80,13 +78,14 @@ const BoardComment = ({ PresentBoardId }) => {
       {boardCommentList.length ? (
         boardCommentList.map((comment) => (
           <CommentView
-            memberId={comment.memberId}
+            author={comment.author}
             content={comment.content}
             boardCommentLikeCounts={comment.boardCommentLikeCounts}
             PresentBoardId={PresentBoardId}
             parentId={comment.id}
             isLike={comment.isLike}
             childrenData={comment.children}
+            getCommentListFun={getCommentList}
             key={comment.id}
           />
         ))
