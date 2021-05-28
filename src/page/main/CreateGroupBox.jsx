@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import sendApi from 'apis/sendApi';
 import ClubList from './ClubList';
 import LinkButtonImg from '../../images/LinkButtonImg.png';
@@ -65,6 +66,7 @@ const NoneClubList = styled.ul`
 `;
 
 const CreateGroupBox = () => {
+  const history = useHistory();
   const [newGroupList, setNewGroupList] = useState([]);
 
   useEffect(() => {
@@ -85,7 +87,7 @@ const CreateGroupBox = () => {
         <CreateGroup>
           <Title>새로운 그룹 만들기</Title>
           신규 그룹을 만들어 다양한 사람들을 만나 보세요
-          <AddGroupButton href="/makeGroup">
+          <AddGroupButton onClick={() => history.push('/makeGroup')}>
             <ButtonDiv>그룹 신청하기→</ButtonDiv>
           </AddGroupButton>
         </CreateGroup>
