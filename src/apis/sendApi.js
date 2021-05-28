@@ -39,6 +39,6 @@ export default {
     return api.get('/api/v1/organization/my');
   },
   postProfilePhoto: (req, type) => {
-    return api.post(`/api/v1/upload'?type=${type}`, req);
+    return api.post(`/api/v1/upload?type=${type}`, req);
   },
 };

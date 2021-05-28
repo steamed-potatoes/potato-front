@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
 import { IoCameraOutline } from 'react-icons/io5';
 import { DEFAULT_PROFILE } from 'constant/defaultProfileIMG';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from 'store/modules/user';
 
 const Wrapper = styled.div`
   display: flex;
@@ -34,7 +36,7 @@ const ProfilePhoto = styled.img`
   background-color: #e2e2e2;
   height: 300px;
   width: 300px;
-  border: none;
+  border: 2px solid black;
 `;
 const InputPhoto = styled.input`
   display: none;
@@ -55,11 +57,14 @@ const Label = styled.label`
 `;
 
 export const PhotoBox = () => {
-  // 여기서 state를 받아야함
-  const [photo, setPhoto] = useState(DEFAULT_PROFILE);
+  const { profileUrl } = useSelector((state) => ({
+    profileUrl: state.user.profileUrl,
+  }));
+
+  const dispatch = useDispatch();
 
   const clickDeleteBtn = () => {
-    setPhoto(DEFAULT_PROFILE); // dispatch사용할 공간
+    dispatch(actions.changeUserProfilePhoto(DEFAULT_PROFILE));
   };
   const onChange = async (e) => {
     if (e.target.files[0]) {
@@ -67,7 +72,10 @@ export const PhotoBox = () => {
       img.append('file', e.target.files[0]);
       try {
         const { data } = await sendApi.postProfilePhoto(img, 'MEMBER_PROFILE');
-        setPhoto(data.data); // 이부분도 dispatch로
+        dispatch(actions.changeUserProfilePhoto(data.data));
+        // 이미지 선택시 변경되는 것은 여기서 put유저정보API를 변경하는 것을 넣어줘야하나싶다
+        // 위의 말이 맞는 것같지만 put할때 넣어줘야하는 값들은 TextBox에 있다.
+        // TextBox컴포넌트와 여기 컴포넌트를 합쳐야하나 싶다..
         alert('프로필 사진이 변경되었습니다.');
       } catch (error) {
         alert(error.response.data.message);
@@ -78,7 +86,7 @@ export const PhotoBox = () => {
   return (
     <Wrapper>
       <ProfileImgText>프로필 이미지</ProfileImgText>
-      <ProfilePhoto src={photo} alt="프로필 사진" />
+      <ProfilePhoto src={profileUrl} alt="프로필 사진" />
       <Label for="profilePhoto">
         <IoCameraOutline size="60" />
       </Label>

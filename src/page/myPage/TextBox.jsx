@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
-import { DEFAULT_PROFILE } from 'constant/defaultProfileIMG';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from 'store/modules/user';
 
 const Wrapper = styled.div`
   height: 480px;
@@ -77,18 +78,17 @@ const Select = styled.select`
 const Option = styled.option``;
 
 export const TextBox = () => {
-  // select할 state들
-  // 삭제할 것들
-  const [email, setEmail] = useState('');
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
-  const [myProfileUrl, setMyProfileUrl] = useState(DEFAULT_PROFILE);
-
+  const [email, setEmail] = useState('');
+  const { profileUrl } = useSelector((state) => ({
+    profileUrl: state.user.profileUrl,
+  }));
   const [majorsForm, setMajorsFrom] = useState([{ majorCode: '', major: '' }]);
   const [myMajor, setMyMajor] = useState([
     { majorCode: 'IT_ICT', major: 'ICT융합학과' },
   ]);
   const [classNumber, setClassNumber] = useState('');
-
   const [groupNameList, setGroupNameList] = useState([]);
 
   const fetchData = async () => {
@@ -101,10 +101,9 @@ export const TextBox = () => {
         classNumber,
         profileUrl,
       } = getMyProfile.data;
-      // 각각의 state들 변경하는 액션함수만들기
-      setName(name); // 디스패치, 이름헷갈리니 변경할것
-      setEmail(email); // 디스패치, 이름헷갈리니 변경할것
-      setMyProfileUrl(profileUrl); // 디스패치, 이름헷갈리니 변경할것
+      setName(name);
+      setEmail(email);
+      dispatch(actions.changeUserProfilePhoto(profileUrl));
       setClassNumber(classNumber);
       setMyMajor({ major: MD.major, majorCode: MD.majorCode });
 
@@ -134,8 +133,8 @@ export const TextBox = () => {
   const handleClick = async () => {
     try {
       await sendApi.putMyProfile({
-        name, //state넘기기
-        profileUrl: myProfileUrl, // state넘기기
+        name,
+        profileUrl,
         major: myMajor.majorCode,
         classNumber,
       });
@@ -152,8 +151,8 @@ export const TextBox = () => {
           이름 :{' '}
           <Input
             type="text"
-            value={name} // state
-            onChange={(e) => setName(e.target.value)} //디스패치
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </PTag>
         <PTag>
@@ -182,8 +181,8 @@ export const TextBox = () => {
           이메일 :{' '}
           <Input
             type="email"
-            value={email} // state
-            onChange={(e) => setEmail(e.target.value)} // 액션생성함수
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </PTag>
         <hr />
