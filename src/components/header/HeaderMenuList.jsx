@@ -40,7 +40,7 @@ const Picture = styled.img`
 `;
 
 const LoginButton = styled.a`
-  margin: 0px 24px 0px 0px;
+  margin: 0px 48px 0px 0px;
   font-size: 16px;
   color: black;
   background-color: white;
@@ -48,7 +48,7 @@ const LoginButton = styled.a`
 `;
 
 const HeaderMenuList = () => {
-  const myInfo = userHook(localStorageService.get(SESSION_ID));
+  const myInfo = userHook();
   const history = useHistory();
   const [openKeys, setOpenKeys] = useState(['']);
   const { SubMenu } = Menu;

@@ -8,7 +8,9 @@ export default {
     return api.post('/api/v1/member', req);
   },
   newBoardData: () => {
-    return api.get('/api/v2/organization/board/list?size=5');
+    return api.get(
+      '/api/v2/organization/board/list?size=5&lastOrganizationBoardId=0'
+    );
   },
   getMajors: () => {
     return api.get('/api/v1/major/list');
@@ -21,6 +23,12 @@ export default {
   },
   getMyProfile: () => {
     return api.get('/api/v1/member');
+  },
+  getBoard: async (lastId,type, req) => {
+    return await api.get(`/api/v2/organization/board/list?size=12&lastOrganizationBoardId=${lastId}&type=${type}`, req, 'get');
+  },
+  putMyProfile: (req) => {
+    return api.put('/api/v1/member',req);
   },
   retrievePopluarBoards: (size) => {
     return api.get(`/api/v1/organization/list/popular?size=${size}`);
@@ -64,4 +72,7 @@ export default {
       `/api/v2/organization/board/like?organizationBoardId=${id}`
     );
   },
+  getMyGroupList: () => {
+    return api.get('/api/v1/organization/my');
+  }
 };

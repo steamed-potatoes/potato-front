@@ -4,6 +4,7 @@ import swal from 'sweetalert';
 import sendApi from 'apis/sendApi';
 import { BoardThumbnail } from 'components/BoardThumbnail';
 import LinkButtonImg from '../../images/LinkButtonImg.png';
+import { getMainPicture } from '../../utils/getMainPicture';
 
 const NewBoardViewWrapper = styled.div`
   display: flex;
@@ -71,7 +72,7 @@ const NewBoardView = () => {
         {newBoardData.length ? (
           newBoardData.map((data) => (
             <BoardThumbnail
-              boardImageUrl={data.boardImageUrl}
+              boardImageUrl={getMainPicture(data.imageUrls)}
               boardTitle={data.boardTitle}
               orgName={data.orgName}
               key={data.boardId}
