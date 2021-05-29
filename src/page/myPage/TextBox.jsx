@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from 'store/modules/user';
 
 const Wrapper = styled.div`
   height: 480px;
@@ -76,15 +78,17 @@ const Select = styled.select`
 const Option = styled.option``;
 
 export const TextBox = () => {
-  const [majorsForm, setMajorsFrom] = useState([{ majorCode: '', major: '' }]);
+  const dispatch = useDispatch();
   const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const { profileUrl } = useSelector((state) => ({
+    profileUrl: state.user.profileUrl,
+  }));
+  const [majorsForm, setMajorsFrom] = useState([{ majorCode: '', major: '' }]);
   const [myMajor, setMyMajor] = useState([
     { majorCode: 'IT_ICT', major: 'ICT융합학과' },
   ]);
   const [classNumber, setClassNumber] = useState('');
-  const [email, setEmail] = useState('');
-  const [myProfileUrl, setMyProfileUrl] = useState('');
-
   const [groupNameList, setGroupNameList] = useState([]);
 
   const fetchData = async () => {
@@ -98,10 +102,10 @@ export const TextBox = () => {
         profileUrl,
       } = getMyProfile.data;
       setName(name);
-      setMyMajor({ major: MD.major, majorCode: MD.majorCode });
-      setClassNumber(classNumber);
       setEmail(email);
-      setMyProfileUrl(profileUrl);
+      dispatch(actions.changeUserProfilePhoto(profileUrl));
+      setClassNumber(classNumber);
+      setMyMajor({ major: MD.major, majorCode: MD.majorCode });
 
       const { data: groupListData } = await sendApi.getMyGroupList();
       setGroupNameList(groupListData.data.map((data) => data.name));
@@ -130,12 +134,11 @@ export const TextBox = () => {
     try {
       await sendApi.putMyProfile({
         name,
-        profileUrl: myProfileUrl,
+        profileUrl,
         major: myMajor.majorCode,
         classNumber,
       });
       alert('내 정보 수정완료');
-      console.log(majorsForm.majorCode);
     } catch (error) {
       alert(error.response.data.message);
     }
