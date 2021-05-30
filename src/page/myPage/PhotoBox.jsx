@@ -57,29 +57,38 @@ const Label = styled.label`
 `;
 
 export const PhotoBox = () => {
-  const { profileUrl } = useSelector((state) => ({
+  // const { profileUrl } = useSelector((state) => ({
+  //   profileUrl: state.user.profileUrl,
+  // }));
+  const { profileUrl, name, major, classNumber } = useSelector((state) => ({
     profileUrl: state.user.profileUrl,
+    name: state.user.name,
+    major: state.user.major,
+    classNumber: state.user.classNumber,
   }));
-
   const dispatch = useDispatch();
-
   const clickDeleteBtn = () => {
     dispatch(actions.changeUserProfilePhoto(DEFAULT_PROFILE));
   };
+
   const onChange = async (e) => {
-    if (e.target.files[0]) {
-      const img = new FormData();
-      img.append('file', e.target.files[0]);
-      try {
+    try {
+      if (e.target.files[0]) {
+        const img = new FormData();
+        img.append('file', e.target.files[0]);
+
         const { data } = await sendApi.postProfilePhoto(img, 'MEMBER_PROFILE');
         dispatch(actions.changeUserProfilePhoto(data.data));
-        // 이미지 선택시 변경되는 것은 여기서 put유저정보API를 변경하는 것을 넣어줘야하나싶다
-        // 위의 말이 맞는 것같지만 put할때 넣어줘야하는 값들은 TextBox에 있다.
-        // TextBox컴포넌트와 여기 컴포넌트를 합쳐야하나 싶다..
+        await sendApi.putMyProfile({
+          name,
+          profileUrl,
+          major,
+          classNumber,
+        });
         alert('프로필 사진이 변경되었습니다.');
-      } catch (error) {
-        alert(error.response.data.message);
       }
+    } catch (error) {
+      alert(error.response.data.message);
     }
   };
 

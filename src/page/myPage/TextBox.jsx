@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { DEFAULT_PROFILE } from 'constant/defaultProfileIMG';
 import * as actions from 'store/modules/user';
 
 const Wrapper = styled.div`
@@ -79,18 +80,18 @@ const Option = styled.option``;
 
 export const TextBox = () => {
   const dispatch = useDispatch();
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
   const { profileUrl } = useSelector((state) => ({
     profileUrl: state.user.profileUrl,
   }));
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
   const [majorsForm, setMajorsFrom] = useState([{ majorCode: '', major: '' }]);
   const [myMajor, setMyMajor] = useState([
     { majorCode: 'IT_ICT', major: 'ICT융합학과' },
   ]);
   const [classNumber, setClassNumber] = useState('');
   const [groupNameList, setGroupNameList] = useState([]);
-
   const fetchData = async () => {
     try {
       const { data: getMyProfile } = await sendApi.getMyProfile();
@@ -103,9 +104,20 @@ export const TextBox = () => {
       } = getMyProfile.data;
       setName(name);
       setEmail(email);
-      dispatch(actions.changeUserProfilePhoto(profileUrl));
       setClassNumber(classNumber);
       setMyMajor({ major: MD.major, majorCode: MD.majorCode });
+      if (profileUrl === null) {
+        try {
+          await sendApi.putMyProfile({
+            name,
+            DEFAULT_PROFILE,
+            major: myMajor.majorCode,
+            classNumber,
+          });
+        } catch (error) {
+          alert(error.response.data.message);
+        }
+      }
 
       const { data: groupListData } = await sendApi.getMyGroupList();
       setGroupNameList(groupListData.data.map((data) => data.name));
@@ -124,6 +136,8 @@ export const TextBox = () => {
 
   useEffect(() => {
     fetchData();
+    dispatch(actions.changeUserDetailInfo(myMajor.majorCode, classNumber));
+    dispatch(actions.changeUserInfo(email, name, profileUrl));
   }, []);
 
   const ChoiceMajor = (e) => {
