@@ -39,5 +39,4 @@ const ProfileBox = styled.div`
   box-shadow: 9px 9px 9px gray;
 `;
 
-
 export default MyPage;

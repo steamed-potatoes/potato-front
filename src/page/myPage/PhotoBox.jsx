@@ -66,7 +66,11 @@ export const PhotoBox = () => {
     major: state.user.major,
     classNumber: state.user.classNumber,
   }));
+  // 전부다 undifined로 나온다.
+  // console.log('리덕스 state값들 : ', profileUrl, name, major, classNumber);
+
   const dispatch = useDispatch();
+
   const clickDeleteBtn = () => {
     dispatch(actions.changeUserProfilePhoto(DEFAULT_PROFILE));
   };

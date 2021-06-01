@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { DEFAULT_PROFILE } from 'constant/defaultProfileIMG';
 import * as actions from 'store/modules/user';
 
@@ -80,18 +80,16 @@ const Option = styled.option``;
 
 export const TextBox = () => {
   const dispatch = useDispatch();
-  const { profileUrl } = useSelector((state) => ({
-    profileUrl: state.user.profileUrl,
-  }));
-
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [profileUrl, setProfileUrl] = useState('');
   const [majorsForm, setMajorsFrom] = useState([{ majorCode: '', major: '' }]);
   const [myMajor, setMyMajor] = useState([
     { majorCode: 'IT_ICT', major: 'ICT융합학과' },
   ]);
   const [classNumber, setClassNumber] = useState('');
   const [groupNameList, setGroupNameList] = useState([]);
+
   const fetchData = async () => {
     try {
       const { data: getMyProfile } = await sendApi.getMyProfile();
@@ -102,10 +100,14 @@ export const TextBox = () => {
         classNumber,
         profileUrl,
       } = getMyProfile.data;
+      // 받아온 것들을 state들로 갖기
       setName(name);
       setEmail(email);
       setClassNumber(classNumber);
+      setProfileUrl(profileUrl);
       setMyMajor({ major: MD.major, majorCode: MD.majorCode });
+
+      // 받아온 프로필주소가 없다면
       if (profileUrl === null) {
         try {
           await sendApi.putMyProfile({
@@ -119,9 +121,11 @@ export const TextBox = () => {
         }
       }
 
+      // 내가 가입한 그룹리스트 목록 가져오는 API
       const { data: groupListData } = await sendApi.getMyGroupList();
       setGroupNameList(groupListData.data.map((data) => data.name));
 
+      // 등록된 학과 정보 가져오는 API
       const { data: majors } = await sendApi.getMajors();
       setMajorsFrom(
         majors.data.map((data) => ({
@@ -136,8 +140,8 @@ export const TextBox = () => {
 
   useEffect(() => {
     fetchData();
-    dispatch(actions.changeUserDetailInfo(myMajor.majorCode, classNumber));
     dispatch(actions.changeUserInfo(email, name, profileUrl));
+    dispatch(actions.changeUserDetailInfo(myMajor.majorCode, classNumber));
   }, []);
 
   const ChoiceMajor = (e) => {

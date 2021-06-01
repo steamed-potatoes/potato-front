@@ -13,20 +13,16 @@ export const changeUserInfo = (email, name, profileUrl) => {
   };
 };
 
-export const changeUserDetailInfo = (major, classNumber) => {
-  return {
-    type: CHANGE_USER_DETAIL_INFO,
-    major,
-    classNumber,
-  };
-};
+export const changeUserDetailInfo = (major, classNumber) => ({
+  type: CHANGE_USER_DETAIL_INFO,
+  major,
+  classNumber,
+});
 
-export const changeUserProfilePhoto = (profileUrl) => {
-  return {
-    type: CHANGE_USER_PROFILE_PHOTO,
-    profileUrl,
-  };
-};
+export const changeUserProfilePhoto = (profileUrl) => ({
+  type: CHANGE_USER_PROFILE_PHOTO,
+  profileUrl,
+});
 
 const initialState = {
   email: '',
