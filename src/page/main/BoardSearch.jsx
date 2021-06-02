@@ -70,7 +70,7 @@ const BoardSearchItemWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  margin: 144px;
+  margin: 32px 144px 144px;
   float: left;
 `;
 
@@ -78,7 +78,7 @@ const BoardSearchItem = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
 `;
 
 const ItemDetail = styled.div`
@@ -212,6 +212,7 @@ const BoardSearch = () => {
           {searchItem.length ? (
             searchItem.map((data) => (
               <BoardThumbnail
+                link={`/board/${data.boardId}`}
                 boardImageUrl={getMainPicture(data.imageUrls)}
                 boardTitle={data.boardTitle}
                 orgName={data.orgName}
