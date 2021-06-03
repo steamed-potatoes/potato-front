@@ -57,17 +57,12 @@ const Label = styled.label`
 `;
 
 export const PhotoBox = () => {
-  // const { profileUrl } = useSelector((state) => ({
-  //   profileUrl: state.user.profileUrl,
-  // }));
   const { profileUrl, name, major, classNumber } = useSelector((state) => ({
     profileUrl: state.user.profileUrl,
     name: state.user.name,
     major: state.user.major,
     classNumber: state.user.classNumber,
   }));
-  // 전부다 undifined로 나온다.
-  // console.log('리덕스 state값들 : ', profileUrl, name, major, classNumber);
 
   const dispatch = useDispatch();
 
@@ -81,11 +76,14 @@ export const PhotoBox = () => {
         const img = new FormData();
         img.append('file', e.target.files[0]);
 
-        const { data } = await sendApi.postProfilePhoto(img, 'MEMBER_PROFILE');
-        dispatch(actions.changeUserProfilePhoto(data.data));
+        const { data: IMG } = await sendApi.postProfilePhoto(
+          img,
+          'MEMBER_PROFILE'
+        );
+        dispatch(actions.changeUserProfilePhoto(IMG.data));
         await sendApi.putMyProfile({
           name,
-          profileUrl,
+          profileUrl: IMG.data,
           major,
           classNumber,
         });

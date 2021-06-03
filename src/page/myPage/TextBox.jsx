@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DEFAULT_PROFILE } from 'constant/defaultProfileIMG';
 import * as actions from 'store/modules/user';
 
@@ -79,10 +79,12 @@ const Select = styled.select`
 const Option = styled.option``;
 
 export const TextBox = () => {
+  const { profileUrls } = useSelector((state) => ({
+    profileUrls: state.user.profileUrl,
+  }));
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [profileUrl, setProfileUrl] = useState('');
   const [majorsForm, setMajorsFrom] = useState([{ majorCode: '', major: '' }]);
   const [myMajor, setMyMajor] = useState([
     { majorCode: 'IT_ICT', major: 'ICT융합학과' },
@@ -94,38 +96,34 @@ export const TextBox = () => {
     try {
       const { data: getMyProfile } = await sendApi.getMyProfile();
       const {
-        email,
-        name,
+        email: EL,
+        name: NA,
         major: MD,
-        classNumber,
-        profileUrl,
+        classNumber: CN,
+        profileUrl: PMU,
       } = getMyProfile.data;
-      // 받아온 것들을 state들로 갖기
-      setName(name);
-      setEmail(email);
-      setClassNumber(classNumber);
-      setProfileUrl(profileUrl);
+      setName(NA);
+      setEmail(EL);
+      setClassNumber(CN);
       setMyMajor({ major: MD.major, majorCode: MD.majorCode });
 
-      // 받아온 프로필주소가 없다면
-      if (profileUrl === null) {
+      if (PMU === null) {
         try {
           await sendApi.putMyProfile({
-            name,
-            DEFAULT_PROFILE,
+            name: NA,
+            profileUrl: DEFAULT_PROFILE,
             major: myMajor.majorCode,
-            classNumber,
+            classNumber: CN,
           });
         } catch (error) {
           alert(error.response.data.message);
         }
       }
-
-      // 내가 가입한 그룹리스트 목록 가져오는 API
+      dispatch(actions.changeUserInfo(EL, NA, PMU));
+      dispatch(actions.changeUserDetailInfo(MD.majorCode, CN));
       const { data: groupListData } = await sendApi.getMyGroupList();
       setGroupNameList(groupListData.data.map((data) => data.name));
 
-      // 등록된 학과 정보 가져오는 API
       const { data: majors } = await sendApi.getMajors();
       setMajorsFrom(
         majors.data.map((data) => ({
@@ -140,8 +138,6 @@ export const TextBox = () => {
 
   useEffect(() => {
     fetchData();
-    dispatch(actions.changeUserInfo(email, name, profileUrl));
-    dispatch(actions.changeUserDetailInfo(myMajor.majorCode, classNumber));
   }, []);
 
   const ChoiceMajor = (e) => {
@@ -152,7 +148,7 @@ export const TextBox = () => {
     try {
       await sendApi.putMyProfile({
         name,
-        profileUrl,
+        profileUrl: profileUrls,
         major: myMajor.majorCode,
         classNumber,
       });

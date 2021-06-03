@@ -36,16 +36,19 @@ export default function user(state = initialState, action) {
   switch (action.type) {
     case CHANGE_USER_INFO:
       return {
+        ...state,
         email: action.email,
         name: action.name,
         profileUrl: action.profileUrl,
       };
     case CHANGE_USER_PROFILE_PHOTO:
       return {
+        ...state,
         profileUrl: action.profileUrl,
       };
     case CHANGE_USER_DETAIL_INFO:
       return {
+        ...state,
         major: action.major,
         classNumber: action.classNumber,
       };
