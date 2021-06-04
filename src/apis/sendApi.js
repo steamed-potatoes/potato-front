@@ -40,5 +40,8 @@ export default {
   },
   getMyGroupList: () => {
     return api.get('/api/v1/organization/my');
+  },
+  getGroupDetail: (subDomain) => {
+    return api.get(`/api/v1/organization/${subDomain}`);
   }
 };

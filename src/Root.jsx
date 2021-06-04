@@ -14,6 +14,7 @@ const Main = lazy(() => import('page/main/Main'));
 const MyPage = lazy(() => import('./page/myPage/MyPage'));
 const NotFound = lazy(() => import('page/NotFound/NotFound'));
 const Search = lazy(() => import('page/main/BoardSearch'));
+const GroupDetail = lazy(() => import('page/main/GroupDetail'));
 const store = createStore(rootReducer);
 
 const Root = () => {
@@ -30,6 +31,7 @@ const Root = () => {
             <Route path="/Main" component={Main} />
             <Route path="/MyPage" component={MyPage} />
             <Route path="/Search" component={Search} />
+            <Route path="/groupDetail" component={GroupDetail} />
             <Route component={NotFound} />
           </Switch>
         </Suspense>
