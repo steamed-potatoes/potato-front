@@ -44,8 +44,8 @@ const MakeGroupBox = () => {
     subDomain: '',
     name: '',
     description: '',
-    profileUrl: '',
   });
+  const [pictureUrl, setPictureUrl] = useState('');
 
   const onChangeForm = (e) => {
     setForm({
@@ -54,13 +54,30 @@ const MakeGroupBox = () => {
     });
   };
 
+  const onChangePicture = async (e) => {
+    console.log('데이터화ㅓㄱ인:', e);
+    if (e.target.files[0]) {
+      try {
+        const { data } = await sendApi.postProfilePhoto(
+          e.target.files[0],
+          'ORGANIZATION_PROFILE'
+        );
+        console.log('dsakl', data);
+        setPictureUrl(data.data);
+        alert('그룹 사진이 추가되었습니다.');
+      } catch (error) {
+        alert(error.response.data.message);
+      }
+    }
+  };
+
   const makeGroup = async (form) => {
     try {
       await sendApi.makeGroup({
         subDomain: form.subDomain,
         name: form.name,
         description: form.description,
-        profileUrl: form.profileUrl,
+        profileUrl: pictureUrl,
       });
       swal('새로운 그룹이 개설되었습니다.');
       history.push('/Main');
@@ -71,7 +88,7 @@ const MakeGroupBox = () => {
 
   return (
     <GroupBox>
-      <Picture onChangeForm={onChangeForm} />
+      <Picture onChangePicture={onChangePicture} pictureUrl={pictureUrl} />
       <GroupInput onChangeForm={onChangeForm} />
       <SendButton onClick={() => makeGroup(form)}>생성하기</SendButton>
     </GroupBox>

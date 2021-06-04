@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.div``;
@@ -39,16 +39,8 @@ const Change = styled.button`
   }
 `;
 
-const MakeGroupPicture = ({ onChangeForm }) => {
-  const [file, setFile] = useState(null);
+const MakeGroupPicture = ({ onChangePicture, pictureUrl }) => {
   const inputFiled = useRef(null);
-
-  const onChangeFile = (event) => {
-    const [imageFile] = event.target.files;
-    const imageUrl = URL.createObjectURL(imageFile);
-    setFile(imageUrl);
-    onChangeForm(event);
-  };
 
   const onClickInput = () => {
     inputFiled.current.click();
@@ -57,13 +49,14 @@ const MakeGroupPicture = ({ onChangeForm }) => {
   return (
     <Wrapper>
       <PictureWrapper>
-        <Picture src={file} />
+        <Picture src={pictureUrl} />
       </PictureWrapper>
       <InputPicture
         type="file"
         name="profileUrl"
         ref={inputFiled}
-        onChange={onChangeFile}
+        accept="image/*"
+        onChange={onChangePicture}
       />
       <Change onClick={onClickInput}>사진 수정</Change>
     </Wrapper>
