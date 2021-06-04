@@ -76,14 +76,14 @@ export const PhotoBox = () => {
         const img = new FormData();
         img.append('file', e.target.files[0]);
 
-        const { data: IMG } = await sendApi.postProfilePhoto(
+        const { data: getImg } = await sendApi.postProfilePhoto(
           img,
           'MEMBER_PROFILE'
         );
-        dispatch(actions.changeUserProfilePhoto(IMG.data));
+        dispatch(actions.changeUserProfilePhoto(getImg.data));
         await sendApi.putMyProfile({
           name,
-          profileUrl: IMG.data,
+          profileUrl: getImg.data,
           major,
           classNumber,
         });

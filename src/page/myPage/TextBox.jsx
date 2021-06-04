@@ -96,31 +96,33 @@ export const TextBox = () => {
     try {
       const { data: getMyProfile } = await sendApi.getMyProfile();
       const {
-        email: EL,
-        name: NA,
-        major: MD,
-        classNumber: CN,
-        profileUrl: PMU,
+        email: getEmail,
+        name: getName,
+        major: getMajor,
+        classNumber: getClassNumber,
+        profileUrl: getProfilUrl,
       } = getMyProfile.data;
-      setName(NA);
-      setEmail(EL);
-      setClassNumber(CN);
-      setMyMajor({ major: MD.major, majorCode: MD.majorCode });
+      setName(getName);
+      setEmail(getEmail);
+      setClassNumber(getClassNumber);
+      setMyMajor({ major: getMajor.major, majorCode: getMajor.majorCode });
 
-      if (PMU === null) {
+      if (getProfilUrl === null) {
         try {
           await sendApi.putMyProfile({
-            name: NA,
+            name: getName,
             profileUrl: DEFAULT_PROFILE,
             major: myMajor.majorCode,
-            classNumber: CN,
+            classNumber: getClassNumber,
           });
         } catch (error) {
           alert(error.response.data.message);
         }
       }
-      dispatch(actions.changeUserInfo(EL, NA, PMU));
-      dispatch(actions.changeUserDetailInfo(MD.majorCode, CN));
+      dispatch(actions.changeUserInfo(getEmail, getName, getProfilUrl));
+      dispatch(
+        actions.changeUserDetailInfo(getMajor.majorCode, getClassNumber)
+      );
       const { data: groupListData } = await sendApi.getMyGroupList();
       setGroupNameList(groupListData.data.map((data) => data.name));
 
