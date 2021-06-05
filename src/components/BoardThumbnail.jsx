@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom'
 
 const NewBoard = styled.div`
   background-color: #bababa;
@@ -51,9 +52,14 @@ const BoardWriter = styled.div`
   text-align: center;
 `;
 
-export const BoardThumbnail = ({ boardImageUrl, boardTitle, orgName }) => {
+export const BoardThumbnail = ({ boardImageUrl, boardTitle, orgName, subDomain }) => {
+  const history = useHistory();
   return (
-    <NewBoard>
+    <NewBoard onClick={() => {history.push({
+      pathname: '/groupDetail',
+      state: {subDomain},
+    })}}
+    >
       <BoardThumb src={boardImageUrl} alt={boardTitle} />
       <BoardSummary>
         <BoardTitle>{boardTitle}</BoardTitle>

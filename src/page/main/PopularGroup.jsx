@@ -92,6 +92,7 @@ const PopularGroup = () => {
             boardImageUrl={board.profileUrl}
             boardTitle={board.name}
             orgName={board.description}
+            subDomain={board.subDomain}
           />
         ))}
       </ContentWreapper>

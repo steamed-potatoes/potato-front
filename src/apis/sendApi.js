@@ -43,5 +43,8 @@ export default {
   },
   getGroupDetail: (subDomain) => {
     return api.get(`/api/v1/organization/${subDomain}`);
+  },
+  getGroupBoard: (subDomain, lastId) => {
+    return api.get(`/api/v2/organization/board/list/in/${subDomain}?size=8&lastOrganizationBoardId=${lastId}`);
   }
 };
