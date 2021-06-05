@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
 import { useDispatch, useSelector } from 'react-redux';
+import { DEFAULT_PROFILE } from 'constant/defaultProfileIMG';
 import * as actions from 'store/modules/user';
 
 const Wrapper = styled.div`
@@ -78,12 +79,12 @@ const Select = styled.select`
 const Option = styled.option``;
 
 export const TextBox = () => {
+  const { profileUrls } = useSelector((state) => ({
+    profileUrls: state.user.profileUrl,
+  }));
   const dispatch = useDispatch();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const { profileUrl } = useSelector((state) => ({
-    profileUrl: state.user.profileUrl,
-  }));
   const [majorsForm, setMajorsFrom] = useState([{ majorCode: '', major: '' }]);
   const [myMajor, setMyMajor] = useState([
     { majorCode: 'IT_ICT', major: 'ICT융합학과' },
@@ -95,18 +96,33 @@ export const TextBox = () => {
     try {
       const { data: getMyProfile } = await sendApi.getMyProfile();
       const {
-        email,
-        name,
-        major: MD,
-        classNumber,
-        profileUrl,
+        email: getEmail,
+        name: getName,
+        major: getMajor,
+        classNumber: getClassNumber,
+        profileUrl: getProfilUrl,
       } = getMyProfile.data;
-      setName(name);
-      setEmail(email);
-      dispatch(actions.changeUserProfilePhoto(profileUrl));
-      setClassNumber(classNumber);
-      setMyMajor({ major: MD.major, majorCode: MD.majorCode });
+      setName(getName);
+      setEmail(getEmail);
+      setClassNumber(getClassNumber);
+      setMyMajor({ major: getMajor.major, majorCode: getMajor.majorCode });
 
+      if (getProfilUrl === null) {
+        try {
+          await sendApi.putMyProfile({
+            name: getName,
+            profileUrl: DEFAULT_PROFILE,
+            major: myMajor.majorCode,
+            classNumber: getClassNumber,
+          });
+        } catch (error) {
+          alert(error.response.data.message);
+        }
+      }
+      dispatch(actions.changeUserInfo(getEmail, getName, getProfilUrl));
+      dispatch(
+        actions.changeUserDetailInfo(getMajor.majorCode, getClassNumber)
+      );
       const { data: groupListData } = await sendApi.getMyGroupList();
       setGroupNameList(groupListData.data.map((data) => data.name));
 
@@ -134,7 +150,7 @@ export const TextBox = () => {
     try {
       await sendApi.putMyProfile({
         name,
-        profileUrl,
+        profileUrl: profileUrls,
         major: myMajor.majorCode,
         classNumber,
       });
