@@ -16,6 +16,7 @@ const Wrapper = styled.div`
 `;
 
 const ImgDeleteBtn = styled.button`
+  margin-top: 24px;
   border: none;
   background: none;
   font-size: 18px;
@@ -29,30 +30,30 @@ const ImgDeleteBtn = styled.button`
 const ProfileImgText = styled.div`
   font-size: 28px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 32px;
 `;
 const ProfilePhoto = styled.img`
   border-radius: 400px;
   background-color: #e2e2e2;
   height: 300px;
   width: 300px;
-  border: 2px solid black;
+  border: 1px solid white;
 `;
 const InputPhoto = styled.input`
   display: none;
 `;
 const Label = styled.label`
   position: absolute;
-  border: 1px solid black;
   border-radius: 50px;
-  right: 10px;
-  bottom: 64px;
+  right: 16px;
+  bottom: 36px;
   z-index: 1;
   transition: transform 0.5s;
   background: #e2e2e2;
   &:hover {
     cursor: pointer;
-    transform: scale(1.3);
+    transform: scale(1.4);
+    border: none;
   }
 `;
 
@@ -99,7 +100,7 @@ export const PhotoBox = () => {
       <ProfileImgText>프로필 이미지</ProfileImgText>
       <ProfilePhoto src={profileUrl} alt="프로필 사진" />
       <Label for="profilePhoto">
-        <IoCameraOutline size="60" />
+        <IoCameraOutline size="56" />
       </Label>
       <InputPhoto
         type="file"

@@ -6,8 +6,10 @@ import { DEFAULT_PROFILE } from 'constant/defaultProfileIMG';
 import * as actions from 'store/modules/user';
 
 const Wrapper = styled.div`
-  height: 480px;
+  margin-top: 40px;
   margin-left: 50px;
+  width: 500px;
+  height: 480px;
 `;
 const Field = styled.form`
   width: 880px;
@@ -16,15 +18,14 @@ const Field = styled.form`
 
 const Input = styled.input`
   font-size: 20px;
-  margin-bottom: 32px;
-  width: 400px;
   border: none;
   &:hover {
-    border-bottom: 2px solid #808080;
+    outline: none;
+    font-weight: bold;
   }
   &:focus {
-    border-bottom: 2px solid #808080;
     outline: none;
+    font-weight: bold;
   }
 `;
 const BoldInput = styled.input`
@@ -33,27 +34,45 @@ const BoldInput = styled.input`
   width: 400px;
   font-weight: bold;
   border: none;
-  &:hover {
-    border-bottom: 2px solid #808080;
-  }
   &:focus {
-    border-bottom: 2px solid #808080;
     outline: none;
   }
 `;
 const PTag = styled.p`
   color: gray;
+  font-size: 16px;
+  width: 400px;
+  height: 40px;
+  border: none;
+  margin-bottom: 36px;
+  padding-left: 16px;
+
+  &:hover {
+    border: 2px solid #c6c6c6;
+    border-radius: 50px;
+    outline: none;
+  }
+  &:focus {
+    border: 2px solid #c6c6c6;
+    border-radius: 50px;
+    outline: none;
+  }
+`;
+const BoldPTag = styled.p`
+  color: #999999;
+  font-size: 24px;
+  font-weight: bold;
 `;
 const ModifyBtn = styled.button`
   position: relative;
-  bottom: 70px;
-  left: 750px;
+  bottom: -20px;
+  left: 610px;
   font-weight: bold;
   border: none;
   border-radius: 25px;
   background-color: white;
   width: 214px;
-  height: 42px;
+  height: 44px;
   box-shadow: 3px 3px 3px gray;
   transition: transform 0.5s;
   &:hover {
@@ -63,16 +82,18 @@ const ModifyBtn = styled.button`
   }
 `;
 const Select = styled.select`
-  width: 512px;
-
+  width: 324px;
+  height: 30px;
+  margin-bottom: 36px;
   border: none;
-  border-bottom: solid 2px #cfcece;
+  font-size: 20px;
 
   &:hover {
+    font-weight: bold;
     cursor: pointer;
-    border-bottom: 2px solid #808080;
   }
   &:focus {
+    font-weight: bold;
     outline: none;
   }
 `;
@@ -201,18 +222,19 @@ export const TextBox = () => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </PTag>
-        <hr />
-        <PTag>
+        <hr width="780px" align="left" color="#c6c6c6" />
+        <BoldPTag>
           소속 동아리 :{' '}
           <BoldInput
             type="text"
+            readOnly
             value={
               groupNameList.length === 0
                 ? '아직 가입한 동아리가 없습니다.'
                 : groupNameList
             }
           />
-        </PTag>
+        </BoldPTag>
       </Field>
       <ModifyBtn onClick={handleClick}>수정</ModifyBtn>
     </Wrapper>

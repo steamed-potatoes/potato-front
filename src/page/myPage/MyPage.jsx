@@ -33,8 +33,8 @@ const ProfileBox = styled.div`
   background-color: white;
   display: flex;
   border-radius: 40px;
-  width: 1648px;
-  height: 760px;
+  width: 1288px;
+  height: 704px;
   flex-flow: row wrap;
   box-shadow: 9px 9px 9px gray;
 `;
