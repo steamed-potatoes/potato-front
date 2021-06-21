@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import swal from 'sweetalert';
+import sendApi from 'apis/sendApi';
 import { HeaderMenu } from 'components/header';
 import BackgroundImg from '../../images/BackgroundImg.png';
 
@@ -23,11 +25,63 @@ const MainWrapper = styled.div`
   padding: 56px;
 `;
 
-const BoardMain = () => {
+const Group = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+const Writer = styled.div`
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 8px;
+`;
+
+const WriterGroupImg = styled.img`
+  background-color: gray;
+  width: 40px;
+  height: 40px;
+  border-radius: 24px;
+`;
+
+const BoardMain = ({ match }) => {
+  const { groupDomain } = match.params;
+  const [authorGroup, setAuthorGroup] = useState(null);
+
+  useEffect(() => {
+    const receivedData = async () => {
+      try {
+        const { data } = await sendApi.getAuthorGroup(groupDomain);
+        console.log('1', data.data);
+        setAuthorGroup(data.data);
+      } catch (e) {
+        swal(`${e.response.data.message}`);
+      }
+    };
+    receivedData();
+  }, []);
+
+  console.log('d', authorGroup);
+  if (authorGroup) {
+    return (
+      <Wrapper>
+        <HeaderMenu />
+        <MainWrapper>
+          <Group>
+            <WriterGroupImg
+              src={authorGroup.organization.profileUrl}
+              alt={authorGroup.organization.name}
+            />
+            <Writer>{authorGroup.organization.name}</Writer>
+          </Group>
+        </MainWrapper>
+      </Wrapper>
+    );
+  }
   return (
     <Wrapper>
       <HeaderMenu />
-      <MainWrapper />
+      <MainWrapper>Loading Weather...</MainWrapper>
     </Wrapper>
   );
 };
