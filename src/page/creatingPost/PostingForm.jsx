@@ -81,7 +81,12 @@ const Textarea = styled.textarea`
   }
 `;
 
-const PostingForm = ({ onChangeForm, setPictureUrl, pictureUrl }) => {
+const PostingForm = ({
+  onChangeHashtags,
+  onChangeForm,
+  setPictureUrl,
+  pictureUrl,
+}) => {
   return (
     <Wrapper>
       <InputTitle name="title" onChange={onChangeForm} placeholder="제목" />
@@ -89,11 +94,19 @@ const PostingForm = ({ onChangeForm, setPictureUrl, pictureUrl }) => {
         <PictureBox setPictureUrl={setPictureUrl} pictureUrl={pictureUrl} />
         <InputDiv>
           <TypeButton />
-          <InputStartDate type="date" />
-          <InputEndDate type="date" />
+          <InputStartDate
+            type="date"
+            name="startDateTime"
+            onChange={onChangeForm}
+          />
+          <InputEndDate
+            type="date"
+            name="endDateTime"
+            onChange={onChangeForm}
+          />
           <HashArea
             name="hashtags"
-            onChange={onChangeForm}
+            onChange={onChangeHashtags}
             placeholder="#해시태그 쓰기 - 쉼표 구분해주세요"
           />
         </InputDiv>

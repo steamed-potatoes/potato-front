@@ -112,6 +112,14 @@ const CreatingPost = ({ match }) => {
       [e.target.name]: e.target.value,
     });
   };
+  const onChangeHashtags = (e) => {
+    const temp = e.target.value;
+    const sliceArr = temp.split(', ');
+    setForm({
+      ...form,
+      hashTags: sliceArr,
+    });
+  };
 
   const send = async (form, pictureUrl) => {
     swal('form send:');
@@ -151,6 +159,7 @@ const CreatingPost = ({ match }) => {
             onChangeForm={onChangeForm}
             setPictureUrl={setPictureUrl}
             pictureUrl={pictureUrl}
+            onChangeHashtags={onChangeHashtags}
           />
           <ButtonWrap>
             <SendButton onClick={() => send(form, pictureUrl)}>
