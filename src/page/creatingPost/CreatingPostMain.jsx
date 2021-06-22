@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 import sendApi from 'apis/sendApi';
 import { HeaderMenu } from 'components/header';
 import BackgroundImg from '../../images/BackgroundImg.png';
+import PostingForm from './PostingForm';
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,26 +45,95 @@ const WriterGroupImg = styled.img`
   height: 40px;
   border-radius: 24px;
 `;
+const ButtonWrap = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+`;
 
-const BoardMain = ({ match }) => {
+const SendButton = styled.button`
+  margin-top: 16px;
+  margin-left: 16px;
+  border: 0;
+  background-color: #f0b138;
+  width: 104px;
+  padding: 8px;
+  border-radius: 48px;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  &:hover {
+    cursor: pointer;
+    border: 1px solid #cfcece;
+  }
+`;
+
+const CreatingPost = ({ match }) => {
   const { groupDomain } = match.params;
   const [authorGroup, setAuthorGroup] = useState(null);
+  const [writer, setWriter] = useState(null);
+  const history = useHistory();
+  // RECRUIT, EVENT
+  const [form, setForm] = useState({
+    title: '',
+    content: '',
+    startDateTime: '',
+    endDateTime: '',
+    type: '',
+    hashTags: [],
+  });
+
+  const [pictureUrl, setPictureUrl] = useState([]);
 
   useEffect(() => {
-    const receivedData = async () => {
+    const receivedGroupData = async () => {
       try {
         const { data } = await sendApi.getAuthorGroup(groupDomain);
-        console.log('1', data.data);
         setAuthorGroup(data.data);
       } catch (e) {
         swal(`${e.response.data.message}`);
       }
     };
-    receivedData();
+    const receivedWriterData = async () => {
+      try {
+        const { data } = await sendApi.getMyProfile();
+        setWriter(data.data);
+      } catch (e) {
+        swal(`${e.response.data.message}`);
+      }
+    };
+    receivedGroupData();
+    receivedWriterData();
   }, []);
 
-  console.log('d', authorGroup);
-  if (authorGroup) {
+  const onChangeForm = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const send = async (form, pictureUrl) => {
+    swal('form send:');
+    const sendData = {
+      title: form.title,
+      content: form.content,
+      imageUrlList: pictureUrl,
+      startDateTime: form.startDateTime,
+      endDateTime: form.endDateTime,
+      type: form.type,
+      hashTags: form.hashTags,
+    };
+    console.log('send:', sendData);
+    history.push('/Main');
+  };
+
+  const cancel = () => {
+    swal('작성취소');
+    history.push('/Main');
+  };
+
+  if (authorGroup && writer) {
     return (
       <Wrapper>
         <HeaderMenu />
@@ -72,8 +143,21 @@ const BoardMain = ({ match }) => {
               src={authorGroup.organization.profileUrl}
               alt={authorGroup.organization.name}
             />
-            <Writer>{authorGroup.organization.name}</Writer>
+            <Writer>
+              {authorGroup.organization.name}({writer.name})
+            </Writer>
           </Group>
+          <PostingForm
+            onChangeForm={onChangeForm}
+            setPictureUrl={setPictureUrl}
+            pictureUrl={pictureUrl}
+          />
+          <ButtonWrap>
+            <SendButton onClick={() => send(form, pictureUrl)}>
+              게시글 작성
+            </SendButton>
+            <SendButton onClick={() => cancel()}>작성 취소</SendButton>
+          </ButtonWrap>
         </MainWrapper>
       </Wrapper>
     );
@@ -86,4 +170,4 @@ const BoardMain = ({ match }) => {
   );
 };
 
-export default BoardMain;
+export default CreatingPost;

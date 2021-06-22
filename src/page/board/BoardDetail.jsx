@@ -59,7 +59,7 @@ const BoardDetail = ({ boardId }) => {
     const receivedData = async () => {
       try {
         const { data } = await sendApi.getBoardDetail(boardId);
-
+        console.log('d', data.data);
         setBoardDetailData(data.data);
       } catch (e) {
         swal(`${e.response.data.message}`);
