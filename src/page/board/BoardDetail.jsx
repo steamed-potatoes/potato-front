@@ -60,7 +60,6 @@ const BoardDetail = ({ boardId }) => {
     const receivedData = async () => {
       try {
         const { data } = await sendApi.getBoardDetail(boardId);
-
         setBoardDetailData(data.data);
       } catch (e) {
         swal(`${e.response.data.message}`);
@@ -96,6 +95,8 @@ const BoardDetail = ({ boardId }) => {
           boardContent={boardDetailData.board.content}
           boardHashTags={boardDetailData.hashTags}
           boardId={presentBoardId}
+          startTime={boardDetailData.board.startDateTime}
+          endTime={boardDetailData.board.endDateTime}
         />
         <BoardComment PresentBoardId={presentBoardId} />
       </DetailWrapper>
