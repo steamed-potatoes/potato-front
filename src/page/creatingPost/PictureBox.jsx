@@ -26,7 +26,7 @@ const ImgDeleteBtn = styled.button`
     transform: scale(1.3);
   }
 `;
-const ProfilePhoto = styled.img`
+const BoardPhoto = styled.img`
   background-color: #e2e2e2;
   height: 300px;
   width: 300px;
@@ -127,21 +127,21 @@ const PictureBox = ({ picturelUrl, setPicturelUrl }) => {
   return (
     <Wrapper>
       {imgCount === 0 ? (
-        <ProfilePhoto src="{DEFAULT_PROFILE}" />
+        <BoardPhoto src="{DEFAULT_PROFILE}" />
       ) : (
         <ImgWrap>
           <LeftButton onClick={onClickPrevImg} />
-          <ProfilePhoto src={picturelUrl[imgCount]} alt="게시글 사진" />
+          <BoardPhoto src={picturelUrl[imgCount]} alt="게시글 사진" />
           <RightButton onClick={onClickNextImg} />
         </ImgWrap>
       )}
 
-      <Label for="Photo">
+      <Label for="boardPhoto">
         <IoCameraOutline size="56" />
       </Label>
       <InputPhoto
         type="file"
-        id="profilePhoto"
+        id="boardPhoto"
         accept="image/*"
         onChange={onChange}
       />
