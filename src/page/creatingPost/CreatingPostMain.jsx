@@ -84,7 +84,7 @@ const CreatingPost = ({ match }) => {
   });
 
   const [pictureUrl, setPictureUrl] = useState([]);
-  const [postType, setPostType] = useState("");
+  const [postType, setPostType] = useState("RECRUIT");
 
   useEffect(() => {
     const receivedGroupData = async () => {
@@ -125,20 +125,7 @@ const CreatingPost = ({ match }) => {
 
   const send = async () => {
     const start = form.startDate.concat('T', form.startTime);
-    console.log("start: ", start);
     const end = form.endDate.concat('T',form.endTime);
-    console.log("end: ", end);
-
-    const temp = {title: form.title,
-      content: form.content,
-      imageUrlList: pictureUrl,
-      startDateTime: start,
-      endDateTime: end,
-      type: postType,
-      hashTags: form.hashTags
-    };
-    
-    console.log("화: ", temp);
 
     try{
       await sendApi.postCreatingPost(groupDomain,{

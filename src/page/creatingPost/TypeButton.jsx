@@ -23,13 +23,15 @@ const TypeButton = ({setPostType}) => {
     학사일정: 'white',
     공지: 'white',
     EVENT: 'white',
-    RECRUIT: 'white',
+    RECRUIT: '#F0B138',
     행사: 'white',
     동아리: 'white',
   });
 
   const recruitTypeButton = (e) => {
     setColor({
+      EVENT: 'white',
+      RECRUIT: 'white',
       [e.target.id]: '#F0B138',
     });
     setPostType("RECRUIT");
@@ -37,6 +39,8 @@ const TypeButton = ({setPostType}) => {
 
   const eventTypeButton = (e) => {
     setColor({
+      EVENT: 'white',
+      RECRUIT: 'white',
       [e.target.id]: '#F0B138',
     });
     setPostType("EVENT");

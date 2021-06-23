@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
 import { IoCameraOutline } from 'react-icons/io5';
@@ -102,10 +102,6 @@ const RightButton = styled.button`
 const PictureBox = ({ pictureUrl, setPictureUrl }) => {
   const [imgCount, setImgCount] = useState(0);
 
-  useEffect(()=>{
-    console.log('다시 그림:', pictureUrl[imgCount]);
-  },)
-  
   const onChange = async (e) => {
     try {
       if (e.target.files[0]) {
@@ -116,12 +112,8 @@ const PictureBox = ({ pictureUrl, setPictureUrl }) => {
           img,
           'BOARD_IMAGE'
         );
-        console.log('확인: ', getImg.data);
         const temp = pictureUrl.concat(getImg.data);
-        console.log('확인2: ', temp);
         setPictureUrl(temp);
-
-        
         alert('사진 추가');
       }
     } catch (error) {
