@@ -4,7 +4,6 @@ import styled from 'styled-components';
 const HashButtonWrapper = styled.div`
   align-items: left;
   justify-content: flex-start;
-  margin-left: 144px;
 `;
 
 const HashButton = styled.button`
@@ -19,7 +18,7 @@ const HashButton = styled.button`
   cursor: pointer;
 `;
 
-const TypeButton = () => {
+const TypeButton = ({setPostType}) => {
   const [color, setColor] = useState({
     학사일정: 'white',
     공지: 'white',
@@ -29,16 +28,18 @@ const TypeButton = () => {
     동아리: 'white',
   });
 
-  const chageTypeButton = (e) => {
+  const recruitTypeButton = (e) => {
     setColor({
-      학사일정: 'white',
-      공지: 'white',
-      EVENT: 'white',
-      RECRUIT: 'white',
-      행사: 'white',
-      동아리: 'white',
       [e.target.id]: '#F0B138',
     });
+    setPostType("RECRUIT");
+  };
+
+  const eventTypeButton = (e) => {
+    setColor({
+      [e.target.id]: '#F0B138',
+    });
+    setPostType("EVENT");
   };
 
   return (
@@ -48,7 +49,7 @@ const TypeButton = () => {
       <HashButton
         type="button"
         id="EVENT"
-        onClick={chageTypeButton}
+        onClick={eventTypeButton}
         color={color.EVENT}
       >
         이벤트
@@ -56,7 +57,7 @@ const TypeButton = () => {
       <HashButton
         type="button"
         id="RECRUIT"
-        onClick={chageTypeButton}
+        onClick={recruitTypeButton}
         color={color.RECRUIT}
       >
         모집

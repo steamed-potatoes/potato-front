@@ -46,8 +46,21 @@ const InputDiv = styled.div`
   flex-direction: column;
 `;
 
-const InputStartDate = styled.input``;
-const InputEndDate = styled.input``;
+const InputDateWrap = styled.div`
+  display:flex;
+  flex-direction: row;
+  font-size:16px;
+  margin: 16px;
+`;
+const InputDateTitle = styled.div`
+`;
+
+const InputStartDateTime = styled.input`
+  margin-right: 16px;
+`;
+const InputEndDateTime = styled.input`
+  margin-right: 16px;
+`;
 
 const HashArea = styled.textarea`
   width: 100%;
@@ -55,7 +68,7 @@ const HashArea = styled.textarea`
   border: solid 2px #7a7a7a;
   border-radius: 16px;
   resize: none;
-  margin-left: 24px;
+  margin-left: 16px;
   &::placeholder {
     color: #b3b3b3;
   }
@@ -86,6 +99,7 @@ const PostingForm = ({
   onChangeForm,
   setPictureUrl,
   pictureUrl,
+  setPostType,
 }) => {
   return (
     <Wrapper>
@@ -93,17 +107,33 @@ const PostingForm = ({
       <MiddleWrap>
         <PictureBox setPictureUrl={setPictureUrl} pictureUrl={pictureUrl} />
         <InputDiv>
-          <TypeButton />
-          <InputStartDate
-            type="date"
-            name="startDateTime"
-            onChange={onChangeForm}
-          />
-          <InputEndDate
-            type="date"
-            name="endDateTime"
-            onChange={onChangeForm}
-          />
+          <TypeButton setPostType={setPostType} />
+          <InputDateWrap>
+            <InputDateTitle>일정 시작</InputDateTitle>
+            <InputStartDateTime
+              type="date"
+              name="startDate"
+              onChange={onChangeForm}
+            />
+            <InputStartDateTime
+              type="time"
+              name="startTime"
+              onChange={onChangeForm}
+            />
+          </InputDateWrap>
+          <InputDateWrap>
+            <InputDateTitle>일정 끝</InputDateTitle>
+            <InputEndDateTime
+              type="date"
+              name="endDate"
+              onChange={onChangeForm}
+            />
+            <InputEndDateTime
+              type="time"
+              name="endTime"
+              onChange={onChangeForm}
+            />
+          </InputDateWrap>
           <HashArea
             name="hashtags"
             onChange={onChangeHashtags}

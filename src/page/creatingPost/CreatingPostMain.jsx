@@ -73,17 +73,18 @@ const CreatingPost = ({ match }) => {
   const [authorGroup, setAuthorGroup] = useState(null);
   const [writer, setWriter] = useState(null);
   const history = useHistory();
-  // RECRUIT, EVENT
   const [form, setForm] = useState({
     title: '',
     content: '',
-    startDateTime: '',
-    endDateTime: '',
-    type: '',
+    startDate: '',
+    startTime: '',
+    endDate: '',
+    endTime: '',
     hashTags: [],
   });
 
   const [pictureUrl, setPictureUrl] = useState([]);
+  const [postType, setPostType] = useState("");
 
   useEffect(() => {
     const receivedGroupData = async () => {
@@ -104,8 +105,9 @@ const CreatingPost = ({ match }) => {
     };
     receivedGroupData();
     receivedWriterData();
-  }, []);
+  }, [pictureUrl]);
 
+  
   const onChangeForm = (e) => {
     setForm({
       ...form,
@@ -121,19 +123,38 @@ const CreatingPost = ({ match }) => {
     });
   };
 
-  const send = async (form, pictureUrl) => {
-    swal('form send:');
-    const sendData = {
-      title: form.title,
+  const send = async () => {
+    const start = form.startDate.concat('T', form.startTime);
+    console.log("start: ", start);
+    const end = form.endDate.concat('T',form.endTime);
+    console.log("end: ", end);
+
+    const temp = {title: form.title,
       content: form.content,
       imageUrlList: pictureUrl,
-      startDateTime: form.startDateTime,
-      endDateTime: form.endDateTime,
-      type: form.type,
-      hashTags: form.hashTags,
+      startDateTime: start,
+      endDateTime: end,
+      type: postType,
+      hashTags: form.hashTags
     };
-    console.log('send:', sendData);
-    history.push('/Main');
+    
+    console.log("화: ", temp);
+
+    try{
+      await sendApi.postCreatingPost(groupDomain,{
+        title: form.title,
+        content: form.content,
+        imageUrlList: pictureUrl,
+        startDateTime: start,
+        endDateTime: end,
+        type: postType,
+        hashTags: form.hashTags,
+      });
+      swal('게시글이 추가되었습니다.');
+      history.push('/Main');
+    }catch (e) {
+      swal(e.response.data.message);
+    }
   };
 
   const cancel = () => {
@@ -160,6 +181,7 @@ const CreatingPost = ({ match }) => {
             setPictureUrl={setPictureUrl}
             pictureUrl={pictureUrl}
             onChangeHashtags={onChangeHashtags}
+            setPostType={setPostType}
           />
           <ButtonWrap>
             <SendButton onClick={() => send(form, pictureUrl)}>

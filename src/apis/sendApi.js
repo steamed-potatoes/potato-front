@@ -86,4 +86,8 @@ export default {
   getAuthorGroup: (req) => {
     return api.get(`/api/v1/organization/${req}`);
   },
+
+  postCreatingPost: (subDomain, req) => {
+    return api.post(`/api/v2/organization/board/${subDomain}`, req);
+  }
 };
