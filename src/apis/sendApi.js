@@ -24,11 +24,11 @@ export default {
   getMyProfile: () => {
     return api.get('/api/v1/member');
   },
-  getBoard: async (lastId,type, req) => {
+  getBoard: async (lastId, type, req) => {
     return await api.get(`/api/v2/organization/board/list?size=12&lastOrganizationBoardId=${lastId}&type=${type}`, req, 'get');
   },
   putMyProfile: (req) => {
-    return api.put('/api/v1/member',req);
+    return api.put('/api/v1/member', req);
   },
   retrievePopluarBoards: (size) => {
     return api.get(`/api/v1/organization/list/popular?size=${size}`);
