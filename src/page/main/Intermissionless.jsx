@@ -90,6 +90,7 @@ const Intermissionless = () => {
       <ContentWreapper>
         {boards.map((board) => (
           <BoardThumbnail
+            link={`/board/${board.id}`}
             key={board.id}
             boardImageUrl={getMainPicture(board.imageUrlList)}
             boardTitle={board.title}

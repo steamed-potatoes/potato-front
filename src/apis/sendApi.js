@@ -38,6 +38,40 @@ export default {
       `/api/v2/organization/board/list/imminentBoards?size=${size}&dateTime=${datetime}`
     );
   },
+  getBoardDetail: (id) => {
+    return api.get(`/api/v2/organization/board?organizationBoardId=${id}`);
+  },
+  addComment: (req) => {
+    return api.post(`/api/v2/board/comment`, req);
+  },
+
+  getCommentList: (id) => {
+    return api.get(
+      `/api/v2/board/comment/list?type=ORGANIZATION_BOARD&boardId=${id}`
+    );
+  },
+
+  getUserProfile: (id) => {
+    return api.get(`/api/v1/member/${id}`);
+  },
+
+  commentLike: (req) => {
+    return api.post(`/api/v2/board/comment/like`, req);
+  },
+
+  commentUnLike: (id) => {
+    return api.delete(`/api/v2/board/comment/like?boardCommentId=${id}`);
+  },
+
+  boardLike: (req) => {
+    return api.post(`/api/v2/organization/board/like`, req);
+  },
+
+  boardUnLike: (id) => {
+    return api.delete(
+      `/api/v2/organization/board/like?organizationBoardId=${id}`
+    );
+  },
   getMyGroupList: () => {
     return api.get('/api/v1/organization/my');
   },
@@ -46,5 +80,8 @@ export default {
   },
   getGroupBoard: (subDomain, lastId) => {
     return api.get(`/api/v2/organization/board/list/in/${subDomain}?size=8&lastOrganizationBoardId=${lastId}`);
-  }
+  },
+  postProfilePhoto: (req, type) => {
+    return api.post(`/api/v1/upload?type=${type}`, req);
+  },
 };
