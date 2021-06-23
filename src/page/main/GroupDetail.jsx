@@ -86,7 +86,9 @@ const LeftWrapper = styled.div`
   margin-right: 64px;
 `
 
-const RightWrpper = styled.div``
+const RightWrpper = styled.div`
+  padding: 32px;
+`
 
 const GroupDetail = () => {
   const [group, setGroup] = useState({});
