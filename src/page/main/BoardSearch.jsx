@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { getMainPicture } from 'utils/getMainPicture';
 import BackgroundImg from 'images/BackgroundImg.png';
 import ScrollImg from 'images/ScrollImg.png';
+import { GroupThumbnail } from './GroupThumbnail';
 
 const Wrapper = styled.div`
   height: 100%;
@@ -100,6 +101,11 @@ const Scroll = styled.button`
   cursor: pointer;
 `;
 
+const NoneClubList = styled.ul`
+  width: 524px;
+  list-style: none;
+`;
+
 const BoardSearch = () => {
   const [searchItem, setSearchItem] = useState([]);
   const [lastBoard, setLastBoard] = useState('0');
@@ -113,6 +119,8 @@ const BoardSearch = () => {
     동아리: 'white',
   });
 
+  const [newGroupList, setNewGroupList] = useState([]);
+
   useEffect(() => {
     const receivedData = async () => {
       try {
@@ -123,6 +131,16 @@ const BoardSearch = () => {
         swal(`${e.response.data.message}`);
       }
     };
+    const getNewGroup = async () => {
+      try {
+        const { data } = await sendApi.getGroupList();
+        setNewGroupList(data.data);
+        console.log(data);
+      } catch (e) {
+        alert(e.reponse.data.message);
+      }
+    };
+    getNewGroup();
     receivedData();
   }, [type]);
 
@@ -176,6 +194,103 @@ const BoardSearch = () => {
     }
   };
 
+  const chageTypeButton2 = (e) => {
+    if (type !== '') {
+      if (type === e.target.id) {
+        setColor({
+          ...color,
+          [e.target.id]: 'white',
+        });
+        setLastBoard(0);
+        setSearchItem([]);
+        document.getElementById('Scroll').style.display = '';
+        setType('');
+      } else {
+        setColor({
+          학사일정: 'white',
+          공지: 'white',
+          EVENT: 'white',
+          RECRUIT: 'white',
+          행사: 'white',
+          동아리: 'white',
+          [e.target.id]: '#F0B138',
+        });
+        setLastBoard(0);
+        setSearchItem([]);
+        document.getElementById('Scroll').style.display = '';
+        setType(e.target.id);
+      }
+    } else {
+      setColor({
+        ...color,
+        [e.target.id]: '#F0B138',
+      });
+      setLastBoard(0);
+      setSearchItem([]);
+      document.getElementById('Scroll').style.display = '';
+      setType(e.target.id);
+    }
+  };
+
+  if (color.동아리 === '#F0B138') {
+    return (
+      <Wrapper>
+        <HeaderMenu />
+        <BoardSearchWrapper>
+          <Search>
+            <SearchInput />
+            <BiSearch size="30" />
+          </Search>
+        </BoardSearchWrapper>
+        <HashButtonWrapper>
+          <HashButton>학사일정</HashButton>
+          <HashButton>공지</HashButton>
+          <HashButton
+            type="button"
+            id="EVENT"
+            onClick={chageTypeButton}
+            color={color.EVENT}
+          >
+            이벤트
+          </HashButton>
+          <HashButton
+            type="button"
+            id="RECRUIT"
+            onClick={chageTypeButton}
+            color={color.RECRUIT}
+          >
+            모집
+          </HashButton>
+          <HashButton>행사</HashButton>
+          <HashButton
+            type="button"
+            id="동아리"
+            onClick={chageTypeButton2}
+            color={color.동아리}
+          >
+            동아리
+          </HashButton>
+        </HashButtonWrapper>
+        <BoardSearchItemWrapper>
+          <BoardSearchItem>
+            {newGroupList.length ? (
+              newGroupList.map((data) => (
+                <GroupThumbnail
+                  name={data.name}
+                  description={data.description}
+                  // profileUrl={data.profileUrl}
+                  key={data.subDomain}
+                />
+              ))
+            ) : (
+              <NoneClubList />
+            )}
+          </BoardSearchItem>
+          <Scroll type="button" id="Scroll" onClick={ScrollButton} />
+        </BoardSearchItemWrapper>
+      </Wrapper>
+    );
+  }
   return (
     <Wrapper>
       <HeaderMenu />
@@ -205,7 +320,14 @@ const BoardSearch = () => {
           모집
         </HashButton>
         <HashButton>행사</HashButton>
-        <HashButton>동아리</HashButton>
+        <HashButton
+          type="button"
+          id="동아리"
+          onClick={chageTypeButton2}
+          color={color.동아리}
+        >
+          동아리
+        </HashButton>
       </HashButtonWrapper>
       <BoardSearchItemWrapper>
         <BoardSearchItem>
