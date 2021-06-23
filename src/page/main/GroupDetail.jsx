@@ -4,7 +4,7 @@ import BackgroundImg from 'images/BackgroundImg.png';
 import { HeaderMenu } from 'components/header';
 import swal from 'sweetalert';
 import sendApi from 'apis/sendApi';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import { BoardThumbnail } from 'components/BoardThumbnail';
 import { getMainPicture } from 'utils/getMainPicture';
 import ScrollImg from 'images/ScrollImg.png';
@@ -90,18 +90,39 @@ const RightWrpper = styled.div`
   padding: 32px;
 `
 
+const Button = styled.button`
+  float: right;
+  background: #f0b138;
+  border-radius: 40px;
+  width: 160px;
+  height: 56px;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  font-weight: bold;
+`
+
 const GroupDetail = () => {
   const [group, setGroup] = useState({});
   const [searchItem, setSearchItem] = useState([]);
   const [lastId, setLastId] = useState('0');
+  const [member, setMember] = useState([]);
   const location = useLocation();
   const subDomain = [location.state.subDomain];
+  const [email, setEmail] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     const receivedData = async () => {
       try {
         const { data } = await sendApi.getGroupDetail(subDomain);
         setGroup(data.data.organization);
+        setMember(data.data.members);
+        const { data: getMyProfile } = await sendApi.getMyProfile();
+        const {
+          email: getEmail,
+        } = getMyProfile.data;
+        setEmail(getEmail);
       } catch (e) {
         swal(`${e.response.data.message}`);
       }
@@ -120,7 +141,29 @@ const GroupDetail = () => {
       }
     }
     saveData();
-  }, [group])
+  }, [group]);
+
+  const ButtonClick = () => {
+    console.log(email);
+    console.log(member[0].email);
+    let i = 0;
+    while (1) {
+      console.log(i);
+      console.log(member.length);
+      if (i === member.length) {
+        swal('권한이 없습니다.');
+        break;
+      }
+      if (member[i].email === email) {
+        history.push({
+          pathname: '/CreatingPost',
+          state: { groupDomain: subDomain },
+        })
+        break;
+      }
+      i += 1;
+    }
+  }
 
   const ScrollButton = async () => {
     try {
@@ -145,6 +188,7 @@ const GroupDetail = () => {
           <RightWrpper>
             <GroupName>{group.name}</GroupName>
             <GroupDescription>{group.description}</GroupDescription>
+            <Button onClick={ButtonClick}>게시글 작성</Button>
           </RightWrpper>
         </DiscriptionWrapper>
         <BoardSearchItemWrapper>
