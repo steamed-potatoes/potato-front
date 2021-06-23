@@ -144,24 +144,13 @@ const GroupDetail = () => {
   }, [group]);
 
   const ButtonClick = () => {
-    console.log(email);
-    console.log(member[0].email);
-    let i = 0;
-    while (1) {
-      console.log(i);
-      console.log(member.length);
-      if (i === member.length) {
-        swal('권한이 없습니다.');
-        break;
-      }
-      if (member[i].email === email) {
-        history.push({
-          pathname: '/CreatingPost',
-          state: { groupDomain: subDomain },
-        })
-        break;
-      }
-      i += 1;
+    if (member[0].email === email) {
+      history.push({
+        pathname: '/CreatingPost',
+        state: { groupDomain: subDomain },
+      })
+    } else {
+      swal('권한이 없습니다.')
     }
   }
 
