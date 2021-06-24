@@ -26,7 +26,7 @@ const ContentTop = styled.div`
 const ContentImg = styled.img`
   width: 496px;
   height: 496px;
-  background-color: gray;
+  background-color: #fafafa;
 `;
 
 const Summary = styled.div`

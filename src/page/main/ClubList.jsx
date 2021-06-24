@@ -13,7 +13,7 @@ const ListItem = styled.li`
   }
 `;
 const ClubPicture = styled.img`
-  background: #bababa;
+  background: #fafafa;
   border-radius: 24px;
   width: 104px;
   height: 104px;

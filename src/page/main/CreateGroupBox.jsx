@@ -73,7 +73,6 @@ const CreateGroupBox = () => {
     const getNewGroup = async () => {
       try {
         const { data } = await sendApi.getNewGroupList();
-        console.log('da', data.data);
         setNewGroupList(data.data);
       } catch (e) {
         alert(e.reponse.data.message);

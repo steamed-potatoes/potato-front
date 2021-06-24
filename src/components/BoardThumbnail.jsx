@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NewBoard = styled.div`
-  background-color: #bababa;
+  background-color: #fefefe;
   margin: 10px;
   flex-basis: auto;
   flex-shrink: 2;
