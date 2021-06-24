@@ -93,7 +93,7 @@ const CreateGroupBox = () => {
         </CreateGroup>
         <FindGroup>
           <Title>신규 그룹 살펴보기</Title>
-          <LinkButton />
+          <LinkButton onClick={() => history.push('/search')} />
           {newGroupList.length ? (
             newGroupList.map((data) => (
               <ClubList

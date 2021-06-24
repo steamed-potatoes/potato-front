@@ -1,9 +1,8 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 const NewBoard = styled.div`
-  background-color: #fefefe;
+  background-color: #bababa;
   margin: 10px;
   flex-basis: auto;
   flex-shrink: 2;
@@ -52,21 +51,13 @@ const BoardWriter = styled.div`
   text-align: center;
 `;
 
-
-export const BoardThumbnail = ({ boardImageUrl, boardTitle, orgName, subDomain }) => {
-  const history = useHistory();
+export const GroupThumbnail = ({ name, description, profileUrl }) => {
   return (
-    <NewBoard onClick={() => {
-      history.push({
-        pathname: '/groupDetail',
-        state: { subDomain },
-      })
-    }}
-    >
-      <BoardThumb src={boardImageUrl} alt={boardTitle} />
+    <NewBoard>
+      <BoardThumb src={profileUrl} alt={name} />
       <BoardSummary>
-        <BoardTitle>{boardTitle}</BoardTitle>
-        <BoardWriter>{orgName}</BoardWriter>
+        <BoardTitle>{name}</BoardTitle>
+        <BoardWriter>{description}</BoardWriter>
       </BoardSummary>
     </NewBoard>
   );

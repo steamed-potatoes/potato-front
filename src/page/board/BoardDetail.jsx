@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 import sendApi from 'apis/sendApi';
+import moment from 'moment';
 import BoardContent from './BoardContent';
 import BoardComment from './BoardComment';
 
@@ -59,7 +60,6 @@ const BoardDetail = ({ boardId }) => {
     const receivedData = async () => {
       try {
         const { data } = await sendApi.getBoardDetail(boardId);
-        console.log('d', data.data);
         setBoardDetailData(data.data);
       } catch (e) {
         swal(`${e.response.data.message}`);
@@ -84,7 +84,7 @@ const BoardDetail = ({ boardId }) => {
           </Group>
           <CreatedDate>
             게시글 작성 시간{' '}
-            {boardDetailData.board.createdDateTime.split('T')[0]}
+            {moment(boardDetailData.board.createdDateTime).format('YYYY.MM.DD')}
           </CreatedDate>
         </Information>
         <BoardTitle>{boardDetailData.board.title}</BoardTitle>
@@ -95,6 +95,8 @@ const BoardDetail = ({ boardId }) => {
           boardContent={boardDetailData.board.content}
           boardHashTags={boardDetailData.hashTags}
           boardId={presentBoardId}
+          startTime={boardDetailData.board.startDateTime}
+          endTime={boardDetailData.board.endDateTime}
         />
         <BoardComment PresentBoardId={presentBoardId} />
       </DetailWrapper>

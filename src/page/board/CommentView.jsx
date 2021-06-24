@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 
 import sendApi from 'apis/sendApi';
 import swal from 'sweetalert';
@@ -83,32 +82,21 @@ const AddReComment = styled.button`
 const NoneRecomment = styled.div``;
 
 const CommentView = ({
-  memberId,
+  author,
   content,
   boardCommentLikeCounts,
   PresentBoardId,
   parentId,
   isLike,
   childrenData,
+  getCommentListFun,
 }) => {
-  const history = useHistory();
   const [addRecomentView, setAddRecommentView] = useState(0);
   const [recommentContent, setRecommentContent] = useState('');
-  const [memberInfomation, setMemberInformation] = useState({});
   const [isLikeState, setIsLikeState] = useState(isLike);
   const [likeCountState, setLikeCountState] = useState(boardCommentLikeCounts);
 
-  useEffect(() => {
-    const receivedData = async () => {
-      try {
-        const { data } = await sendApi.getUserProfile(memberId);
-        setMemberInformation(data.data);
-      } catch (e) {
-        swal(`${e.response.data.message}`);
-      }
-    };
-    receivedData();
-  }, [isLikeState]);
+  useEffect(() => {}, [isLikeState]);
 
   const addReComment = async () => {
     try {
@@ -121,7 +109,7 @@ const CommentView = ({
       swal('댓글이 추가되었습니다');
       setRecommentContent('');
       setAddRecommentView(0);
-      history.go(0);
+      getCommentListFun();
     } catch (e) {
       swal(e.response.data.message);
     }
@@ -152,9 +140,9 @@ const CommentView = ({
   return (
     <CommentViewWrap>
       <Comment>
-        <WriterImg src={memberInfomation.profileUrl} />
+        <WriterImg src={author.profileUrl} />
         <Summary>
-          <WriterNickname>{memberInfomation.name}</WriterNickname>
+          <WriterNickname>{author.name}</WriterNickname>
           <CommentContent>{content}</CommentContent>
           <CommentButtonWrap>
             {isLikeState ? (
@@ -184,9 +172,9 @@ const CommentView = ({
           )}
           {childrenData.length ? (
             childrenData.map(
-              ({ memberId, content, boardCommentLikeCounts, id, isLike }) => (
+              ({ author, content, boardCommentLikeCounts, id, isLike }) => (
                 <Recomment
-                  recommentMemberId={memberId}
+                  recommentAuthor={author}
                   recommentContent={content}
                   recommentLike={boardCommentLikeCounts}
                   recommentId={id}

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import { BoardThumbnail } from 'components/BoardThumbnail';
 import LinkButtonImg from 'images/LinkButtonImg.png';
 // import LeftIcon from 'images/LeftIcon.png';
@@ -74,6 +75,7 @@ const ContentWreapper = styled.div`
 
 const PopularGroup = () => {
   const [popularBoards, setPopularBoards] = useState([]);
+  const history = useHistory();
 
   useEffect(async () => {
     const { data } = await sendApi.retrievePopluarBoards(5);
@@ -84,7 +86,7 @@ const PopularGroup = () => {
     <Wrapper>
       <Title>인기있는 그룹</Title>
       <SubTitle>현재 슬기로운 감자 생활에서 핫한 그룹들을 보고 가세요</SubTitle>
-      <LinkButton />
+      <LinkButton onClick={() => history.push('/search')} />
       <ContentWreapper>
         {popularBoards.map((board) => (
           <BoardThumbnail
@@ -92,6 +94,7 @@ const PopularGroup = () => {
             boardImageUrl={board.profileUrl}
             boardTitle={board.name}
             orgName={board.description}
+            subDomain={board.subDomain}
           />
         ))}
       </ContentWreapper>

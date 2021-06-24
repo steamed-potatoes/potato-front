@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import sendApi from 'apis/sendApi';
 import swal from 'sweetalert';
+import moment from 'moment';
 import LikeLogo from '../../images/LikeLogo.png';
 import UnLikeLogo from '../../images/UnLikeLogo.png';
 import LeftIcon from '../../images/LeftIcon.png';
@@ -26,12 +27,18 @@ const ContentTop = styled.div`
 const ContentImg = styled.img`
   width: 496px;
   height: 496px;
-  background-color: gray;
+  background-color: #fafafa;
 `;
 
 const Summary = styled.div`
   margin: 0 0 0 24px;
   width: 40%;
+`;
+
+const DateTime = styled.div`
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 24px;
 `;
 
 const BoardLike = styled.div`
@@ -128,6 +135,8 @@ const BoardContent = ({
   boardHashTags,
   boardIsLike,
   boardId,
+  startTime,
+  endTime,
 }) => {
   const [boardLikeState, setBoardLikeState] = useState(boardIsLike);
   const [boardLikeCountState, setBoardLikeCountState] = useState(
@@ -182,6 +191,10 @@ const BoardContent = ({
         </ImgWrap>
 
         <Summary>
+          <DateTime>
+            일정 기간: [ {moment(startTime).format('YYYY.MM.DD')} ~{' '}
+            {moment(endTime).format('YYYY.MM.DD')} ]
+          </DateTime>
           <BoardLike>
             {boardLikeState ? (
               <LikeSymbol onClick={onClickBoardUnLike} />
