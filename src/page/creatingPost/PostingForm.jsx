@@ -40,6 +40,7 @@ const MiddleWrap = styled.div`
 `;
 const InputDiv = styled.div`
   height: 400px;
+  width: -webkit-fill-available;
   border: 0;
   flex-basis: auto;
   display: flex;
@@ -63,7 +64,7 @@ const InputEndDateTime = styled.input`
 `;
 
 const HashArea = styled.textarea`
-  width: 100%;
+  width: 98%;
   height: 160px;
   border: solid 2px #7a7a7a;
   border-radius: 16px;
@@ -85,6 +86,7 @@ const Textarea = styled.textarea`
   border-radius: 16px;
   resize: none;
   padding: 24px;
+  margin-top: 16px;
   &::placeholder {
     color: #b3b3b3;
   }
