@@ -55,20 +55,21 @@ const MakeGroupBox = () => {
   };
 
   const onChangePicture = async (e) => {
-    console.log('데이터화ㅓㄱ인:', e);
-    if (e.target.files[0]) {
-      try {
-        const { data } = await sendApi.postProfilePhoto(
-          e.target.files[0],
+    try {
+      if (e.target.files[0]) {
+        const img = new FormData();
+        img.append('file', e.target.files[0]);
+        const { data:getImg } = await sendApi.postProfilePhoto(
+          img,
           'ORGANIZATION_PROFILE'
         );
-        console.log('dsakl', data);
-        setPictureUrl(data.data);
+        setPictureUrl(getImg.data);
         alert('그룹 사진이 추가되었습니다.');
-      } catch (error) {
-        alert(error.response.data.message);
       }
+    } catch (error) {
+      alert(error.response.data.message);
     }
+    
   };
 
   const makeGroup = async (form) => {
