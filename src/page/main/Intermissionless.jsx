@@ -80,7 +80,7 @@ const Intermissionless = () => {
     const now = moment().format('YYYY-MM-DDTHH:mm:ss');
     const { data } = await sendApi.retrieveIntermissionlessBoards(4, now);
     setBoards(data.data);
-    console.log(data.data);
+    // console.log(data.data);
   }, []);
 
   return (
