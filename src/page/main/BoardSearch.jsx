@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BiSearch } from 'react-icons/bi';
-import { BoardThumbnail } from 'components/BoardThumbnail';
+import { BoardThumbnail2 } from 'components/BoardThumbnail2';
 import { HeaderMenu } from 'components/header';
 import swal from 'sweetalert';
 import sendApi from 'apis/sendApi';
@@ -279,7 +279,6 @@ const BoardSearch = () => {
                   name={data.name}
                   description={data.description}
                   profileUrl={data.profileUrl}
-                  subDomain={data.subDomain}
                   key={data.subDomain}
                 />
               ))
@@ -292,6 +291,7 @@ const BoardSearch = () => {
       </Wrapper>
     );
   }
+
   return (
     <Wrapper>
       <HeaderMenu />
@@ -334,12 +334,12 @@ const BoardSearch = () => {
         <BoardSearchItem>
           {searchItem.length ? (
             searchItem.map((data) => (
-              <BoardThumbnail
+              <BoardThumbnail2
                 link={`/board/${data.boardId}`}
                 boardImageUrl={getMainPicture(data.imageUrls)}
                 boardTitle={data.boardTitle}
                 orgName={data.orgName}
-                key={data.boardId}
+                boardId={data.boardId}
               />
             ))
           ) : (
