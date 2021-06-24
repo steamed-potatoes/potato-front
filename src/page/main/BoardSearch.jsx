@@ -135,7 +135,6 @@ const BoardSearch = () => {
       try {
         const { data } = await sendApi.getGroupList();
         setNewGroupList(data.data);
-        console.log(data);
       } catch (e) {
         alert(e.reponse.data.message);
       }

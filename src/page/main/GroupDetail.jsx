@@ -5,7 +5,7 @@ import { HeaderMenu } from 'components/header';
 import swal from 'sweetalert';
 import sendApi from 'apis/sendApi';
 import { useLocation, useHistory } from 'react-router-dom';
-import { BoardThumbnail } from 'components/BoardThumbnail';
+import { BoardThumbnail2 } from 'components/BoardThumbnail2';
 import { getMainPicture } from 'utils/getMainPicture';
 import ScrollImg from 'images/ScrollImg.png';
 
@@ -178,10 +178,11 @@ const GroupDetail = () => {
           <BoardSearchItem>
             {searchItem.length ? (
               searchItem.map((data) => (
-                <BoardThumbnail
+                <BoardThumbnail2
                   boardImageUrl={getMainPicture(data.imageUrls)}
                   boardTitle={data.boardTitle}
                   orgName={data.orgName}
+                  boardId={data.boardId}
                   key={data.boardId}
                 />
               ))

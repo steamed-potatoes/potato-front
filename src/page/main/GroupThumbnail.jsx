@@ -59,7 +59,6 @@ export const GroupThumbnail = ({
   subDomain,
 }) => {
   const history = useHistory();
-  console.log(subDomain);
   return (
     <NewBoard
       onClick={() => {
