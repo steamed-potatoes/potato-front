@@ -143,9 +143,10 @@ const GroupDetail = () => {
 
   const ButtonClick = () => {
     if (member[0].email === email) {
+      let url = '/CreatingPost/';
+      url += subDomain;
       history.push({
-        pathname: '/CreatingPost',
-        state: { groupDomain: subDomain },
+        pathname: url,
       });
     } else {
       swal('권한이 없습니다.');

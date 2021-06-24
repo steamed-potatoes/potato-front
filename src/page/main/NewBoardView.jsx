@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import swal from 'sweetalert';
 import sendApi from 'apis/sendApi';
-import { BoardThumbnail } from 'components/BoardThumbnail';
+import { BoardThumbnail2 } from 'components/BoardThumbnail2'
 import LinkButtonImg from '../../images/LinkButtonImg.png';
 import { getMainPicture } from '../../utils/getMainPicture';
 
@@ -57,6 +57,7 @@ const NewBoardView = () => {
         const { data } = await sendApi.newBoardData();
 
         setNewBoardData(data.data);
+
       } catch (e) {
         swal(`${e.response.data.message}`);
       }
@@ -71,12 +72,11 @@ const NewBoardView = () => {
       <NewBoardItem>
         {newBoardData.length ? (
           newBoardData.map((board) => (
-            <BoardThumbnail
-              link={`/board/${board.boardId}`}
+            <BoardThumbnail2
               boardImageUrl={getMainPicture(board.imageUrls)}
               boardTitle={board.boardTitle}
               orgName={board.orgName}
-              key={board.boardId}
+              boardId={board.boardId}
             />
           ))
         ) : (

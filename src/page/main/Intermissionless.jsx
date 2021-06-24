@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { BoardThumbnail } from 'components/BoardThumbnail';
+import { BoardThumbnail2 } from 'components/BoardThumbnail2';
 import LinkButtonImg from 'images/LinkButtonImg.png';
 import sendApi from 'apis/sendApi';
 import moment from 'moment';
@@ -80,6 +80,7 @@ const Intermissionless = () => {
     const now = moment().format('YYYY-MM-DDTHH:mm:ss');
     const { data } = await sendApi.retrieveIntermissionlessBoards(4, now);
     setBoards(data.data);
+    console.log(data.data);
   }, []);
 
   return (
@@ -89,12 +90,11 @@ const Intermissionless = () => {
       <LinkButton />
       <ContentWreapper>
         {boards.map((board) => (
-          <BoardThumbnail
-            link={`/board/${board.id}`}
-            key={board.id}
+          <BoardThumbnail2
             boardImageUrl={getMainPicture(board.imageUrlList)}
             boardTitle={board.title}
             orgName={`${board.endDateTime} 까지`}
+            boardId={board.id}
           />
         ))}
       </ContentWreapper>
