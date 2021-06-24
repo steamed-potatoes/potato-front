@@ -56,9 +56,6 @@ const BoardWriter = styled.div`
 export const BoardThumbnail2 = ({ boardImageUrl, boardTitle, orgName, boardId }) => {
   const history = useHistory();
 
-  console.log(boardTitle);
-  console.log(orgName);
-  console.log(boardId);
   return (
     <NewBoard onClick={() => {
       let url = '/Board/'
