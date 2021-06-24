@@ -278,7 +278,7 @@ const BoardSearch = () => {
                 <GroupThumbnail
                   name={data.name}
                   description={data.description}
-                  // profileUrl={data.profileUrl}
+                  profileUrl={data.profileUrl}
                   key={data.subDomain}
                 />
               ))

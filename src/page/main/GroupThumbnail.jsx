@@ -51,13 +51,10 @@ const BoardWriter = styled.div`
   text-align: center;
 `;
 
-export const GroupThumbnail = ({ name, description }) => {
+export const GroupThumbnail = ({ name, description, profileUrl }) => {
   return (
     <NewBoard>
-      <BoardThumb
-        src="https://avatars.githubusercontent.com/u/48153675?v=4"
-        alt={name}
-      />
+      <BoardThumb src={profileUrl} alt={name} />
       <BoardSummary>
         <BoardTitle>{name}</BoardTitle>
         <BoardWriter>{description}</BoardWriter>

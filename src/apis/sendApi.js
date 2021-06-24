@@ -79,6 +79,14 @@ export default {
   getMyGroupList: () => {
     return api.get('/api/v1/organization/my');
   },
+  getGroupDetail: (subDomain) => {
+    return api.get(`/api/v1/organization/${subDomain}`);
+  },
+  getGroupBoard: (subDomain, lastId) => {
+    return api.get(
+      `/api/v2/organization/board/list/in/${subDomain}?size=8&lastOrganizationBoardId=${lastId}`
+    );
+  },
   postProfilePhoto: (req, type) => {
     return api.post(`/api/v1/upload?type=${type}`, req);
   },

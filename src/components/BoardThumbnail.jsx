@@ -52,15 +52,17 @@ const BoardWriter = styled.div`
   text-align: center;
 `;
 
-export const BoardThumbnail = ({
-  link,
-  boardImageUrl,
-  boardTitle,
-  orgName,
-}) => {
+
+export const BoardThumbnail = ({ boardImageUrl, boardTitle, orgName, subDomain }) => {
   const history = useHistory();
   return (
-    <NewBoard onClick={() => history.push(link)}>
+    <NewBoard onClick={() => {
+      history.push({
+        pathname: '/groupDetail',
+        state: { subDomain },
+      })
+    }}
+    >
       <BoardThumb src={boardImageUrl} alt={boardTitle} />
       <BoardSummary>
         <BoardTitle>{boardTitle}</BoardTitle>
