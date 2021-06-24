@@ -60,12 +60,7 @@ const BoardSearchItem = styled.div`
 `;
 
 const ItemDetail = styled.div`
-  margin: 10px;
-  flex-basis: auto;
-  flex-shrink: 2;
-  width: 200px;
-  height: 232px;
-  background-color: gray;
+  height: 100%;
 `;
 
 const Scroll = styled.button`
@@ -135,7 +130,7 @@ const GroupDetail = () => {
         setSearchItem(data.data);
         setLastId(data.data[data.data.length - 1].boardId);
       } catch (e) {
-        swal('게시글이 없습니다.');
+        swal(e);
       }
     };
     saveData();
@@ -194,7 +189,11 @@ const GroupDetail = () => {
               <ItemDetail />
             )}
           </BoardSearchItem>
-          <Scroll type="button" id="Scroll" onClick={ScrollButton} />
+          {searchItem.length ? (
+            <Scroll type="button" id="Scroll" onClick={ScrollButton} />
+          ) : (
+            <div />
+          )}
         </BoardSearchItemWrapper>
       </DetailWrapper>
     </Wrapper>
