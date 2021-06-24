@@ -93,7 +93,4 @@ export default {
   getGroupList: () => {
     return api.get('/api/v1/organization/list?size=12');
   },
-  postCreatingPost: (subDomain, req) => {
-    return api.post(`/api/v2/organization/board/${subDomain}`, req);
-  },
 };
