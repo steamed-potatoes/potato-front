@@ -128,7 +128,7 @@ const BoardSearch = () => {
         setSearchItem(data.data);
         setLastBoard(data.data[data.data.length - 1].boardId);
       } catch (e) {
-        swal(`${e.response.data.message}`);
+        swal(e);
       }
     };
     const getNewGroup = async () => {
@@ -279,7 +279,7 @@ const BoardSearch = () => {
                   name={data.name}
                   description={data.description}
                   profileUrl={data.profileUrl}
-                  key={data.subDomain}
+                  subDomain={data.subDomain}
                 />
               ))
             ) : (

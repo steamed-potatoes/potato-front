@@ -55,7 +55,6 @@ const BoardWriter = styled.div`
 
 export const BoardThumbnail = ({ boardImageUrl, boardTitle, orgName, subDomain }) => {
   const history = useHistory();
-  console.log("여기로옴");
   return (
     <NewBoard onClick={() => {
       history.push({
