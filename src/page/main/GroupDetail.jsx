@@ -60,7 +60,7 @@ const BoardSearchItem = styled.div`
 `;
 
 const ItemDetail = styled.div`
-  height: 100%;
+  height: 440px;
 `;
 
 const Scroll = styled.button`
