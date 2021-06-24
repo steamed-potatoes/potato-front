@@ -280,6 +280,7 @@ const BoardSearch = () => {
                   description={data.description}
                   profileUrl={data.profileUrl}
                   subDomain={data.subDomain}
+                  key={data.boardId}
                 />
               ))
             ) : (
