@@ -78,6 +78,7 @@ const CreateGroupBox = () => {
         alert(e.reponse.data.message);
       }
     };
+
     getNewGroup();
   }, []);
 
